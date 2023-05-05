@@ -1,9 +1,9 @@
-@import url(https://fonts.bunny.net/css?family=aboreto:400);
-
 .header {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
 
   background-color: var(--main-blue);
   color: var(--light-blue);
@@ -12,6 +12,7 @@
   &-brand {
 
     padding: 0.5em;
+
     @media (min-width: 768px) {
       padding: 1em;
     }
@@ -34,11 +35,23 @@
 
     @keyframes spin {
       from {
-          transform: rotateZ(0);
+        transform: rotateZ(0);
       }
+
       to {
-          transform: rotateZ(720deg);
+        transform: rotateZ(720deg);
       }
+    }
   }
+
+  &-site-nav {
+    
+    display: none;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+
+    flex-flow: row nowrap;
+    gap: 2em;
   }
 }
