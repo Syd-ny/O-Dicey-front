@@ -1,0 +1,35 @@
+@import url(https://fonts.bunny.net/css?family=aboreto:400);
+
+body {
+    margin: 0;
+}
+
+main {
+    font-family: 'Aboreto', display;
+    background-color: #E6EEF7;
+    color: white;
+}
+
+.container {
+    // background-color: #E6EEF7;
+    background-color: #0D5EAF;
+    margin: 2rem;
+    padding: 1rem;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container--article {
+    width: 40%;
+}
+
+.container--img {
+    width: 40%;
+}
+
+img {
+    max-width: 100%;
+}

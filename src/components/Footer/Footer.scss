@@ -1,0 +1,20 @@
+@import url(https://fonts.bunny.net/css?family=aboreto:400);
+
+.footer a {
+    margin-right: 1rem;
+    color: white;
+}
+
+.footer p {
+    margin-left: 1rem;
+}
+
+.footer {
+    font-family: 'Aboreto', display;
+    background-color: #0D5EAF;
+    color: white;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
