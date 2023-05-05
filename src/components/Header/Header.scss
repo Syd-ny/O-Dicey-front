@@ -1,0 +1,57 @@
+.header {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--main-blue);
+  color: var(--light-blue);
+  font-family: 'Aboreto', display;
+
+  &-brand {
+
+    padding: 0.5em;
+
+    @media (min-width: 768px) {
+      padding: 1em;
+    }
+
+    display: flex;
+    gap: 0.4em;
+
+    h1 {
+      font-size: 2em;
+    }
+
+    img {
+      display: inline;
+      height: 2em;
+    }
+  }
+
+  &-brand:hover img {
+    animation: spin 3s infinite linear;
+
+    @keyframes spin {
+      from {
+        transform: rotateZ(0);
+      }
+
+      to {
+        transform: rotateZ(720deg);
+      }
+    }
+  }
+
+  &-site-nav {
+    
+    display: none;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+
+    flex-flow: row nowrap;
+    gap: 2em;
+  }
+}
