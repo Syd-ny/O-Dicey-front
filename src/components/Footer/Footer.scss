@@ -1,20 +1,33 @@
-@import url(https://fonts.bunny.net/css?family=aboreto:400);
-
-.footer a {
-    margin-right: 1rem;
+.footer {
+    font-family: 'Aboreto', display;
+    background-color: var(--main-blue);
     color: white;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+        flex-flow: row nowrap;
+    }
 }
 
-.footer p {
+a {
+    color: white;
+    @media (min-width: 768px) {
+        margin-right: 1rem;
+    }
+}
+
+p {
     margin-left: 1rem;
 }
 
-.footer {
-    font-family: 'Aboreto', display;
-    background-color: #0D5EAF;
-    color: white;
+.footer nav {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
+    gap: 1rem;
 }
+
