@@ -9,6 +9,10 @@ const Header = () => {
         <img src={logo} />
         <h1 className="header-title">O'Dicey</h1>
       </div>
+      <nav className="header-site-nav">
+        <a href="#">Liste des personnages</a>
+        <a href="#">Liste des parties</a>
+      </nav>
       <Dropdown />
     </header>
   );
