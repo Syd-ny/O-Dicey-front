@@ -1,0 +1,36 @@
+.character-list {
+  padding: 2rem;
+  width: 100%;
+  max-width: 900px;
+
+  &-header {
+    display: grid;
+    grid-template: auto 1fr / 2fr 1fr;
+    gap: 1em;
+
+    button {
+      width: fit-content;
+      background-color: #0D5EAF;
+      border: none;
+      padding: 0.8em;
+      border-radius: 0.5em;
+      color: white;
+    }
+
+    button:hover {
+      background-color: hsl(210, 86%, 26%);
+      cursor: pointer;
+    }
+
+    h2 {
+      font-size: 2em;
+    }
+  }
+
+  &-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    margin: 2em 0;
+  }
+}
