@@ -1,0 +1,52 @@
+main h2 {
+    font-family: 'Aboreto', display;
+    margin-bottom: 1rem;
+}
+
+main {
+    background-color: var(--light-blue);
+    color: white;
+    margin: 4rem;
+    text-align : justify;
+}
+
+.container {
+    margin: 2rem;
+}
+
+.container-header, .container-article {
+    background-color: var(--main-blue);
+    padding: 1rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (min-width: 1000px) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+}
+
+.container-article {
+    order: 1;
+
+    @media (min-width: 1000px) {
+        order: 0;
+        width: 40em;
+      }
+}
+
+.container-img {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--main-blue);
+    border-radius: 10px;
+}
+
+img {
+    max-width: 100%;
+    position: relative;
+}

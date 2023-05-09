@@ -1,0 +1,33 @@
+.footer {
+    font-family: 'Aboreto', display;
+    background-color: var(--main-blue);
+    color: white;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    @media (min-width: 768px) {
+        flex-flow: row nowrap;
+    }
+}
+
+a {
+    color: white;
+    @media (min-width: 768px) {
+        margin-right: 1rem;
+    }
+}
+
+p {
+    margin-left: 1rem;
+}
+
+.footer nav {
+    display: flex;
+    gap: 1rem;
+}
+
