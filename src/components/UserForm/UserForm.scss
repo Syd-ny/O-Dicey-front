@@ -1,38 +1,61 @@
-.subscribe {
+@use "sass:color";
+
+.userform {
 
   margin: 1em 0;
-  padding: 0 2em;
-  padding-bottom: 2em;
 
   width: 100%;
   max-width: 300px;
 
-  background-color: var(--main-blue);
-  color: var(--light-blue);
-  border-radius: 1em;
+
+
+
 
   h2 {
-    font-size: 2em;
-    padding: 1em 0;
+    font-size: 1.2em;
+    padding: 1rem 1rem;
+    background-color: var(--main-blue);
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    font-family: 'Aboreto', display;
+    color: var(--light-blue);
   }
 
   &-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    padding: 1rem 2rem;
+
+    input {
+      margin-bottom: 0.8rem;
+      width: 100%;
+      border-radius: 1rem;
+      border: none;
+      padding: 0.4rem 0.6rem;
+    }
 
     input[type="file"] {
       display: none;
     }
 
     &-avatar-upload {
-      width: 3em;
-      height: 3em;
       border-radius: 50%;
-      background-color: var(--light-blue);
+      background-color: var(--main-blue);
+      background-image: url(avatar.svg);
+      background-size: contain;
       cursor: pointer;
       position: relative;
+
+      &#avatar-label {
+        margin-bottom: 1rem;
+        width: 3em;
+        height: 3em;
+      }
+
+      &:hover {
+        background-color: hsl(210, 86%, 45%);
+      }
 
       img {
         position: absolute;
@@ -42,18 +65,24 @@
       }
     }
 
+    label {
+      font-size: 0.8rem;
+      margin-bottom: 0.3rem;
+      width: 100%;
+    }
+
     button {
       width: fit-content;
 
       color: white;
-      background-color: #6558f5;
+      background-color: var(--main-blue);
       border: none;
-      border-radius: 0.2em;
+      border-radius: 1rem;
       padding: 0.5em 1em;
       font-weight: bold;
 
       &:hover {
-        background-color: hsl(245, 89%, 50%);
+        background-color: hsl(210, 86%, 45%);
         cursor: pointer;
       }
 

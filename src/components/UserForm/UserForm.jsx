@@ -2,37 +2,50 @@ import PropTypes from 'prop-types';
 
 import './UserForm.scss';
 import edit from '../../assets/edit-icon.svg';
+import Frame from '../Frame/Frame';
 
 const UserForm = ({ formType }) => {
 
   if (formType === 'subscribe') {
     return (
-      <section className="subscribe">
-        <h2>Inscription</h2>
-        <form className="subscribe-form">
-          <label htmlFor="avatar" className="subscribe-form-avatar-upload">
+      <Frame title="Inscription">
+        <form className="userform-form">
+          <label htmlFor="avatar" className="userform-form-avatar-upload" id="avatar-label">
             <img src={edit} />
           </label>
           <input type="file" id="avatar" name="avatar" accept=".jpg .jpeg .png" />
-          <input type="email" placeholder="Adresse e-mail" />
-          <input type="text" placeholder="Pseudo" />
-          <input type="password" placeholder="Mot de passe" />
-          <input type="password" placeholder="Confirmez le mot de passe" />
+
+          <label htmlFor="email">E-mail :</label>
+          <input type="email" id="email" placeholder="Adresse e-mail" />
+
+          <label htmlFor="pseudo">Pseudo :</label>
+          <input type="text" id="pseudo" placeholder="Pseudo" />
+
+          <label htmlFor="password">Mot de passe :</label>
+          <input type="password" id="password" placeholder="Mot de passe" />
+
+          <label htmlFor="password">Confirmez le mot de passe :</label>
+          <input type="password" id="password" placeholder="Confirmez le mot de passe" />
+
           <button type="submit">Envoyer</button>
         </form>
-      </section>
+      </Frame>
     );
   }
   else if (formType === 'login') {
     return (
-      <section className="subscribe">
-        <h2>Login</h2>
-        <form className="subscribe-form">
-          <input type="email" placeholder="Adresse e-mail" />
-          <input type="password" placeholder="Mot de passe" />
+      <Frame title="Login">
+        <form className="userform-form">
+
+          <label htmlFor="email">E-mail :</label>
+          <input type="email" id="email" placeholder="Adresse e-mail" />
+
+          <label htmlFor="password">Mot de passe :</label>
+          <input type="password" id="password" placeholder="Mot de passe" />
+
           <button type="submit">Envoyer</button>
         </form>
-      </section>
+      </Frame>
     );
   }
 };
