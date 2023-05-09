@@ -1,0 +1,28 @@
+.header-title-game {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: initial;
+  }
+}
+
+.header-game {
+  &-exit {
+    margin-right: 0.5rem;
+    @media (min-width: 768px) {
+      margin-right: 1rem;
+    }
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+      img {
+        filter: brightness(85%);
+      }
+    }
+  }
+}

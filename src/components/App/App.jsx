@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import Home from "../Home/Home";
 import UserForm from "../UserForm/UserForm";
 import CharacterList from "../CharacterList/CharacterList";
+import Game from "../Game/Game";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/register" element={<UserForm formType="subscribe" />} />
           <Route path="/login" element={<UserForm formType="login" />} />
           <Route path="/characters" element={<CharacterList />} />
+          <Route path="/game" element={<Game />} />
         </Routes>
       </div>
       <Footer />
