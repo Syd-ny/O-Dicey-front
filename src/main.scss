@@ -4,11 +4,17 @@
 .app {
   min-height: 100vh;
   width: 100vw;
+  font-family: sans-serif;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   .app {
-    --main-blue: black;
+    --main-blue: #0d5eaf;
     --light-blue: #e6eef7;
     --main-yellow: #f2cf05;
     --main-red: #c60800;

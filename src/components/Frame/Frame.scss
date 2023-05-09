@@ -1,0 +1,21 @@
+.frame {
+  margin: 1rem 0;
+
+  h2 {
+    font-size: 1.2em;
+    padding: 1rem 1rem;
+    background-color: var(--main-blue);
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    font-family: 'Aboreto', display;
+    color: var(--light-blue);
+  }
+
+  &-content {
+    border: 0.2rem solid var(--main-blue);
+    border-radius: 1rem;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top: none;
+  }
+}
