@@ -1,0 +1,132 @@
+.character-card {
+  width: 100%;
+  max-width: 430px;
+  aspect-ratio: 0.67;
+  max-height: 640px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-radius: 1rem;
+
+  background-repeat: no-repeat;
+
+  color: white;
+  text-shadow: black 1px 1px 5px;
+
+  &-header {
+    position: relative;
+    padding: 1.5rem;
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+
+      &-name {
+        font-size: 2rem;
+      }
+    }
+
+    &-level {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 2rem;
+    }
+  }
+
+  &-main {
+    background-color: transparent;
+    margin: 0;
+
+    .character-stats {
+      display: flex;
+      flex-flow: column;
+      gap: 0.6rem;
+      justify-content: space-evenly;
+      font-size: 0.9rem;
+      width: fit-content;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #c60700c5;
+        padding: 0.2em;
+        padding-right: 1em;
+        padding-left: 0.5em;
+        border-top-right-radius: 3em;
+        border-bottom-right-radius: 3em;
+        border: 0.3em solid var(--main-yellow);
+        width: 3em;
+
+        h3 {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  &-footer {
+    position: relative;
+    padding: 1.5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .game-title {
+      font-size: 1.5rem;
+    }
+
+    .character-actions {
+      button {
+        font-size: 1.5rem;
+        color: var(--light-blue);
+        background-color: transparent;
+        border: none;
+        transition: scale 100ms ease-in;
+      }
+
+      button:hover {
+        scale: 130%;
+        cursor: pointer;
+        color: var(--main-yellow);
+      }
+    }
+
+    .character-image-edit {
+      display: none;
+      flex-flow: column nowrap;
+      gap: 0.5rem;
+      position: absolute;
+      right: -3rem;
+      bottom: 1rem;
+
+      &-actions {
+        text-align: center;
+      }
+    }
+  }
+
+  .character-stats,
+  .character-actions {
+    opacity: 0;
+    transition: opacity 400ms ease-in-out;
+  }
+
+  &:hover {
+    .character-stats,
+    .character-actions {
+      opacity: 1;
+    }
+  }
+
+  &-edit {
+    .character-image-edit {
+      display: flex;
+    }
+  }
+}

@@ -1,0 +1,91 @@
+@use "sass:color";
+
+.userform {
+
+  margin: 1em 0;
+
+  width: 100%;
+  max-width: 300px;
+
+
+
+
+
+  h2 {
+    font-size: 1.2em;
+    padding: 1rem 1rem;
+    background-color: var(--main-blue);
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    font-family: 'Aboreto', display;
+    color: var(--light-blue);
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2rem;
+
+    input {
+      margin-bottom: 0.8rem;
+      width: 100%;
+      border-radius: 1rem;
+      border: none;
+      padding: 0.4rem 0.6rem;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    &-avatar-upload {
+      border-radius: 50%;
+      background-color: var(--main-blue);
+      background-image: url(avatar.svg);
+      background-size: contain;
+      cursor: pointer;
+      position: relative;
+
+      &#avatar-label {
+        margin-bottom: 1rem;
+        width: 3em;
+        height: 3em;
+      }
+
+      &:hover {
+        background-color: hsl(210, 86%, 45%);
+      }
+
+      img {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 1em;
+      }
+    }
+
+    label {
+      font-size: 0.8rem;
+      margin-bottom: 0.3rem;
+      width: 100%;
+    }
+
+    button {
+      width: fit-content;
+
+      color: white;
+      background-color: var(--main-blue);
+      border: none;
+      border-radius: 1rem;
+      padding: 0.5em 1em;
+      font-weight: bold;
+
+      &:hover {
+        background-color: hsl(210, 86%, 45%);
+        cursor: pointer;
+      }
+
+    }
+  }
+}

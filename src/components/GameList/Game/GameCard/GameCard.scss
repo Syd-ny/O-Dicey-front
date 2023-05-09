@@ -1,9 +1,9 @@
-.card {
+.gamecard {
     width: 300px;
     height: 400px;
 }
 
-.card-information {
+.gamecard-information {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
     width: 300px;
 }
 
-.card-header {
+.gamecard-header {
     width: 100%;
     text-shadow: black 1px 1px 5px;
     display: flex;
@@ -25,11 +25,11 @@
     margin: 1rem;
 }
 
-.card-header h3 {
+.gamecard-header h3 {
     font-size: 1.7rem;
 }
 
-.card-img {
+.gamecard-img {
     position: absolute;
     width: 300px;
     height: 400px;
@@ -37,13 +37,13 @@
     border-radius: 10px;
 }
 
-.card-footer {
+.gamecard-footer {
     opacity: 0;
     margin: 1.5rem;
     font-size: .9rem;
     transition: 0.5s;
 }
 
-.card-information:hover .card-footer {
+.gamecard-information:hover .gamecard-footer {
     opacity: 1;
 }

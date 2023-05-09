@@ -5,14 +5,14 @@ const GameCard = ({
     title,
 }) => {
     return (
-        <div className="card">
-            <img className="card-img" src="https://i.imgur.com/i1m3wz0.png" alt="" />
-            <div className="card-information">
-                <header className="card-header">
+        <div className="gamecard">
+            <img className="gamecard-img" src="https://i.imgur.com/i1m3wz0.png" alt="" />
+            <div className="gamecard-information">
+                <header className="gamecard-header">
                     <h3>Nom de la partie {title}</h3>
                     <p>Maître du jeu : user</p>
                 </header>
-                <div className="card-footer">
+                <div className="gamecard-footer">
                     <p>Créé le : xx/xx/xxxx</p>
                     <p>Dernière session : xx/xx/xxxx</p>
                     <p>Status : En cours</p>
