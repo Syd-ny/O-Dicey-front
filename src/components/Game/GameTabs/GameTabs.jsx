@@ -1,3 +1,4 @@
+import DiceRoller from '../DiceRoller/DiceRoller';
 import GameMap from '../GameMap/GameMap';
 import './GameTabs.scss';
 
@@ -38,7 +39,7 @@ const GameTabs = () => {
         </nav>
       </header>
       <div className="game-tabs-content">
-        <GameMap />
+        <DiceRoller />
       </div>
     </div>
   );
