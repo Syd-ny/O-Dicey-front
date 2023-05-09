@@ -8,8 +8,8 @@ import image from '../../assets/berserker.jpg';
 const CharacterCard = ({ edit }) => {
   const [characterImage, setCharacterImage] = useState(image);
   const [characterImagePositionX, setCharacterImagePositionX] = useState(50);
-  const [characterImagePositionY, setCharacterImagePositionY] = useState(50);
-  const [characterImageSize, setCharacterImageSize] = useState(100);
+  const [characterImagePositionY, setCharacterImagePositionY] = useState(10);
+  const [characterImageSize, setCharacterImageSize] = useState(150);
 
   const cardStyle = {
     backgroundImage: `url(${characterImage})`,

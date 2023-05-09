@@ -1,16 +1,27 @@
 .character-list {
-  padding: 2rem;
+  box-sizing: border-box;
+  
+  padding: 1rem;
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
   width: 100%;
   max-width: 900px;
 
   &-header {
     display: grid;
-    grid-template: auto 1fr / 2fr 1fr;
+    
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    @media (min-width: 768px) {
+      grid-template: auto 1fr / 2fr 1fr;
+      justify-items: initial;
+    }
     gap: 1em;
 
     button {
       width: fit-content;
-      background-color: #0D5EAF;
+      background-color: hsl(210, 86%, 37%);
       border: none;
       padding: 0.8em;
       border-radius: 0.5em;
@@ -29,7 +40,13 @@
 
   &-cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     gap: 2em;
     margin: 2em 0;
   }
