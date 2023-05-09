@@ -1,0 +1,35 @@
+.gameDetailed {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin: 3rem;
+}
+
+.game-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    width: 300px;
+}
+
+.game-description {
+    text-align : justify;
+}
+
+.gallery {
+    background-color: green;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.gallery img {
+    border: 1px solid black;
+    border-radius: 2rem;
+    width: 200px;
+}
