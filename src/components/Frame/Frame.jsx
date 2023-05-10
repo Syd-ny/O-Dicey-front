@@ -13,7 +13,7 @@ const Frame = ({ title, children }) => {
 
 Frame.propTypes = {
   title: PropTypes.string.isRequired,
-  child: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Frame;
