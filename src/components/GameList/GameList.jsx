@@ -40,8 +40,6 @@ function useWindowSize() {
 }
 
 
-
-
 const GameList = () => {
   const width = useWindowSize().width;
 

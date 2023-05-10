@@ -57,7 +57,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
                     <GameCardDetailed
                         title={title}
                     />
-                    <button className='test' onClick={() => setIsOpen(!isOpen)}></button>
+                    <button className='close' onClick={() => setIsOpen(!isOpen)}></button>
                 </div>{" "}
             </div>
         );
