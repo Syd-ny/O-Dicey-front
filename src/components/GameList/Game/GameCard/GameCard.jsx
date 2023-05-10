@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import "./GameCard.scss"
+import "./GameCard.scss";
 
 const GameCard = ({
     title,

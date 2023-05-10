@@ -6,6 +6,7 @@ import "./Game.scss";
 import GameCard from "./GameCard/GameCard";
 import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
 
+    // Animation from GameCard to GameCardDetailed
     function useAnimation(isOpen, boolean) {
         const [scope, animate] = useAnimate();
 

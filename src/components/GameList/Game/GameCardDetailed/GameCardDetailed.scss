@@ -22,6 +22,32 @@
     text-align : justify;
 }
 
+.game-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+
+.dropdown-status select, .dropdown-status option{
+    background-color: var(--main-blue);
+    font-size: 1rem;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    padding: .25rem 1rem;
+    font-weight: bold;
+
+    &:hover {
+      background-color: hsl(210, 86%, 45%);
+      cursor: pointer;
+    }
+}
+
+
+
+
+
 .gallery {
     // background-color: green;
     display: grid;
