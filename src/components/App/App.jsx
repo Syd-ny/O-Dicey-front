@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./App.scss"
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -7,6 +8,8 @@ import UserForm from "../UserForm/UserForm";
 import CharacterList from "../CharacterList/CharacterList";
 
 function App() {
+  const isLogged = useSelector((state) => state.user.logged);
+
   return (
     <div className="app">
       <Header />
@@ -15,7 +18,13 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<UserForm formType="subscribe" />} />
           <Route path="/login" element={<UserForm formType="login" />} />
-          <Route path="/characters" element={<CharacterList />} />
+
+          {/* Restricted routes, user must be logged in */}
+          {isLogged && (
+            <>
+              <Route path="/characters" element={<CharacterList />} />
+            </>
+          )}
         </Routes>
       </div>
       <Footer />
