@@ -1,0 +1,57 @@
+import PropTypes from 'prop-types';
+import { useState } from "react";
+import Dropdown from "../../Header/Dropdown/Dropdown";
+import "./Dropdown.scss";
+
+const GameCreate = (
+    {   
+        title,
+        itemToList,
+    }) => {
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+    const [itemsList, setItemsList] = itemToList;
+
+    const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+
+    return (
+        <div>
+            <div className="custom-dropdown">
+                <div className={
+                    "custom-dropdown-selection " + (isDropdownVisible ? "visible" : "")
+                    } onClick={event => {
+                        setIsDropdownVisible(!isDropdownVisible);
+                    }
+                }>
+                    {selectedItemIndex != null ? itemsList[selectedItemIndex].name : title}
+                </div>
+                {
+                    isDropdownVisible ? (
+                        <div className="items-holder">
+                            {
+                                itemsList.map((item, index) => (
+                                    <div key={item.value} className={`dropdown-item ${item.class}`} onClick={event => {
+                                        setSelectedItemIndex(index);
+                                        setIsDropdownVisible(false);
+                                    }}>
+                                        {
+                                            item.name
+                                        }
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    ) : <></>
+                }
+            </div>
+        </div>
+
+    )
+}
+
+Dropdown.propTypes = {
+    title: PropTypes.string.isRequired,
+    itemToList: PropTypes.array.isRequired,
+}
+
+export default GameCreate;

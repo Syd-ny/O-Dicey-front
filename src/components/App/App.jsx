@@ -7,6 +7,7 @@ import GameList from "../GameList/GameList";
 import Home from "../Home/Home";
 import UserForm from "../UserForm/UserForm";
 import CharacterList from "../CharacterList/CharacterList";
+import GameCreate from "../GameCreate/GameCreate";
 
 function App() {
   const isLogged = useSelector((state) => state.user.logged);
@@ -19,6 +20,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<UserForm formType="subscribe" />} />
           <Route path="/login" element={<UserForm formType="login" />} />
+          {/* <Route path="/create" element={<GameCreate/>} />
+          <Route path="/list" element={<GameList/>} /> */}
 
           {/* Restricted routes, user must be logged in */}
           {isLogged && (
