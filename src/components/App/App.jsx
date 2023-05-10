@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import "./App.scss"
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import GameList from "../GameList/GameList";
 import Home from "../Home/Home";
 import UserForm from "../UserForm/UserForm";
 import CharacterList from "../CharacterList/CharacterList";
