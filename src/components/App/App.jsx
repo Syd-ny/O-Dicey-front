@@ -7,6 +7,7 @@ import GameList from "../GameList/GameList";
 import Home from "../Home/Home";
 import UserForm from "../UserForm/UserForm";
 import CharacterList from "../CharacterList/CharacterList";
+import ErrorCode from "../ErrorCode/ErrorCode";
 
 function App() {
   const isLogged = useSelector((state) => state.user.logged);
@@ -24,8 +25,11 @@ function App() {
           {isLogged && (
             <>
               <Route path="/characters" element={<CharacterList />} />
+              <Route path="/games" element={<GameList />} />
             </>
           )}
+
+          <Route path="*" element={<ErrorCode code="404" message="Page not found" />} />
         </Routes>
       </div>
       <Footer />
