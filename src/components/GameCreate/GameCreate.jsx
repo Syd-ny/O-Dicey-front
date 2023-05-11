@@ -84,7 +84,8 @@ const GameCreate = () => {
                             </div>
                         </div>
                         <h3>Envoyez votre image :</h3>
-                        <button className="game-form-button">Parcourir</button>
+                        <label className="image-label" for="image">Parcourir</label>
+                        <input className="image-input" type="file" id="image" name="image" accept=".jpg .jpeg .png" />
                     </div>
                     <button className="validate">Lancer la Partie</button>
                 </div>
