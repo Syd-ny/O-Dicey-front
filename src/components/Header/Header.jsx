@@ -18,7 +18,7 @@ const Header = () => {
       {isLogged && (
         <nav className="header-site-nav">
           <Link to="/characters">Liste des personnages</Link>
-          <a href="#">Liste des parties</a>
+          <Link to="/games">Liste des parties</Link>
         </nav>
       )}
       <Dropdown />
