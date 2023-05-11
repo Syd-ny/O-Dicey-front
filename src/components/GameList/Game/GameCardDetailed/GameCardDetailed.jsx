@@ -2,14 +2,32 @@ import PropTypes from 'prop-types';
 import "./GameCardDetailed.scss";
 import GameCard from "../GameCard/GameCard";
 import CharacterCard from "../../../CharacterCard/CharacterCard";
-
-
-
+import Dropdown from "../../../GameCreate/Dropdown/Dropdown";
+import { useState } from "react";
 
 const GameCardDetailed = ({
     title,
     mobile,
 }) => {
+
+    const gameStatus = useState([
+        {
+            name: "En cours",
+            value: "ongoing",
+            class: "green"
+        },
+        {
+            name: "Inactive",
+            value: "inactive",
+            class: "orange"
+        },
+        {
+            name: "Terminée",
+            value: "finish",
+            class: "red"
+        }
+    ]);
+
     const Gallery = () => {
         if ( mobile == undefined ) {
             return (
@@ -35,13 +53,10 @@ const GameCardDetailed = ({
                 <p className="game-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum suscipit, quo sit iste blanditiis unde explicabo voluptatibus tenetur quaerat cupiditate nulla, veritatis rerum non animi laborum reprehenderit praesentium atque sed?</p>
                 <div className="game-status">
                     <button className='classic'>Rejoindre</button>
-                    <form className='dropdown-status'>
-                        <select name="status" id="status">
-                            <option value="En cours">En cours</option>
-                            <option value="Inactive">Inactive</option>
-                            <option value="Terminée">Terminée</option>
-                        </select>
-                    </form>
+                    <Dropdown
+                        title="Statut"
+                        itemToList={gameStatus}
+                    />
                 </div>
             </div>
             <Gallery />

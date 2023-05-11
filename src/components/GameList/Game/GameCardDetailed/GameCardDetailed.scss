@@ -4,7 +4,7 @@
     flex-direction: row;
     justify-content: center;
     gap: 1rem;
-    height: calc(100% - 2rem);
+    height: calc(100% - 4rem);
     padding: 2rem;
 }
 
@@ -24,24 +24,9 @@
 
 .game-status {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-}
-
-.dropdown-status select, .dropdown-status option{
-    background-color: var(--main-blue);
-    font-size: 1rem;
-    color: white;
-    border: none;
-    border-radius: 1rem;
-    padding: .25rem 1rem;
-    font-weight: bold;
-
-    &:hover {
-      background-color: hsl(210, 86%, 45%);
-      cursor: pointer;
-    }
+    flex-direction: row;
+    gap: 1rem;
+    
 }
 
 .gallery {
@@ -58,4 +43,14 @@
     border: 1px solid black;
     border-radius: 2rem;
     width: 200px;
+}
+
+// Dropdown
+
+.game-status .custom-dropdown .items-holder {
+    top: calc(-300% + 4px);
+}
+
+.game-status .custom-dropdown, .game-status .custom-dropdown .items-holder  {
+    width: 150px;
 }
