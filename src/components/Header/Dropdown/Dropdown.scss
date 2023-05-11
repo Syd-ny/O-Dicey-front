@@ -29,12 +29,12 @@
   &-nav {
     position: absolute;
     right: 0.5em;
+    width: 100%;
 
     @media (min-width: 768px) {
       right: 1em;
     }
 
-    width: 10em;
     display: none;
     flex-direction: column;
 
