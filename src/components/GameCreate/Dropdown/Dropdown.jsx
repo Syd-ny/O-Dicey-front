@@ -18,7 +18,7 @@ const GameCreate = (
         <div>
             <div className="custom-dropdown">
                 <div className={
-                    "custom-dropdown-selection " + (isDropdownVisible ? "visible" : "")
+                    "custom-dropdown-selection " + (isDropdownVisible ? "visible " : "") + (selectedItemIndex != undefined ? itemsList[selectedItemIndex].class : "")
                     } onClick={event => {
                         setIsDropdownVisible(!isDropdownVisible);
                     }

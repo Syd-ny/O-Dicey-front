@@ -1,11 +1,18 @@
 .game-create {
-    // border: 2px solid var(--main-blue);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 2rem;
+    margin: 2rem 0;
     width: 100%;
+
+    @media (min-width: 768px) {
+        border: 2px solid var(--main-blue);
+        border-radius: 1rem;
+        margin: 2rem;
+        width: calc(100% - 4rem);
+        box-shadow: var(--main-blue) 2px 2px 10px;
+    }
 
 }
 .game-create h2{
@@ -14,8 +21,14 @@
     font-size: 2rem;
     padding-bottom: 1rem;
     margin-bottom: 2rem;
+    text-shadow: black 1px 1px 5px;
 
     border-bottom: 2px solid var(--main-blue);
+
+    @media (min-width: 768px) {
+        margin-top: 2rem;
+        margin-bottom: 4rem;
+    }
 }
 
 .game-form {
@@ -23,12 +36,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     gap: 1rem;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        gap: 3rem;
+    }
 }
 
 .game-form input {
-    width: 100%;
     border-radius: 1rem;
     border: none;
     padding: 0.4rem 0.6rem;
@@ -41,21 +58,25 @@
     justify-content: center;
     align-items: center;
     gap: .5rem;
+
+    @media (min-width: 768px) {
+        gap: 1rem;
+    }
 }
 
-.green {
+.custom-dropdown .green {
     color: green;
 }
 
-.red {
+.custom-dropdown .red {
     color: red;
 }
 
-.orange {
+.custom-dropdown .orange {
     color: orange;
 }
 
-.send-invite {
+.game-form-button {
     width: fit-content;
     color: white;
     background-color: var(--main-blue);
@@ -70,10 +91,29 @@
     }
 }
 
-.validate {
+.game-form-left, .game-form-right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.game-form-left {
+    @media (min-width: 768px) {
+        justify-content: space-around;
+    }
+}
+
+.game-form-right {
+    @media (min-width: 768px) {
+        margin-bottom: 2rem;
+        justify-content: space-between;
+    }
+}
+
+.game-form-right .validate {
     align-self: flex-end;
     width: fit-content;
-    margin-right: 4rem;
+    margin-right: 10%;
     color: white;
     background-color: var(--main-blue);
     border: none;
@@ -85,4 +125,49 @@
       background-color: hsl(210, 86%, 45%);
       cursor: pointer;
     }
+}
+
+
+// player
+.mj {
+    color: red;
+}
+
+// gallery - img
+.game-gallery {
+    display: none;
+
+    @media (min-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: .5rem;
+    }
+}
+
+.game-gallery-part {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.game-gallery-front {
+    max-width: 720px;
+    max-height: 480px;
+}
+
+.game-gallery-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;  
+}
+
+.game-gallery-list img{
+    max-width: 180px;
+    max-height: 120px;
 }

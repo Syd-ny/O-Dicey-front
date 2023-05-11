@@ -20,8 +20,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<UserForm formType="subscribe" />} />
           <Route path="/login" element={<UserForm formType="login" />} />
-          {/* <Route path="/create" element={<GameCreate/>} />
-          <Route path="/list" element={<GameList/>} /> */}
 
           {/* Restricted routes, user must be logged in */}
           {isLogged && (
