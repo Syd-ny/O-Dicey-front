@@ -7,6 +7,7 @@ import GameList from "../GameList/GameList";
 import Home from "../Home/Home";
 import UserForm from "../UserForm/UserForm";
 import CharacterList from "../CharacterList/CharacterList";
+import GameCreate from "../GameCreate/GameCreate";
 import ErrorCode from "../ErrorCode/ErrorCode";
 
 function App() {
