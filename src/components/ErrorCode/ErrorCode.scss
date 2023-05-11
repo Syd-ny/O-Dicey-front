@@ -1,0 +1,40 @@
+.error-code {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  color: var(--main-blue);
+
+  //margin-top: 5rem;
+  padding: 5rem 0;
+  &-status {
+    font-size: 10rem;
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+
+    &-number {
+      animation: UpDown 1.5s ease-in-out infinite;
+      filter: drop-shadow(5px 2rem 2px #00000080);
+    }
+
+    @keyframes UpDown {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-2rem);
+        filter: drop-shadow(5px 4rem 10px #00000080);
+        scale: 120%;
+      }
+    }
+  }
+
+  &-message {
+    font-size: 4rem;
+    text-align: center;
+  }
+}

@@ -5,11 +5,17 @@ import './UserForm.scss';
 import edit from '../../assets/edit-icon.svg';
 import Frame from '../Frame/Frame';
 import { actionSubmitLoginForm, actionUpdateFormField } from '../../actions/user';
+import { Navigate } from 'react-router-dom';
 
 const UserForm = ({ formType }) => {
   const dispatch = useDispatch();
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);
+  const isLogged = useSelector((state) => state.user.logged);
+
+  if (isLogged) {
+    return <Navigate to="/" />
+  }
 
   const changeField = (name, value) => {
     dispatch(actionUpdateFormField(name, value));
