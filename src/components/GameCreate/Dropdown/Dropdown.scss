@@ -2,6 +2,7 @@
     width: 200px;
     position: relative;
     font-weight: bold;
+    user-select: none;
 }
 
 .custom-dropdown-selection {
@@ -24,8 +25,8 @@
     content: "";
     width: 10px;
     height: 10px;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
     transform: rotate(45deg);
     position: absolute;
     right: 15px;
