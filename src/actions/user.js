@@ -12,9 +12,9 @@ export const actionSubmitLoginForm = () => ({
   type: SUBMIT_LOGIN_FORM,
 });
 
-export const actionUserLogin = (pseudo, token) => ({
+export const actionUserLogin = (pseudo, token, id) => ({
   type: USER_LOGIN,
-  payload: { pseudo, token },
+  payload: { pseudo, token, user_id: id },
 });
 
 export const actionUserLogout = () => ({
