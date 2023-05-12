@@ -207,6 +207,7 @@
   "spells": [
     {
       "name": "Boule de feu",
+      "level": 3,
       "time": 1,
       "range": 45,
       "components": ["V", "S", "M"],
