@@ -1,0 +1,194 @@
+//import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import './CharacterEdit.scss';
+import { useSelector } from 'react-redux';
+import CharacterCard from '../CharacterCard/CharacterCard';
+
+const apiUrl = import.meta.env.VITE_API_URL;
+
+const CharacterEdit = () => {
+  //const { charId } = useParams();
+  const charId = 30;
+  const userId = useSelector((state) => state.user.user_id);
+  const userToken = useSelector((state) => state.user.token);
+  const [character, setCharacter] = useState({
+    game: {
+      name: "",
+    },
+    picture: "",
+    name: "",
+    stats: {
+      info: {
+        name: "",
+        level: 0,
+        class: "",
+        background: "",
+        player_name: "",
+        race: "",
+        alignment: "",
+        experience: 0,
+        age: 0,
+        height: 0,
+        weight: 0,
+        eyes: "",
+        skin: "",
+        hair: ""
+      },
+      characteristics: {
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0
+      },
+    },
+  });
+
+  const [info, setInfo] = useState({
+    name: "",
+    level: 0,
+    class: "",
+    background: "",
+    player_name: "",
+    race: "",
+    alignment: "",
+    experience: 0,
+    age: 0,
+    height: 0,
+    weight: 0,
+    eyes: "",
+    skin: "",
+    hair: ""
+  });
+
+  const [characteristics, setCharacteristics] = useState({
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0
+  });
+
+  const fetchCharacter = useCallback(async () => {
+    const res = await axios.get(`${apiUrl}/api/characters/${charId}`, {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        Accept: 'application/json',
+      }
+    });
+    // sanitization
+    const sanitizedChar = { ...res.data, game: { id: res.data.game.id }, user: { id: res.data.user.id } };
+    setCharacter(sanitizedChar);
+  }, [userToken, charId]);
+
+  useEffect(() => {
+    fetchCharacter();
+  }, [fetchCharacter]);
+
+  useEffect(() => {
+    setInfo(character.stats.info);
+    setCharacteristics(character.stats.characteristics)
+  }, [character]);
+
+  const changeField = (initialValue, setValue) => {
+    return (name, value) => {
+      const newValue = { ...initialValue, [name]: value };
+      setValue(newValue);
+    };
+  };
+
+  const changeInfo = (event) => {
+    changeField(info, setInfo)(event.target.name, event.target.value);
+  };
+
+  const changeCharacteristics = (event) => {
+    changeField(characteristics, setCharacteristics)(event.target.name, event.target.value);
+  }
+
+  const saveCharacter = async () => {
+    try {
+      const updatedCharacter = { ...character, stats: { info, characteristics } };
+      await axios.put(`${apiUrl}/api/characters/${charId}`, updatedCharacter, {
+        headers: {
+          'Authorization': `Bearer ${userToken}` ,
+          'Content-Type': 'application/json',
+        }
+      });
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
+
+  return (
+    <div className="character-edit">
+      <CharacterCard game={character.game.name} image={character.picture} name={character.name} characteristics={characteristics} edit />
+      <button onClick={() => saveCharacter()}>Sauvegarder</button>
+      <section className="character-edit-info">
+        <label htmlFor="name">Nom :</label>
+        <input type="text" name="name" id="name" value={info.name} onChange={changeInfo} />
+
+        <label htmlFor="level">Niveau :</label>
+        <input type="number" name="level" id="level" value={info.level} onChange={changeInfo} />
+
+        <label htmlFor="class">Classe :</label>
+        <input type="text" name="class" id="class" value={info.class} onChange={changeInfo} />
+
+        <label htmlFor="background">Historique :</label>
+        <input type="text" name="background" id="background" value={info.background} onChange={changeInfo} />
+
+        <label htmlFor="player_name">Nom du joueur :</label>
+        <input type="text" name="player_name" id="player_name" value={info.player_name} onChange={changeInfo} />
+
+        <label htmlFor="alignment">Alignement :</label>
+        <input type="text" name="alignment" id="alignment" value={info.alignment} onChange={changeInfo} />
+
+        <label htmlFor="experience">Expérience :</label>
+        <input type="number" name="experience" id="experience" value={info.experience} onChange={changeInfo} />
+
+        <label htmlFor="age">Age :</label>
+        <input type="number" name="age" id="age" value={info.age} onChange={changeInfo} />
+
+        <label htmlFor="height">Taille(cm) :</label>
+        <input type="number" name="height" id="height" value={info.height} onChange={changeInfo} />
+
+        <label htmlFor="weight">Poids(kg) :</label>
+        <input type="number" name="weight" id="weight" value={info.weight} onChange={changeInfo} />
+
+        <label htmlFor="eyes">Yeux :</label>
+        <input type="text" name="eyes" id="eyes" value={info.eyes} onChange={changeInfo} />
+
+        <label htmlFor="skin">Peau :</label>
+        <input type="text" name="skin" id="skin" value={info.skin} onChange={changeInfo} />
+
+        <label htmlFor="hair">Cheveux :</label>
+        <input type="text" name="hair" id="hair" value={info.hair} onChange={changeInfo} />
+      </section>
+
+      <section className="character-edit-characteristics">
+        <label htmlFor="strength">Force :</label>
+        <input type="number" name="strength" id="strength" value={characteristics.strength} onChange={changeCharacteristics} />
+
+        <label htmlFor="dexterity">Dextérité :</label>
+        <input type="number" name="dexterity" id="dexterity" value={characteristics.dexterity} onChange={changeCharacteristics} />
+
+        <label htmlFor="constitution">Constitution :</label>
+        <input type="number" name="constitution" id="constitution" value={characteristics.constitution} onChange={changeCharacteristics} />
+
+        <label htmlFor="intelligence">Intelligence :</label>
+        <input type="number" name="intelligence" id="intelligence" value={characteristics.intelligence} onChange={changeCharacteristics} />
+
+        <label htmlFor="wisdom">Sagesse :</label>
+        <input type="number" name="wisdom" id="wisdom" value={characteristics.wisdom} onChange={changeCharacteristics} />
+
+        <label htmlFor="charisma">Charisme :</label>
+        <input type="number" name="charisma" id="charisma" value={characteristics.charisma} onChange={changeCharacteristics} />
+      </section>
+    </div>
+  );
+};
+
+export default CharacterEdit;

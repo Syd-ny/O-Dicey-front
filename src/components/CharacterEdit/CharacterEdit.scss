@@ -1,0 +1,7 @@
+.character-edit {
+  &-info,
+  &-characteristics {
+    display: flex;
+    flex-direction: column;
+  }
+}

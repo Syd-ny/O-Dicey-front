@@ -2,15 +2,16 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import './CharacterCard.scss';
+import { Link } from 'react-router-dom';
 
-const CharacterCard = ({ edit, image, name, game  }) => {
-  const [characterImage, setCharacterImage] = useState(image);
+const CharacterCard = ({ edit, image, name, game, characteristics }) => {
+  //const [characterImage, setCharacterImage] = useState(image);
   const [characterImagePositionX, setCharacterImagePositionX] = useState(50);
   const [characterImagePositionY, setCharacterImagePositionY] = useState(10);
   const [characterImageSize, setCharacterImageSize] = useState(250);
 
   const cardStyle = {
-    backgroundImage: `url(${characterImage})`,
+    backgroundImage: `url(${image})`,
     backgroundPositionX: `${characterImagePositionX}%`,
     backgroundPositionY: `${characterImagePositionY}%`,
     backgroundSize: `${characterImageSize}%`,
@@ -85,7 +86,7 @@ const CharacterCard = ({ edit, image, name, game  }) => {
     <article className={cardClass} style={cardStyle}>
       <header className="character-card-header">
         <section className="character-card-header-info">
-          <h1 className="character-card-header-info-name">{name}</h1>
+          <h1 className="character-card-header-info-name"><Link to="/characters/4">{name}</Link></h1>
           <h2 className="character-card-header-info-race">Humain</h2>
           <h2 className="character-card-header-info-class">Barbare</h2>
         </section>
@@ -97,27 +98,27 @@ const CharacterCard = ({ edit, image, name, game  }) => {
         <ul className="character-stats">
           <li>
             <h3>FOR</h3>
-            <p>10</p>
+            <p>{characteristics.strength}</p>
           </li>
           <li>
             <h3>DEX</h3>
-            <p>10</p>
+            <p>{characteristics.dexterity}</p>
           </li>
           <li>
             <h3>CON</h3>
-            <p>10</p>
+            <p>{characteristics.constitution}</p>
           </li>
           <li>
             <h3>SAG</h3>
-            <p>10</p>
+            <p>{characteristics.wisdom}</p>
           </li>
           <li>
             <h3>INT</h3>
-            <p>2</p>
+            <p>{characteristics.intelligence}</p>
           </li>
           <li>
             <h3>CHA</h3>
-            <p>10</p>
+            <p>{characteristics.charisma}</p>
           </li>
           <li>
             <h3>HP</h3>
@@ -155,13 +156,25 @@ const CharacterCard = ({ edit, image, name, game  }) => {
 
 CharacterCard.propTypes = {
   edit: PropTypes.bool,
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  game: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  game: PropTypes.string,
+  characteristics: PropTypes.object,
 };
 
 CharacterCard.defaultProps = {
   edit: false,
+  image: "",
+  name: "",
+  game: "",
+  characteristics: {
+    strength: 0,
+    dexterity: 0,
+    constitution: 0,
+    intelligence: 0,
+    wisdom: 0,
+    charisma: 0
+  },
 };
 
 export default CharacterCard;
