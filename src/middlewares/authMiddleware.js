@@ -14,7 +14,7 @@ const authMiddleware = (store) => (next) => async (action) => {
           }
         });
         console.log(res);
-        store.dispatch(actionUserLogin(res.data.data.login, res.data.token));
+        store.dispatch(actionUserLogin(res.data.data.login, res.data.token, res.data.data.id));
       }
       catch (err) {
         // TODO: gérer les erreurs
