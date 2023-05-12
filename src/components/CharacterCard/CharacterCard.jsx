@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 
 import './CharacterCard.scss';
 
-import image from '../../assets/berserker.jpg';
-
-const CharacterCard = ({ edit }) => {
+const CharacterCard = ({ edit, image, name, game  }) => {
   const [characterImage, setCharacterImage] = useState(image);
   const [characterImagePositionX, setCharacterImagePositionX] = useState(50);
   const [characterImagePositionY, setCharacterImagePositionY] = useState(10);
-  const [characterImageSize, setCharacterImageSize] = useState(150);
+  const [characterImageSize, setCharacterImageSize] = useState(250);
 
   const cardStyle = {
     backgroundImage: `url(${characterImage})`,
@@ -66,7 +64,7 @@ const CharacterCard = ({ edit }) => {
     switch (direction) {
       case '+': {
         const newSize = characterImageSize + 1;
-        if (newSize <= 200) {
+        if (newSize <= 400) {
           setCharacterImageSize(newSize);
         }
         break;
@@ -87,7 +85,7 @@ const CharacterCard = ({ edit }) => {
     <article className={cardClass} style={cardStyle}>
       <header className="character-card-header">
         <section className="character-card-header-info">
-          <h1 className="character-card-header-info-name">Brutus</h1>
+          <h1 className="character-card-header-info-name">{name}</h1>
           <h2 className="character-card-header-info-race">Humain</h2>
           <h2 className="character-card-header-info-class">Barbare</h2>
         </section>
@@ -128,7 +126,7 @@ const CharacterCard = ({ edit }) => {
         </ul>
       </main>
       <footer className="character-card-footer">
-        <section className="game-title"><h2>Nom de la partie</h2></section>
+        <section className="game-title"><h2>{game}</h2></section>
         <section className="character-actions">
           <button>🖋️</button>
           <button>🗑️</button>
@@ -157,6 +155,9 @@ const CharacterCard = ({ edit }) => {
 
 CharacterCard.propTypes = {
   edit: PropTypes.bool,
+  image: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  game: PropTypes.string.isRequired,
 };
 
 CharacterCard.defaultProps = {
