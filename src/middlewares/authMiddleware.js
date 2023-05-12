@@ -8,7 +8,11 @@ const authMiddleware = (store) => (next) => async (action) => {
     case SUBMIT_LOGIN_FORM: {
       try {
         const { email, password } = store.getState().user;
-        const res = await axios.post(`${apiUrl}/api/login_check`, { username: email, password });
+        const res = await axios.post(`${apiUrl}/api/login_check`, { username: email, password }, {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
         console.log(res);
         store.dispatch(actionUserLogin(res.data.data.login, res.data.token));
       }
