@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './CharacterCard.scss';
 import { Link } from 'react-router-dom';
 
-const CharacterCard = ({ edit, image, name, game, characteristics }) => {
+const CharacterCard = ({ id, edit, image, name, game, characteristics }) => {
   //const [characterImage, setCharacterImage] = useState(image);
   const [characterImagePositionX, setCharacterImagePositionX] = useState(50);
   const [characterImagePositionY, setCharacterImagePositionY] = useState(10);
@@ -86,7 +86,7 @@ const CharacterCard = ({ edit, image, name, game, characteristics }) => {
     <article className={cardClass} style={cardStyle}>
       <header className="character-card-header">
         <section className="character-card-header-info">
-          <h1 className="character-card-header-info-name"><Link to="/characters/4">{name}</Link></h1>
+          <h1 className="character-card-header-info-name"><Link to={`/characters/${id}/edit`}>{name}</Link></h1>
           <h2 className="character-card-header-info-race">Humain</h2>
           <h2 className="character-card-header-info-class">Barbare</h2>
         </section>
@@ -155,6 +155,7 @@ const CharacterCard = ({ edit, image, name, game, characteristics }) => {
 };
 
 CharacterCard.propTypes = {
+  id: PropTypes.number,
   edit: PropTypes.bool,
   image: PropTypes.string,
   name: PropTypes.string,

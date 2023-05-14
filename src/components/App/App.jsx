@@ -27,7 +27,7 @@ function App() {
           {isLogged && (
             <>
               <Route path="/characters" element={<CharacterList />} />
-              <Route path="/characters/:charId" element={<CharacterEdit />} />
+              <Route path="/characters/:charId/edit" element={<CharacterEdit />} />
               <Route path="/games" element={<GameList />} />
             </>
           )}
