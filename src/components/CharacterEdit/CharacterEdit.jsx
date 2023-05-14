@@ -1,10 +1,11 @@
-//import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import './CharacterEdit.scss';
-import { useSelector } from 'react-redux';
-import CharacterCard from '../CharacterCard/CharacterCard';
 import { useParams } from 'react-router-dom';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import defaultStats from '../../types/character-stats';
+import './CharacterEdit.scss';
+import CharacterCard from '../CharacterCard/CharacterCard';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -18,59 +19,12 @@ const CharacterEdit = () => {
     id: 0,
     picture: "",
     name: "",
-    stats: {
-      info: {
-        name: "",
-        level: 0,
-        class: "",
-        background: "",
-        player_name: "",
-        race: "",
-        alignment: "",
-        experience: 0,
-        age: 0,
-        height: 0,
-        weight: 0,
-        eyes: "",
-        skin: "",
-        hair: ""
-      },
-      characteristics: {
-        strength: 0,
-        dexterity: 0,
-        constitution: 0,
-        intelligence: 0,
-        wisdom: 0,
-        charisma: 0
-      },
-    },
+    stats: defaultStats,
   });
 
-  const [info, setInfo] = useState({
-    name: "",
-    level: 0,
-    class: "",
-    background: "",
-    player_name: "",
-    race: "",
-    alignment: "",
-    experience: 0,
-    age: 0,
-    height: 0,
-    weight: 0,
-    eyes: "",
-    skin: "",
-    hair: ""
-  });
+  const [info, setInfo] = useState(defaultStats.info);
 
-  const [characteristics, setCharacteristics] = useState({
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    intelligence: 0,
-    wisdom: 0,
-    charisma: 0
-  });
+  const [characteristics, setCharacteristics] = useState(defaultStats.characteristics);
 
   const fetchCharacter = useCallback(async () => {
     const res = await axios.get(`${apiUrl}/api/characters/${charId}`, {
@@ -80,10 +34,10 @@ const CharacterEdit = () => {
       }
     });
     // sanitization: the API just wants game and user id when making a PUT request
-    const sanitizedChar = { ...res.data, game: { id: res.data.game.id }, user: { id: res.data.user.id } };
+    const sanitizedChar = { ...res.data, game: { id: res.data.game.id }, user: { id: userId } };
     setGame(res.data.game.name);
     setCharacter(sanitizedChar);
-  }, [userToken, charId]);
+  }, [userToken, charId, userId]);
 
   useEffect(() => {
     if (firstRender.current){
