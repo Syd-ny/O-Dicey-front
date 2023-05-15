@@ -27,6 +27,7 @@ function App() {
             <>
               <Route path="/characters" element={<CharacterList />} />
               <Route path="/games" element={<GameList />} />
+              <Route path="/games/new" element={<GameCreate />} />
             </>
           )}
 
