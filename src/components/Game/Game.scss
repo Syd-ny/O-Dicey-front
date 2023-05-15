@@ -5,6 +5,7 @@
   &-main {
     display: grid;
     grid-template-columns: 1fr;
+    position: relative;
   }
 
   @media (min-width: 768px) {
