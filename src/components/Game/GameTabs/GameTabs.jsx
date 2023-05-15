@@ -8,7 +8,7 @@ const GameTabs = () => {
 
   const changeTab = (event) => {
     event.preventDefault();
-    setCurrentTab(event.target.dataset.screen);
+    setCurrentTab(event.currentTarget.dataset.screen);
   };
 
   return (

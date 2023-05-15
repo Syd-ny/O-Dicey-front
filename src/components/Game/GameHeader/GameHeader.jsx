@@ -14,7 +14,7 @@ const GameHeader = () => {
       </div>
       <div className="header-game-name"><h2>Nom de la partie</h2></div>
       <div className="header-game-exit">
-        <img src={exit} />
+        <Link to="/games"><img src={exit} /></Link>
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 import Dice from "./Dice";
 import './DiceRoller.scss';
 import { useDispatch, useSelector } from "react-redux";
-import { actionAddDiceRoll } from "../../../actions/gamestate";
+import { actionAddDiceRoll, actionClearDiceRolls } from "../../../actions/gamestate";
 
 const DiceRoller = () => {
   const dispatch = useDispatch();
@@ -25,6 +25,7 @@ const DiceRoller = () => {
           <Dice sides={100} updateResultList={updateResults} />
         </ul>
       </section>
+      <button onClick={() => dispatch(actionClearDiceRolls())}>Effacer</button>
       <section className="diceroller-results">
         <ul className="diceroller-results-list">
           {results.map((r, i) => 

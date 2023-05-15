@@ -1,7 +1,9 @@
+import './GameMap.scss';
+
 const GameMap = () => {
   return (
     <div className="game-map">
-      <h1>Ceci est une map</h1>
+      <img src="http://localhost/images/AMMap.jpg" />
     </div>
   );
 };

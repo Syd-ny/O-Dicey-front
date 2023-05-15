@@ -1,0 +1,11 @@
+.game-map {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+
+  img {
+    object-fit: contain;
+    max-width: 100%;
+    height: calc(100vh - 4rem);
+  }
+}
