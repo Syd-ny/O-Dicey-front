@@ -12,14 +12,19 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const CharacterEdit = () => {
   const { charId } = useParams();
   const firstRender = useRef(true);
+
   const userId = useSelector((state) => state.user.user_id);
   const userToken = useSelector((state) => state.user.token);
-  const [game, setGame] = useState("");
+
   const [character, setCharacter] = useState({
     id: 0,
     picture: "",
     name: "",
     stats: defaultStats,
+    game: {
+      id: 0,
+      name: ""
+    },
   });
 
   const [info, setInfo] = useState(defaultStats.info);
@@ -33,14 +38,11 @@ const CharacterEdit = () => {
         Accept: 'application/json',
       }
     });
-    // sanitization: the API just wants game and user id when making a PUT request
-    const sanitizedChar = { ...res.data, game: { id: res.data.game.id }, user: { id: userId } };
-    setGame(res.data.game.name);
-    setCharacter(sanitizedChar);
-  }, [userToken, charId, userId]);
+    setCharacter(res.data);
+  }, [userToken, charId]);
 
   useEffect(() => {
-    if (firstRender.current){
+    if (firstRender.current) {
       fetchCharacter();
       firstRender.current = false;
     }
@@ -51,6 +53,11 @@ const CharacterEdit = () => {
     setCharacteristics(character.stats.characteristics)
   }, [character]);
 
+  useEffect(() => {
+    setCharacter(c => ({ ...c, stats: { info, characteristics } }));
+  }, [info, characteristics]);
+
+  // use only to change character.stats
   const changeField = (initialValue, setValue) => {
     return (name, value) => {
       const newValue = { ...initialValue, [name]: value };
@@ -68,13 +75,15 @@ const CharacterEdit = () => {
 
   const saveCharacter = async () => {
     try {
-      const updatedCharacter = { ...character, stats: { info, characteristics } };
-      await axios.put(`${apiUrl}/api/characters/${charId}`, updatedCharacter, {
+      // sanitization: the API just wants game and user id when making a PUT request
+      const updatedCharacter = { ...character, stats: { info, characteristics }, game: { id: character.game.id }, user: { id: userId } };
+      const res = await axios.put(`${apiUrl}/api/characters/${charId}`, updatedCharacter, {
         headers: {
-          'Authorization': `Bearer ${userToken}` ,
+          'Authorization': `Bearer ${userToken}`,
           'Content-Type': 'application/json',
         }
       });
+      setCharacter(res.data);
     }
     catch (err) {
       console.error(err);
@@ -83,8 +92,11 @@ const CharacterEdit = () => {
 
   return (
     <div className="character-edit">
-      <CharacterCard id={character.id} game={game} image={character.picture} name={character.name} characteristics={characteristics} edit />
+
+      <CharacterCard character={character} edit />
+
       <button onClick={() => saveCharacter()}>Sauvegarder</button>
+
       <section className="character-edit-info">
         <h2>Infos</h2>
         <form className="character-edit-info-form">
@@ -98,6 +110,8 @@ const CharacterEdit = () => {
           <input type="text" name="background" id="background" value={info.background} onChange={changeInfo} />
           <label htmlFor="player_name">Nom du joueur :</label>
           <input type="text" name="player_name" id="player_name" value={info.player_name} onChange={changeInfo} />
+          <label htmlFor="race">Race :</label>
+          <input type="text" name="race" id="race" value={info.race} onChange={changeInfo} />
           <label htmlFor="alignment">Alignement :</label>
           <input type="text" name="alignment" id="alignment" value={info.alignment} onChange={changeInfo} />
           <label htmlFor="experience">Expérience :</label>

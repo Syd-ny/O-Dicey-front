@@ -37,7 +37,7 @@ const CharacterList = () => {
         <button type="button">Nouveau personnage</button>
       </header>
       <section className="character-list-cards">
-        {characterList.map((c) => <CharacterCard key={`character-${c.id}`} id={c.id} game={c.game.name} image={c.picture} name={c.name} characteristics={c.stats.characteristics} />)}
+        {characterList.map((c) => <CharacterCard key={`character-${c.id}`} character={c} />)}
       </section>
       {characterList.length === 0 && <p>Aucun personnage</p>}
     </div>
