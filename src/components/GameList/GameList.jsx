@@ -4,6 +4,7 @@ import Game from "./Game/Game";
 import GameCardDetailed from "./Game/GameCardDetailed/GameCardDetailed";
 
 import { useState, useEffect } from "react";
+import PageWrapper from "../PageWrapper/PageWrapper";
 
 // function => detect screen size
 function useWindowSize() {
@@ -78,44 +79,46 @@ const GameList = () => {
     // else mobile => GameCardDetailed but with less infos (no character card)
     const isMobile = true;
     return (
-      <div>
-        <GameListHeader />
-        <div className="game-list">
-          <GameCardDetailed
-            title="test1"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test2"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test3"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test4"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test5"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test6"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test7"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test8"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test9"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test10"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test11"
-            mobile={isMobile} />
+      <PageWrapper>
+        <div>
+          <GameListHeader />
+          <div className="game-list">
+            <GameCardDetailed
+              title="test1"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test2"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test3"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test4"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test5"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test6"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test7"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test8"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test9"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test10"
+              mobile={isMobile} />
+            <GameCardDetailed
+              title="test11"
+              mobile={isMobile} />
+          </div>
         </div>
-      </div>
+      </PageWrapper>
     )
   }
 };

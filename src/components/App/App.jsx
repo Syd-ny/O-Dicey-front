@@ -17,7 +17,6 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
       <div className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -37,7 +36,6 @@ function App() {
           <Route path="*" element={<ErrorCode code="404" message="Page not found" />} />
         </Routes>
       </div>
-      <Footer />
     </div>
   );
 }

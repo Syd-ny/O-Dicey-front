@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Dice from "./Dice";
 import './DiceRoller.scss';
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +10,6 @@ const DiceRoller = () => {
   const updateResults = (result) => {
     dispatch(actionAddDiceRoll(result));
   };
-
-  console.log(results);
 
   return (
     <section className="diceroller">
