@@ -1,13 +1,18 @@
 import { useState } from "react";
 import Dice from "./Dice";
 import './DiceRoller.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { actionAddDiceRoll } from "../../../actions/gamestate";
 
 const DiceRoller = () => {
-  const [results, setResults] = useState([]);
+  const dispatch = useDispatch();
+  const results = useSelector((state) => state.gamestate.diceRolls );
 
   const updateResults = (result) => {
-    setResults([...results, result]);
+    dispatch(actionAddDiceRoll(result));
   };
+
+  console.log(results);
 
   return (
     <section className="diceroller">

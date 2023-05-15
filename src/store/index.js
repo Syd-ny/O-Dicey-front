@@ -2,10 +2,11 @@ import { applyMiddleware, compose, legacy_createStore as createStore } from "red
 
 import reducers from '../reducers';
 import authMiddleware from "../middlewares/authMiddleware";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
 
-const enhancers = composeEnhancers(
+const enhancers = composeWithDevTools(
   applyMiddleware(
     authMiddleware,
   ),
