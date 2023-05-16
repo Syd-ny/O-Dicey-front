@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import DiceRoller from '../DiceRoller/DiceRoller';
 import GameMap from '../GameMap/GameMap';
 import './GameTabs.scss';
+import { isDMSelector } from '../../../selectors/gameSelectors';
 
 const GameTabs = () => {
   const [currentTab, setCurrentTab] = useState("sheet"); // display character sheet by default
+  const isDm = useSelector(isDMSelector);
+  const currentCharacter = useSelector((state) => state.gamestate.currentCharacter);
 
   const changeTab = (event) => {
     event.preventDefault();
@@ -43,18 +47,20 @@ const GameTabs = () => {
               <span className="tab-icon">D</span>
             </a>
           </div>
-          <a href="#" className="dm" data-screen="gallery" onClick={changeTab}>
+
+          {isDm && (<a href="#" className="dm" data-screen="gallery" onClick={changeTab}>
             <span className="tab-text">Galerie</span>
             <span className="tab-icon">G</span>
-          </a>
+          </a>)}
+          
         </nav>
       </header>
       <div className="game-tabs-content">
         {currentTab === "map" && <GameMap />}
-        {currentTab === "sheet" && <p>Feuille de perso</p>}
+        {currentTab === "sheet" && <p>{currentCharacter.name}</p>}
         {currentTab === "team" && <p>Coterie</p>}
-        {currentTab === "notes" && <p>Notes</p>}
-        {currentTab === "inventory" && <p>Inventaire</p>}
+        {currentTab === "notes" && <p>{currentCharacter.notes}</p>}
+        {currentTab === "inventory" && <p>{currentCharacter.inventory}</p>}
         {currentTab === "dice" && <DiceRoller />}
         {currentTab === "gallery" && <p>Galerie</p>}
       </div>
