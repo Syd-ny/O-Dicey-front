@@ -3,7 +3,7 @@ import logo from '../../../assets/ten-sided-dice.svg';
 import exit from '../../../assets/exit-icon.svg';
 import './GameHeader.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionClearGameData } from '../../../actions/gamestate';
+import { actionClearCurrentCharacter, actionClearGameData } from '../../../actions/gamestate';
 
 const GameHeader = () => {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ const GameHeader = () => {
 
   const handleExit = () => {
     dispatch(actionClearGameData());
+    dispatch(actionClearCurrentCharacter());
   };
 
   return (

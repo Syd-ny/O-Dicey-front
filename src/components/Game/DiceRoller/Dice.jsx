@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 const Dice = ({ sides, updateResultList }) => {
   const roll = (max) => {
     const result = Math.floor(Math.random() * max + 1);
-    updateResultList({sides, result})
+    const time = new Date().toLocaleTimeString('fr-FR', {timeStyle: "short"});
+    updateResultList({sides, result, time})
   }
 
   return (

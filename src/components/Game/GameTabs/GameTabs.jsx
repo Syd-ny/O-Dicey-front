@@ -4,6 +4,7 @@ import DiceRoller from '../DiceRoller/DiceRoller';
 import GameMap from '../GameMap/GameMap';
 import './GameTabs.scss';
 import { isDMSelector } from '../../../selectors/gameSelectors';
+import Notes from '../Notes/Notes';
 
 const GameTabs = () => {
   const [currentTab, setCurrentTab] = useState("sheet"); // display character sheet by default
@@ -59,7 +60,7 @@ const GameTabs = () => {
         {currentTab === "map" && <GameMap />}
         {currentTab === "sheet" && <p>{currentCharacter.name}</p>}
         {currentTab === "team" && <p>Coterie</p>}
-        {currentTab === "notes" && <p>{currentCharacter.notes}</p>}
+        {currentTab === "notes" && <Notes />}
         {currentTab === "inventory" && <p>{currentCharacter.inventory}</p>}
         {currentTab === "dice" && <DiceRoller />}
         {currentTab === "gallery" && <p>Galerie</p>}

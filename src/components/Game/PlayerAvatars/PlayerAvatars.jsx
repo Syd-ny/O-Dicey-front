@@ -6,7 +6,7 @@ import { actionUpdateCurrentCharacter } from '../../../actions/gamestate';
 const PlayerAvatars = () => {
   const dispatch = useDispatch();
   const { characters } = useSelector((state) => state.gamestate.game);
-  const isDm = !useSelector(isDMSelector);
+  const isDm = useSelector(isDMSelector);
   const currentCharacter = useSelector((state) => state.gamestate.currentCharacter);
 
   const charactersToDisplay = isDm ? characters : characters.filter((c) => c.id !== currentCharacter.id);

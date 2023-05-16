@@ -30,6 +30,7 @@ const DiceRoller = () => {
         <ul className="diceroller-results-list">
           {results.map((r, i) => 
             <li key={i} className="diceroller-results-list-item">
+              <span className="diceroller-results-list-item-time">{r.time}</span>
               <span className="diceroller-results-list-item-sides">Lancé d'un D{r.sides}</span>
               <span className="diceroller-results-list-item-result">{r.result}</span>
             </li>

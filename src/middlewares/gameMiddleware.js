@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_CURRENT_CHARACTER, GET_GAME_DATA, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
+import { GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
 
 const gameMiddleware = (store) => (next) => async (action) => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -38,6 +38,26 @@ const gameMiddleware = (store) => (next) => async (action) => {
       }
       break;
     }
+
+    case SAVE_CHARACTER: {
+      try {
+        const { token, user_id: userId } = store.getState().user;
+        const character = store.getState().gamestate.currentCharacter;
+        const gameId = store.getState().gamestate.game.id;
+        const res = await axios.put(`${apiUrl}/api/characters/${character.id}`, 
+        { ...character, user: { id: userId }, game: { id: gameId } }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        store.dispatch(actionUpdateCurrentCharacter(res.data));
+      }
+      catch (err) {
+        console.log(err);
+      }
+      break;
+    }
+
     default: break;
   }
 

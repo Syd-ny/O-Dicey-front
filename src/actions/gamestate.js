@@ -6,6 +6,8 @@ export const CLEAR_GAME_DATA = 'CLEAR_GAME_DATA';
 export const GET_CURRENT_CHARACTER = 'GET_CURRENT_CHARACTER';
 export const UPDATE_CURRENT_CHARACTER = 'UPDATE_CURRENT_CHARACTER';
 export const CLEAR_CURRENT_CHARACTER = 'CLEAR_CURRENT_CHARACTER';
+export const UPDATE_NOTES = 'UPDATE_NOTES';
+export const SAVE_CHARACTER = 'SAVE_CHARACTER';
 
 export const actionAddDiceRoll = (roll) => ({
   type: ADD_DICE_ROLL,
@@ -45,4 +47,13 @@ export const actionUpdateCurrentCharacter = (character) => ({
 
 export const actionClearCurrentCharacter = () => ({
   type: CLEAR_CURRENT_CHARACTER,
+});
+
+export const actionUpdateNotes = (text) => ({
+  type: UPDATE_NOTES,
+  payload: text,
+});
+
+export const actionSaveCharacter = () => ({
+  type: SAVE_CHARACTER,
 });
