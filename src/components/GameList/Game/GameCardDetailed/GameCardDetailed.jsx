@@ -8,8 +8,31 @@ import CharacterCardSmall from '../../../CharacterCard/CharacterCardSmall';
 
 const GameCardDetailed = ({
     title,
+    createdAt,
+    updatedAt,
+    status,
+    dm,
     mobile,
 }) => {
+
+    var gameStatusActive = ""
+    if ( status == 0 ) {
+        gameStatusActive = {
+            name : "En cours",
+            class: "green",
+        }
+    } else if ( status == 1 ) {
+        gameStatusActive = {
+            name : "Terminée",
+            class: "red",
+        }
+    } else {
+        gameStatusActive = {
+            name : "Inactive",
+            class: "orange",
+        }
+    }
+
 
     const gameStatus = useState([
         {
@@ -24,7 +47,7 @@ const GameCardDetailed = ({
         },
         {
             name: "Terminée",
-            value: "finish",
+            value: "finished",
             class: "red"
         }
     ]);
@@ -50,12 +73,17 @@ const GameCardDetailed = ({
         <div className="gameDetailed">
             <div className="game-header">
                 <GameCard
-                    title={title} />
+                    title={title}
+                    createdAt={createdAt}
+                    updatedAt={updatedAt}
+                    status={status} 
+                    dm={dm}
+                />
                 <p className="game-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum suscipit, quo sit iste blanditiis unde explicabo voluptatibus tenetur quaerat cupiditate nulla, veritatis rerum non animi laborum reprehenderit praesentium atque sed?</p>
                 <div className="game-status">
                     <button className='classic'>Rejoindre</button>
                     <Dropdown
-                        title="Statut"
+                        title={gameStatusActive}
                         itemToList={gameStatus}
                     />
                 </div>
@@ -67,6 +95,10 @@ const GameCardDetailed = ({
 
 GameCardDetailed.propTypes = {
     title: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    status: PropTypes.number.isRequired,
+    dm: PropTypes.string.isRequired,
     mobile: PropTypes.bool,
     };
 
