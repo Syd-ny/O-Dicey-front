@@ -7,6 +7,9 @@ import { useState } from "react";
 
 const GameCardDetailed = ({
     title,
+    createdAt,
+    updatedAt,
+    status,
     mobile,
 }) => {
 
@@ -23,7 +26,7 @@ const GameCardDetailed = ({
         },
         {
             name: "Terminée",
-            value: "finish",
+            value: "finished",
             class: "red"
         }
     ]);
@@ -49,7 +52,11 @@ const GameCardDetailed = ({
         <div className="gameDetailed">
             <div className="game-header">
                 <GameCard
-                    title={title} />
+                    title={title}
+                    createdAt={createdAt}
+                    updatedAt={updatedAt}
+                    status={status} 
+                />
                 <p className="game-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum suscipit, quo sit iste blanditiis unde explicabo voluptatibus tenetur quaerat cupiditate nulla, veritatis rerum non animi laborum reprehenderit praesentium atque sed?</p>
                 <div className="game-status">
                     <button className='classic'>Rejoindre</button>
@@ -66,6 +73,9 @@ const GameCardDetailed = ({
 
 GameCardDetailed.propTypes = {
     title: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    status: PropTypes.number.isRequired,
     mobile: PropTypes.bool,
     };
 

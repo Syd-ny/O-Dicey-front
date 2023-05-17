@@ -27,6 +27,9 @@
 
 .gamecard-header h3 {
     font-size: 1.7rem;
+    width: calc(100% - 2rem);
+    padding: 0 1rem;
+    text-align: center;
 }
 
 .gamecard-img {
@@ -46,4 +49,16 @@
 
 .gamecard-information:hover .gamecard-footer {
     opacity: 1;
+}
+
+.game-status-ongoing {
+    color: green;
+}
+
+.game-status-finished {
+    color: red;
+}
+
+.game-status-inactive {
+    color: orange;
 }
