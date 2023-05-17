@@ -9,13 +9,14 @@ import UserForm from "../UserForm/UserForm";
 import CharacterList from "../CharacterList/CharacterList";
 import GameCreate from "../GameCreate/GameCreate";
 import ErrorCode from "../ErrorCode/ErrorCode";
+import CharacterEdit from "../CharacterEdit/CharacterEdit";
+import Game from "../Game/Game";
 
 function App() {
   const isLogged = useSelector((state) => state.user.logged);
 
   return (
     <div className="app">
-      <Header />
       <div className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,6 +27,7 @@ function App() {
           {isLogged && (
             <>
               <Route path="/characters" element={<CharacterList />} />
+              <Route path="/characters/:charId/edit" element={<CharacterEdit />} />
               <Route path="/games" element={<GameList />} />
               <Route path="/games/new" element={<GameCreate />} />
             </>
@@ -34,7 +36,6 @@ function App() {
           <Route path="*" element={<ErrorCode code="404" message="Page not found" />} />
         </Routes>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -1050,6 +1050,11 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
+feather-icons-react@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/feather-icons-react/-/feather-icons-react-0.6.2.tgz#0f562b325b3e8ab2b936daf76e935fb9dcbd22c1"
+  integrity sha512-G677Y5nc3HzP1f5NNb5LJuZwKrI58BK4+/9O8Bl4naF9JixC+YL4trVom1F2ajnilq/EbU8JETPTNqvCzwH1qA==
+
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/file-entry-cache/-/file-entry-cache-6.0.1.tgz#211b2dd9659cb0394b073e7323ac3c933d522027"
@@ -1812,6 +1817,11 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
+
+redux-devtools-extension@^2.13.9:
+  version "2.13.9"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.9.tgz#6b764e8028b507adcb75a1cae790f71e6be08ae7"
+  integrity sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==
 
 redux@^4.2.1:
   version "4.2.1"
