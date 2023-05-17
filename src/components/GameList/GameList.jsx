@@ -141,16 +141,14 @@ const GameList = () => {
   if (width > 1000) {
     return (
       <PageWrapper>
-        <div>
-          <GameListHeader />
-          <div className="game-list">
-            {gameList.map((g, i) => <Game key={`game-${i}`} 
-              title={g.name}
-              createdAt={g.createdAt}
-              updatedAt={g.updatedAt}
-              status={g.status}
-              dm={g.dm.login} />)}
-          </div>
+        <GameListHeader />
+        <div className="game-list">
+          {gameList.map((g, i) => <Game key={`game-${i}`} 
+            title={g.name}
+            createdAt={g.createdAt}
+            updatedAt={g.updatedAt}
+            status={g.status}
+            dm={g.dm.login} />)}
         </div>
       </PageWrapper>
     );
@@ -159,19 +157,16 @@ const GameList = () => {
     const isMobile = true;
     return (
       <PageWrapper>
-        <div>
-          <GameListHeader />
-          <div className="game-list">
-            {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`} 
-              title={g.name}
-              createdAt={g.createdAt}
-              updatedAt={g.updatedAt}
-              status={g.status}
-              dm={g.dm.login}
-              mobile={isMobile} />
-            )}
+         <GameListHeader />
+         <div className="game-list">
+           {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`} 
+             title={g.name}
+             createdAt={g.createdAt}
+             updatedAt={g.updatedAt}
+             status={g.status}
+             dm={g.dm.login}
+             mobile={isMobile} />)}
         </div>
-      </div>
       </PageWrapper>
     )
   }
