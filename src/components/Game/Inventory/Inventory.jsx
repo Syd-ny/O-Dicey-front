@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actionSaveCharacter, actionUpdateNotes } from "../../../actions/gamestate";
+import { actionSaveCharacter, actionUpdateInventory } from "../../../actions/gamestate";
 
-import './Notes.scss';
+// Style is defined in ../Notes/Notes.scss
 
-const Notes = () => {
+const Inventory = () => {
   const dispatch = useDispatch();
   const [canSave, setCanSave] = useState(false);
-  const { notes } = useSelector((state) => state.gamestate.currentCharacter);
+  const { inventory } = useSelector((state) => state.gamestate.currentCharacter);
 
   const handleChangeNotes = (event) => {
     setCanSave(true);
-    dispatch(actionUpdateNotes(event.target.value));
+    dispatch(actionUpdateInventory(event.target.value));
   };
 
   const handleSaveNotes = () => {
@@ -19,16 +19,16 @@ const Notes = () => {
     dispatch(actionSaveCharacter());
   };
 
-  // content of notes is nullable, put an empty string if that's the case
-  const textareaValue = notes === null ? "" : notes;
+  // content of inventory is nullable, put an empty string if that's the case
+  const textareaValue = inventory === null ? "" : inventory;
 
   return (
-    <section className="game-notes">
-      <h2>Notes</h2>
+    <section className="game-inventory">
+      <h2>Inventaire</h2>
       <button disabled={!canSave} onClick={handleSaveNotes}>Sauvegarder</button>
       <textarea value={textareaValue} onChange={handleChangeNotes} />
     </section>
   );
 };
 
-export default Notes;
+export default Inventory;

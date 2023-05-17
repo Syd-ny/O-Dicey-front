@@ -7,6 +7,7 @@ export const GET_CURRENT_CHARACTER = 'GET_CURRENT_CHARACTER';
 export const UPDATE_CURRENT_CHARACTER = 'UPDATE_CURRENT_CHARACTER';
 export const CLEAR_CURRENT_CHARACTER = 'CLEAR_CURRENT_CHARACTER';
 export const UPDATE_NOTES = 'UPDATE_NOTES';
+export const UPDATE_INVENTORY = 'UPDATE_INVENTORY';
 export const SAVE_CHARACTER = 'SAVE_CHARACTER';
 
 export const actionAddDiceRoll = (roll) => ({
@@ -51,6 +52,11 @@ export const actionClearCurrentCharacter = () => ({
 
 export const actionUpdateNotes = (text) => ({
   type: UPDATE_NOTES,
+  payload: text,
+});
+
+export const actionUpdateInventory = (text) => ({
+  type: UPDATE_INVENTORY,
   payload: text,
 });
 

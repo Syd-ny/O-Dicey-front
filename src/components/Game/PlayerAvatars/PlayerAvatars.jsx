@@ -20,9 +20,10 @@ const PlayerAvatars = () => {
   return (
     <div className="game-avatars">
       <ul className="game-avatars-list">
-        {charactersToDisplay.map((c) => 
-          <li key={`character-${c.id}`} className="game-avatars-list-item" style={{backgroundImage: `url(${c.picture})`}} onClick={() => handleDisplayCharacter(c)}></li>
-        )}
+        {charactersToDisplay.map((c) => {
+          const elementClass = isDm && (c.id === currentCharacter.id) ? 'game-avatars-list-item game-avatars-list-item-active' : 'game-avatars-list-item';
+          return <li key={`character-${c.id}`} className={elementClass} style={{backgroundImage: `url(${c.picture})`}} onClick={() => handleDisplayCharacter(c)}></li>
+        })}
       </ul>
     </div>
   );

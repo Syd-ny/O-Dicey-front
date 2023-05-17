@@ -1,4 +1,4 @@
-import { ADD_DICE_ROLL, CLEAR_CURRENT_CHARACTER, CLEAR_DICE_ROLLS, CLEAR_GAME_DATA, UPDATE_CURRENT_CHARACTER, UPDATE_GAME_DATA, UPDATE_NOTES } from "../actions/gamestate";
+import { ADD_DICE_ROLL, CLEAR_CURRENT_CHARACTER, CLEAR_DICE_ROLLS, CLEAR_GAME_DATA, UPDATE_CURRENT_CHARACTER, UPDATE_GAME_DATA, UPDATE_INVENTORY, UPDATE_NOTES } from "../actions/gamestate";
 import initialStats from '../types/character-stats';
 
 const initialState = {
@@ -54,6 +54,10 @@ const reducer = (state = initialState, action = {}) => {
 
     case UPDATE_NOTES: {
       return { ...state, currentCharacter: { ...state.currentCharacter, notes: action.payload } };
+    }
+
+    case UPDATE_INVENTORY: {
+      return { ...state, currentCharacter: { ...state.currentCharacter, inventory: action.payload } };
     }
 
     default: return state;

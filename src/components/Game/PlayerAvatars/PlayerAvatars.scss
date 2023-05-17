@@ -17,13 +17,22 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
+        filter: drop-shadow(0 0 5px #000);
         width: 4rem;
         height: 4rem;
         border-radius: 50%;
-        background-color: chartreuse; // TODO: changer par un placeholder
+        box-sizing: border-box;
+        background-color: var(--main-blue); // TODO: changer par un placeholder
         background-size: cover;
         background-position: center;
+
+        &:hover {
+          scale: 110%;
+        }
+
+        &-active {
+          border: 2px solid var(--main-yellow);
+        }
       }
     }
   }

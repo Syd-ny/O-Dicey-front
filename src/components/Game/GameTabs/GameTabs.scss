@@ -6,7 +6,6 @@
   position: relative;
 
   height: calc(100dvh - 4rem);
-  background-color: aqua;
 
   @media (max-width: 767px) {
     &-nav {
@@ -109,13 +108,17 @@
         height: calc(100% - 1rem);
 
         a {
-          background-color: chartreuse;
+          background-color: var(--main-blue);
           width: 3rem;
           height: 3rem;
           border-radius: 50%;
           display: flex;
           justify-content: center;
           align-items: center;
+
+          &:hover {
+            scale: 110%
+          }
         }
       }
 
@@ -125,7 +128,13 @@
         }
 
         &-icon {
-          display: initial;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          svg {
+            stroke: var(--light-blue);
+          }
         }
       }
 

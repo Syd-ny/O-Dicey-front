@@ -5,6 +5,9 @@ import GameMap from '../GameMap/GameMap';
 import './GameTabs.scss';
 import { isDMSelector } from '../../../selectors/gameSelectors';
 import Notes from '../Notes/Notes';
+import Inventory from '../Inventory/Inventory';
+import { User, Users, FileText, ShoppingBag, Box, Map } from 'feather-icons-react/build/IconComponents';
+import CharacterSheet from '../CharacterSheet/CharacterSheet';
 
 const GameTabs = () => {
   const [currentTab, setCurrentTab] = useState("sheet"); // display character sheet by default
@@ -27,41 +30,41 @@ const GameTabs = () => {
             </a>
             <a href="#" className="player" data-screen="sheet" onClick={changeTab}>
               <span className="tab-text">Feuille de personnage</span>
-              <span className="tab-icon">F</span>
+              <span className="tab-icon"><User /></span>
             </a>
             <a href="#" className="player player-mobile" data-screen="team" onClick={changeTab}>
               <span className="tab-text">Coterie</span>
-              <span className="tab-icon">C</span>
+              <span className="tab-icon"><Users /></span>
             </a>
           </div>
           <div className="player-bottom">
             <a href="#" className="player" data-screen="notes" onClick={changeTab}>
               <span className="tab-text">Notes</span>
-              <span className="tab-icon">N</span>
+              <span className="tab-icon"><FileText /></span>
             </a>
             <a href="#" className="player" data-screen="inventory" onClick={changeTab}>
               <span className="tab-text">Inventaire</span>
-              <span className="tab-icon">I</span>
+              <span className="tab-icon"><ShoppingBag /></span>
             </a>
             <a href="#" className="player" data-screen="dice" onClick={changeTab}>
               <span className="tab-text">Lancé de dés</span>
-              <span className="tab-icon">D</span>
+              <span className="tab-icon"><Box /></span>
             </a>
           </div>
 
           {isDm && (<a href="#" className="dm" data-screen="gallery" onClick={changeTab}>
             <span className="tab-text">Galerie</span>
-            <span className="tab-icon">G</span>
+            <span className="tab-icon"><Map /></span>
           </a>)}
           
         </nav>
       </header>
       <div className="game-tabs-content">
         {currentTab === "map" && <GameMap />}
-        {currentTab === "sheet" && <p>{currentCharacter.name}</p>}
+        {currentTab === "sheet" && <CharacterSheet />}
         {currentTab === "team" && <p>Coterie</p>}
         {currentTab === "notes" && <Notes />}
-        {currentTab === "inventory" && <p>{currentCharacter.inventory}</p>}
+        {currentTab === "inventory" && <Inventory />}
         {currentTab === "dice" && <DiceRoller />}
         {currentTab === "gallery" && <p>Galerie</p>}
       </div>
