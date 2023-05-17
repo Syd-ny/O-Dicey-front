@@ -6,6 +6,7 @@ export const initialState = {
   pseudo: '',
   password: '',
   token: '',
+  user_id: 0,
 };
 
 const reducer = (state = initialState, action = {}) => {

@@ -3,6 +3,7 @@ import GameListHeader from "./GameListHeader/GameListHeader";
 import Game from "./Game/Game";
 import GameCardDetailed from "./Game/GameCardDetailed/GameCardDetailed";
 import CharacterCard from "../CharacterCard/CharacterCard";
+import PageWrapper from "../PageWrapper/PageWrapper";
 
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -142,8 +143,7 @@ const GameList = () => {
   // if web => GameCardDetailed
   if (width > 1000) {
     return (
-      
-      <div>
+      <PageWrapper>
         <GameListHeader />
         <div className="game-list">
           {gameList.map((g, i) => <Game key={`game-${i}`} 
@@ -153,24 +153,24 @@ const GameList = () => {
             status={g.status}
             dm={g.dm.login} />)}
         </div>
-      </div>
+      </PageWrapper>
     );
   } else {
     // else mobile => GameCardDetailed but with less infos (no character card)
     const isMobile = true;
     return (
-      <div>
-        <GameListHeader />
-        <div className="game-list">
-          {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`} 
-            title={g.name}
-            createdAt={g.createdAt}
-            updatedAt={g.updatedAt}
-            status={g.status}
-            dm={g.dm.login}
-            mobile={isMobile} />)}
+      <PageWrapper>
+         <GameListHeader />
+         <div className="game-list">
+           {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`} 
+             title={g.name}
+             createdAt={g.createdAt}
+             updatedAt={g.updatedAt}
+             status={g.status}
+             dm={g.dm.login}
+             mobile={isMobile} />
         </div>
-      </div>
+      </PageWrapper>
     )
   }
 };

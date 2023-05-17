@@ -1,18 +1,16 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './CharacterCard.scss';
 
-import image from '../../assets/berserker.jpg';
-
-const CharacterCard = ({ edit }) => {
-  const [characterImage, setCharacterImage] = useState(image);
+const CharacterCard = ({ edit, character }) => {
   const [characterImagePositionX, setCharacterImagePositionX] = useState(50);
   const [characterImagePositionY, setCharacterImagePositionY] = useState(10);
-  const [characterImageSize, setCharacterImageSize] = useState(150);
+  const [characterImageSize, setCharacterImageSize] = useState(250);
 
   const cardStyle = {
-    backgroundImage: `url(${characterImage})`,
+    backgroundImage: `url(${character.picture})`,
     backgroundPositionX: `${characterImagePositionX}%`,
     backgroundPositionY: `${characterImagePositionY}%`,
     backgroundSize: `${characterImageSize}%`,
@@ -66,7 +64,7 @@ const CharacterCard = ({ edit }) => {
     switch (direction) {
       case '+': {
         const newSize = characterImageSize + 1;
-        if (newSize <= 200) {
+        if (newSize <= 400) {
           setCharacterImageSize(newSize);
         }
         break;
@@ -87,39 +85,39 @@ const CharacterCard = ({ edit }) => {
     <article className={cardClass} style={cardStyle}>
       <header className="character-card-header">
         <section className="character-card-header-info">
-          <h1 className="character-card-header-info-name">Brutus</h1>
-          <h2 className="character-card-header-info-race">Humain</h2>
-          <h2 className="character-card-header-info-class">Barbare</h2>
+          <h1 className="character-card-header-info-name"><Link to={`/characters/${character.id}/edit`}>{character.stats.info.name}</Link></h1>
+          <h2 className="character-card-header-info-race">{character.stats.info.race}</h2>
+          <h2 className="character-card-header-info-class">{character.stats.info.class}</h2>
         </section>
         <section className="character-card-header-level">
-          <h2 className="character-level">4</h2>
+          <h2 className="character-level">{character.stats.info.level}</h2>
         </section>
       </header>
       <main className="character-card-main">
         <ul className="character-stats">
           <li>
             <h3>FOR</h3>
-            <p>10</p>
+            <p>{character.stats.characteristics.strength}</p>
           </li>
           <li>
             <h3>DEX</h3>
-            <p>10</p>
+            <p>{character.stats.characteristics.dexterity}</p>
           </li>
           <li>
             <h3>CON</h3>
-            <p>10</p>
+            <p>{character.stats.characteristics.constitution}</p>
           </li>
           <li>
             <h3>SAG</h3>
-            <p>10</p>
+            <p>{character.stats.characteristics.wisdom}</p>
           </li>
           <li>
             <h3>INT</h3>
-            <p>2</p>
+            <p>{character.stats.characteristics.intelligence}</p>
           </li>
           <li>
             <h3>CHA</h3>
-            <p>10</p>
+            <p>{character.stats.characteristics.charisma}</p>
           </li>
           <li>
             <h3>HP</h3>
@@ -128,7 +126,7 @@ const CharacterCard = ({ edit }) => {
         </ul>
       </main>
       <footer className="character-card-footer">
-        <section className="game-title"><h2>Nom de la partie</h2></section>
+        <section className="game-title"><h2>{character.game.name}</h2></section>
         <section className="character-actions">
           <button>🖋️</button>
           <button>🗑️</button>
@@ -157,10 +155,52 @@ const CharacterCard = ({ edit }) => {
 
 CharacterCard.propTypes = {
   edit: PropTypes.bool,
+  character: PropTypes.shape({
+    id: PropTypes.number,
+    picture: PropTypes.string,
+    name: PropTypes.string,
+    stats: PropTypes.object,
+    game: PropTypes.object,
+  }),
 };
 
 CharacterCard.defaultProps = {
   edit: false,
+  character: {
+    id: 0,
+    picture: "",
+    name: "",
+    stats: {
+      info: {
+        name: "",
+        level: 0,
+        class: "",
+        background: "",
+        player_name: "",
+        race: "",
+        alignment: "",
+        experience: 0,
+        age: 0,
+        height: 0,
+        weight: 0,
+        eyes: "",
+        skin: "",
+        hair: ""
+      },
+      characteristics: {
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0
+      }
+    },
+    game: {
+      id: 0,
+      name: "",
+    }
+  },
 };
 
 export default CharacterCard;
