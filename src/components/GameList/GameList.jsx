@@ -60,9 +60,7 @@ const GameList = () => {
   // ===== GET ALL CHARACTERS FROM USER =====
   // ========================================
 
-
-  // const userIdtest = useSelector((state) => state.user.user_id);
-  const userId = 7;
+  const userId = useSelector((state) => state.user.user_id);
   const userToken = useSelector((state) => state.user.token);
   const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -121,7 +119,6 @@ const GameList = () => {
         }
       ).then((response) => {
             // add game from characters to the end of "gameList"
-            console.log(response.data)
             setgameList(gameList => [...gameList, response.data]);
       })
     }
@@ -168,7 +165,7 @@ const GameList = () => {
              updatedAt={g.updatedAt}
              status={g.status}
              dm={g.dm.login}
-             mobile={isMobile} />
+             mobile={isMobile} />)}
         </div>
       </PageWrapper>
     )
