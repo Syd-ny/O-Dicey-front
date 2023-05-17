@@ -6,7 +6,12 @@ import CharacterCard from "../CharacterCard/CharacterCard";
 
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useCallback, useState, useEffect } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
+
+
+// ===============================
+// ===== Windows Size Detect =====
+// ===============================
 
 // function => detect screen size
 function useWindowSize() {
@@ -42,16 +47,29 @@ function useWindowSize() {
   return windowSize;
 }
 
+
+// ===========================
+// ===== EXPORT GAMELIST =====
+// ===========================
+
+
 const GameList = () => {
+
+  // ========================================
+  // ===== GET ALL CHARACTERS FROM USER =====
+  // ========================================
+
 
   // const userIdtest = useSelector((state) => state.user.user_id);
   const userId = 7;
   const userToken = useSelector((state) => state.user.token);
   const apiUrl = import.meta.env.VITE_API_URL;
+
+  // ARRAY of OBJECTS : list of characters
   const [characterList, setCharacterList] = useState([]);
 
+  // axios => get data
   const fetchCharacters = useCallback( async () => {
-
     await axios.get( 
       `api/users/${userId}`,
       { 
@@ -63,19 +81,32 @@ const GameList = () => {
         } , 
       }
     ).then((response) => {
-          // console.log('reponse :', response);
+          // add all characters in "characterList"
           setCharacterList(response.data.characters);
     })
   }, [userId, userToken, apiUrl]);
 
+  // do it when new render
+  const firstRender = useRef(true);
   useEffect(() => {
-    fetchCharacters();
+    if (firstRender.current) {
+      fetchCharacters();
+      firstRender.current = false;
+    } 
   }, [fetchCharacters]);
 
+
+  // ===================================
+  // ===== GET ALL GAMES FROM USER =====
+  // ===================================
+
+  // ARRAY of OBJECTS : list of games
   const [gameList, setgameList] = useState([]);
 
-  
+  // axios => get data
   const fetchGames = useCallback( async () => {
+
+    // loop FOR for each characters from "charactersList"
     for (let index = 0; index < characterList.length; index++) {
       await axios.get( 
         `api/games/${characterList[index].id}`,
@@ -88,17 +119,24 @@ const GameList = () => {
           } , 
         }
       ).then((response) => {
-            console.log('reponse :', response);
+            // add game from characters to the end of "gameList"
+            console.log(response.data)
             setgameList(gameList => [...gameList, response.data]);
       })
     }
   }, [userToken, apiUrl, characterList]);
 
+  // do it when new render
   useEffect(() => {
     fetchGames();
   }, [fetchGames]);
 
 
+  // ==============================
+  // ===== RENDER OF GAMELIST =====
+  // ==============================
+
+  //width of the windows
   const width = useWindowSize().width;
 
   // if web => GameCardDetailed
@@ -112,7 +150,8 @@ const GameList = () => {
             title={g.name}
             createdAt={g.createdAt}
             updatedAt={g.updatedAt}
-            status={g.status} />)}
+            status={g.status}
+            dm={g.dm.login} />)}
         </div>
       </div>
     );
@@ -128,6 +167,7 @@ const GameList = () => {
             createdAt={g.createdAt}
             updatedAt={g.updatedAt}
             status={g.status}
+            dm={g.dm.login}
             mobile={isMobile} />)}
         </div>
       </div>

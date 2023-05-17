@@ -6,8 +6,9 @@ const GameCard = ({
     createdAt,
     updatedAt,
     status,
+    dm,
 }) => {
-    status = {status}
+    
     const Status = () => {
         if (status == 0) {
             return (
@@ -24,18 +25,30 @@ const GameCard = ({
         }
     }
 
+    // transform date if != null
+    var dateCreatedAt = ""
+    if (createdAt != null) {
+        dateCreatedAt = createdAt.split('T')[0]
+    }
+
+    var dateUpdatedAt = ""
+    if (updatedAt != null) {
+        dateUpdatedAt = updatedAt.split('T')[0]
+    }
+   
+
     return (
         <div className="gamecard">
             <img className="gamecard-img" src="https://i.imgur.com/i1m3wz0.png" alt="" />
             <div className="gamecard-information">
                 <header className="gamecard-header">
                     <h3>{title}</h3>
-                    <p>Maître du jeu : user</p>
+                    <p>Maître du jeu : {dm}</p>
                 </header>
                 <div className="gamecard-footer">
-                    <p>Créé le : {createdAt}</p>
-                    <p>Dernière session : {updatedAt}</p>
-                    <p>Status : <Status></Status></p>
+                    <p>Créé le : {dateCreatedAt}</p>
+                    <p>Dernière session : {dateUpdatedAt} </p>
+                    <p>Status : <Status/></p>
                 </div>
             </div>
         </div>
@@ -47,6 +60,7 @@ GameCard.propTypes = {
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
     status: PropTypes.number.isRequired,
+    dm: PropTypes.string.isRequired,
   };
 
 export default GameCard;
