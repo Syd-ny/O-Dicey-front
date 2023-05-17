@@ -129,7 +129,7 @@ const GameList = () => {
     fetchGames();
   }, [fetchGames]);
 
-
+  
   // ==============================
   // ===== RENDER OF GAMELIST =====
   // ==============================
@@ -148,6 +148,7 @@ const GameList = () => {
             createdAt={g.createdAt}
             updatedAt={g.updatedAt}
             status={g.status}
+            characters={g.characters}
             dm={g.dm.login} />)}
         </div>
       </PageWrapper>
@@ -165,6 +166,7 @@ const GameList = () => {
              updatedAt={g.updatedAt}
              status={g.status}
              dm={g.dm.login}
+             characters={g.characters}
              mobile={isMobile} />)}
         </div>
       </PageWrapper>

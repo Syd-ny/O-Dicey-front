@@ -2,14 +2,17 @@ import PropTypes from 'prop-types';
 
 import './CharacterCardSmall.scss';
 
-const CharacterCardSmall = ({ character }) => {
+const CharacterCardSmall = ({ 
+  character,
+  name,
+}) => {
   const cardStyle = { backgroundImage: `url(${character.picture})` };
 
   return (
     <article className="character-card-small" style={cardStyle}>
       <header className="character-card-small-header">
         <section className="character-card-small-header-info">
-          <h1 className="character-card-small-header-info-name">Brutus</h1>
+          <h1 className="character-card-small-header-info-name">{name}</h1>
           <h2 className="character-card-small-header-info-race">Humain</h2>
           <h2 className="character-card-small-header-info-class">Barbare</h2>
         </section>

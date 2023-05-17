@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import "./GameCardDetailed.scss";
 import GameCard from "../GameCard/GameCard";
-import CharacterCard from "../../../CharacterCard/CharacterCard";
 import Dropdown from "../../../GameCreate/Dropdown/Dropdown";
 import { useState } from "react";
 import CharacterCardSmall from '../../../CharacterCard/CharacterCardSmall';
@@ -12,6 +11,7 @@ const GameCardDetailed = ({
     updatedAt,
     status,
     dm,
+    characters,
     mobile,
 }) => {
 
@@ -56,10 +56,9 @@ const GameCardDetailed = ({
         if ( mobile == undefined ) {
             return (
                 <div className="gallery">
-                    <CharacterCardSmall/>
-                    <CharacterCardSmall/>
-                    <CharacterCardSmall/>
-                    <CharacterCardSmall/>
+                    {characters.map((c, i) => <CharacterCardSmall key={`game-${i}`} 
+                                name={c.name}
+                                />)}
                 </div>
             );
         } else {
@@ -99,6 +98,7 @@ GameCardDetailed.propTypes = {
     updatedAt: PropTypes.string.isRequired,
     status: PropTypes.number.isRequired,
     dm: PropTypes.string.isRequired,
+    characters: PropTypes.array.isRequired,
     mobile: PropTypes.bool,
     };
 

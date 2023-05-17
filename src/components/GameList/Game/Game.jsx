@@ -35,6 +35,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
         updatedAt,
         status,
         dm,
+        characters,
     }) => {
         const [isOpen, setIsOpen] = useState(false);
         const scope = useAnimation(isOpen);
@@ -68,6 +69,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
                         updatedAt={updatedAt}
                         status={status}
                         dm={dm}
+                        characters={characters}
                     />
                     <button className='close' onClick={() => setIsOpen(!isOpen)}></button>
                 </div>{" "}
@@ -81,6 +83,7 @@ Game.propTypes = {
     updatedAt: PropTypes.string.isRequired,
     status: PropTypes.number.isRequired,
     dm: PropTypes.string.isRequired,
+    characters: PropTypes.array.isRequired,
   };
 
 export default Game;
