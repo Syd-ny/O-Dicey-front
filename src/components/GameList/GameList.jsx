@@ -3,6 +3,7 @@ import GameListHeader from "./GameListHeader/GameListHeader";
 import Game from "./Game/Game";
 import GameCardDetailed from "./Game/GameCardDetailed/GameCardDetailed";
 import CharacterCard from "../CharacterCard/CharacterCard";
+import PageWrapper from "../PageWrapper/PageWrapper";
 
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -59,9 +60,7 @@ const GameList = () => {
   // ===== GET ALL CHARACTERS FROM USER =====
   // ========================================
 
-
-  // const userIdtest = useSelector((state) => state.user.userId);
-  const userId = 7;
+  const userId = useSelector((state) => state.user.user_id);
   const userToken = useSelector((state) => state.user.token);
   const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -120,7 +119,6 @@ const GameList = () => {
         }
       ).then((response) => {
             // add game from characters to the end of "gameList"
-            console.log(response.data)
             setgameList(gameList => [...gameList, response.data]);
       })
     }
@@ -142,35 +140,39 @@ const GameList = () => {
   // if web => GameCardDetailed
   if (width > 1000) {
     return (
-      
-      <div>
-        <GameListHeader />
-        <div className="game-list">
-          {gameList.map((g, i) => <Game key={`game-${i}`} 
-            title={g.name}
-            createdAt={g.createdAt}
-            updatedAt={g.updatedAt}
-            status={g.status}
-            dm={g.dm.login} />)}
+      <PageWrapper>
+        <div>
+          <GameListHeader />
+          <div className="game-list">
+            {gameList.map((g, i) => <Game key={`game-${i}`} 
+              title={g.name}
+              createdAt={g.createdAt}
+              updatedAt={g.updatedAt}
+              status={g.status}
+              dm={g.dm.login} />)}
+          </div>
         </div>
-      </div>
+      </PageWrapper>
     );
   } else {
     // else mobile => GameCardDetailed but with less infos (no character card)
     const isMobile = true;
     return (
-      <div>
-        <GameListHeader />
-        <div className="game-list">
-          {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`} 
-            title={g.name}
-            createdAt={g.createdAt}
-            updatedAt={g.updatedAt}
-            status={g.status}
-            dm={g.dm.login}
-            mobile={isMobile} />)}
+      <PageWrapper>
+        <div>
+          <GameListHeader />
+          <div className="game-list">
+            {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`} 
+              title={g.name}
+              createdAt={g.createdAt}
+              updatedAt={g.updatedAt}
+              status={g.status}
+              dm={g.dm.login}
+              mobile={isMobile} />
+            )}
         </div>
       </div>
+      </PageWrapper>
     )
   }
 };

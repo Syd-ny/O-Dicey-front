@@ -4,6 +4,7 @@ import GameCard from "../GameCard/GameCard";
 import CharacterCard from "../../../CharacterCard/CharacterCard";
 import Dropdown from "../../../GameCreate/Dropdown/Dropdown";
 import { useState } from "react";
+import CharacterCardSmall from '../../../CharacterCard/CharacterCardSmall';
 
 const GameCardDetailed = ({
     title,
@@ -55,10 +56,10 @@ const GameCardDetailed = ({
         if ( mobile == undefined ) {
             return (
                 <div className="gallery">
-                    <CharacterCard/>
-                    <CharacterCard/>
-                    <CharacterCard/>
-                    <CharacterCard/>
+                    <CharacterCardSmall/>
+                    <CharacterCardSmall/>
+                    <CharacterCardSmall/>
+                    <CharacterCardSmall/>
                 </div>
             );
         } else {

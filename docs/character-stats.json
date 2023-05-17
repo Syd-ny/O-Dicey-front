@@ -1,0 +1,246 @@
+{
+  "info": {
+    "name": "",
+    "level": 0,
+    "class": "",
+    "background": "",
+    "player_name": "",
+    "race": "",
+    "alignment": "",
+    "experience": 0,
+    "age": 0,
+    "height": 0,
+    "weight": 0,
+    "eyes": "",
+    "skin": "",
+    "hair": ""
+  },
+  "characteristics": {
+    "strength": 0,
+    "dexterity": 0,
+    "constitution": 0,
+    "intelligence": 0,
+    "wisdom": 0,
+    "charisma": 0
+  },
+  "inspiration": 0,
+  "proficiency": 0,
+  "saving_throws": {
+    "type": "CheckValue",
+    "items": [
+      {
+        "name": "Force",
+        "checked": false,
+        "value": 0
+      },
+      {
+        "name": "Dextérité",
+        "checked": false,
+        "value": 0
+      },
+      {
+        "name": "Constitution",
+        "checked": false,
+        "value": 0
+      },
+      {
+        "name": "Intelligence",
+        "checked": false,
+        "value": 0
+      },
+      {
+        "name": "Sagesse",
+        "checked": false,
+        "value": 0
+      },
+      {
+        "name": "Charisme",
+        "checked": false,
+        "value": 0
+      }
+    ]
+  },
+  "skills": {
+    "type": "CheckValue",
+    "items": [
+      {
+        "name": "Acrobaties",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Dex"
+      },
+      {
+        "name": "Arcanes",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Int"
+      },
+      {
+        "name": "Athlétisme",
+        "checked": false,
+        "value": 0,
+        "characteristic": "For"
+      },
+      {
+        "name": "Discrétion",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Dex"
+      },
+      {
+        "name": "Dressage",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Sag"
+      },
+      {
+        "name": "Escamotage",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Dex"
+      },
+      {
+        "name": "Histoire",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Int"
+      },
+      {
+        "name": "Intimidation",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Cha"
+      },
+      {
+        "name": "Investigation",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Int"
+      },
+      {
+        "name": "Médecine",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Sag"
+      },
+      {
+        "name": "Nature",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Int"
+      },
+      {
+        "name": "Perception",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Sag"
+      },
+      {
+        "name": "Perspicacité",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Sag"
+      },
+      {
+        "name": "Persuasion",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Sag"
+      },
+      {
+        "name": "Religion",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Int"
+      },
+      {
+        "name": "Représentation",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Sag"
+      },
+      {
+        "name": "Survie",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Sag"
+      },
+      {
+        "name": "Tromperie",
+        "checked": false,
+        "value": 0,
+        "characteristic": "Cha"
+      }
+    ]
+  },
+  "armor_class": 0,
+  "initiative": 0,
+  "speed": 0,
+  "hp": {
+    "max": 0,
+    "current": 0
+  },
+  "temporary_hp": 0,
+  "hit_dice": "",
+  "death_saves": {
+    "successes": 0,
+    "failures": 0
+  },
+  "attacks": [
+    {
+      "name": "Épée à deux mains",
+      "damage": {
+        "type": "tranchant",
+        "dices": [{"sides": 6}, {"sides": 6}],
+        "bonus": 0
+      }
+    },
+    {
+      "name": "Fronde",
+      "damage": {
+        "type": "contondant",
+        "dices": [{"sides": 4}],
+        "bonus": 0
+      }
+    }
+  ],
+  "spells": [
+    {
+      "name": "Boule de feu",
+      "level": 3,
+      "time": 1,
+      "range": 45,
+      "components": ["V", "S", "M"],
+      "duration": 0,
+      "description": "Une éclatante traînée lumineuse est émise de la pointe de votre doigt vers un point de votre choix dans la po...",
+      "higher": "Lorsque vous lancez ce sort en utilisant un emplacement de sort de niveau 4 ou sup..."
+    }
+  ],
+  "proficiencies": [],
+  "money": {
+    "cp": 0,
+    "sp": 0,
+    "ep": 0,
+    "gp": 0,
+    "pp": 0 
+  },
+  "traits": [],
+  "ideals": [],
+  "bonds": [],
+  "flaws": [],
+  "features": [],
+  "appearence": "",
+  "backstory": "",
+  "allies": [],
+  "symbol": {
+    "name": "",
+    "picture": ""
+  },
+  "treasure": [],
+  "spellcasting": {
+    "class": "",
+    "ability": 0,
+    "save": 0,
+    "bonus": 0
+  }
+}

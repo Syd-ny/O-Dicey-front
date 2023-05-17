@@ -82,7 +82,7 @@
     background-color: var(--main-blue);
     border: none;
     border-radius: 1rem;
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
     font-weight: bold;
 
     &:hover {
@@ -118,7 +118,7 @@
     background-color: var(--main-blue);
     border: none;
     border-radius: 1rem;
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
     font-weight: bold;
 
     &:hover {
@@ -170,4 +170,23 @@
 .game-gallery-list img{
     max-width: 180px;
     max-height: 120px;
+}
+
+.image-label {
+    width: fit-content;
+    color: white;
+    background-color: var(--main-blue);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5em 1em;
+    font-weight: bold;
+
+    &:hover {
+      background-color: hsl(210, 86%, 45%);
+      cursor: pointer;
+    }
+}
+
+.image-input {
+    display: none;
 }
