@@ -1,8 +1,9 @@
-import './CharacterCardSmall.scss';
-import image from '../../assets/berserker.jpg';
+import PropTypes from 'prop-types';
 
-const CharacterCardSmall = () => {
-  const cardStyle = { backgroundImage: `url(${image})` };
+import './CharacterCardSmall.scss';
+
+const CharacterCardSmall = ({ character }) => {
+  const cardStyle = { backgroundImage: `url(${character.picture})` };
 
   return (
     <article className="character-card-small" style={cardStyle}>
@@ -50,6 +51,49 @@ const CharacterCardSmall = () => {
       </main>
     </article>
   );
+};
+
+CharacterCardSmall.propTypes = {
+  character: PropTypes.shape({
+    id: PropTypes.number,
+    picture: PropTypes.string,
+    name: PropTypes.string,
+    stats: PropTypes.object,
+  }),
+};
+
+CharacterCardSmall.defaultProps = {
+  character: {
+    id: 0,
+    picture: "",
+    name: "",
+    stats: {
+      info: {
+        name: "",
+        level: 0,
+        class: "",
+        background: "",
+        player_name: "",
+        race: "",
+        alignment: "",
+        experience: 0,
+        age: 0,
+        height: 0,
+        weight: 0,
+        eyes: "",
+        skin: "",
+        hair: ""
+      },
+      characteristics: {
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0
+      }
+    },
+  },
 };
 
 export default CharacterCardSmall;
