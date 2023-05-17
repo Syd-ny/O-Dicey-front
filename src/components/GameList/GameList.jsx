@@ -60,7 +60,7 @@ const GameList = () => {
   // ========================================
 
 
-  // const userIdtest = useSelector((state) => state.user.user_id);
+  // const userIdtest = useSelector((state) => state.user.userId);
   const userId = 7;
   const userToken = useSelector((state) => state.user.token);
   const apiUrl = import.meta.env.VITE_API_URL;
