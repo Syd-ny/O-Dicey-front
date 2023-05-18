@@ -39,32 +39,6 @@
       display: none;
     }
 
-    &-avatar-upload {
-      border-radius: 50%;
-      background-color: var(--main-blue);
-      background-image: url(avatar.svg);
-      background-size: contain;
-      cursor: pointer;
-      position: relative;
-
-      &#avatar-label {
-        margin-bottom: 1rem;
-        width: 3em;
-        height: 3em;
-      }
-
-      &:hover {
-        background-color: hsl(210, 86%, 45%);
-      }
-
-      img {
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 1em;
-      }
-    }
-
     label {
       font-size: 0.8rem;
       margin-bottom: 0.3rem;
