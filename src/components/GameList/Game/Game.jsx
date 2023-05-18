@@ -30,6 +30,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
     }
 
     const Game = ({
+        gameId,
         title,
         createdAt,
         updatedAt,
@@ -64,6 +65,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
                     }}
                 >
                     <GameCardDetailed
+                        gameId={gameId}
                         title={title}
                         createdAt={createdAt}
                         updatedAt={updatedAt}
@@ -78,6 +80,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
     }
 
 Game.propTypes = {
+    gameId: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,

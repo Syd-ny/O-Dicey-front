@@ -3,9 +3,11 @@ import "./GameCardDetailed.scss";
 import GameCard from "../GameCard/GameCard";
 import Dropdown from "../../../GameCreate/Dropdown/Dropdown";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import CharacterCardSmall from '../../../CharacterCard/CharacterCardSmall';
 
 const GameCardDetailed = ({
+    gameId,
     title,
     createdAt,
     updatedAt,
@@ -14,6 +16,8 @@ const GameCardDetailed = ({
     characters,
     mobile,
 }) => {
+
+    const navigate = useNavigate();
 
     var gameStatusActive = ""
     if ( status == 0 ) {
@@ -53,6 +57,7 @@ const GameCardDetailed = ({
     ]);
 
     const Gallery = () => {
+
         if ( mobile == undefined ) {
             return (
                 <div className="gallery">
@@ -80,7 +85,7 @@ const GameCardDetailed = ({
                 />
                 <p className="game-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum suscipit, quo sit iste blanditiis unde explicabo voluptatibus tenetur quaerat cupiditate nulla, veritatis rerum non animi laborum reprehenderit praesentium atque sed?</p>
                 <div className="game-status">
-                    <button className='classic'>Rejoindre</button>
+                    <button onClick={() => navigate(`/games/${gameId}`)} className='classic'>Rejoindre</button>
                     <Dropdown
                         title={gameStatusActive}
                         itemToList={gameStatus}
@@ -93,6 +98,7 @@ const GameCardDetailed = ({
 };
 
 GameCardDetailed.propTypes = {
+    gameId: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,

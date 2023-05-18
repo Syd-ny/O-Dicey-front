@@ -2,7 +2,6 @@ import "./GameList.scss";
 import GameListHeader from "./GameListHeader/GameListHeader";
 import Game from "./Game/Game";
 import GameCardDetailed from "./Game/GameCardDetailed/GameCardDetailed";
-import CharacterCard from "../CharacterCard/CharacterCard";
 import PageWrapper from "../PageWrapper/PageWrapper";
 
 import axios from "axios";
@@ -53,7 +52,6 @@ function useWindowSize() {
 // ===== EXPORT GAMELIST =====
 // ===========================
 
-
 const GameList = () => {
 
   // ========================================
@@ -65,13 +63,13 @@ const GameList = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
 
   // ARRAY of OBJECTS : list of characters
-  const [characterList, setCharacterList] = useState([]);
+  const [gameList, setgameList] = useState([]);
 
-  // axios => get data
+  // axios => get data (character data from user)
   const fetchCharacters = useCallback( async () => {
-    await axios.get( 
+    await axios.get(
       `api/users/${userId}`,
-      { 
+      {
         method: 'get',
         baseURL: `${apiUrl}/`,
         headers: {
@@ -80,8 +78,42 @@ const GameList = () => {
         } , 
       }
     ).then((response) => {
-          // add all characters in "characterList"
-          setCharacterList(response.data.characters);
+      const characterList = response.data.characters;
+
+      // loop for all games within "characterList"
+      for (let index = 0; index < characterList.length; index++) {
+
+        // axios => get data (gameId from each character data)
+        axios.get( 
+          `api/characters/${characterList[index].id}`,
+          { 
+            method: 'get',
+            baseURL: `${apiUrl}/`,
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+              Accept: 'application/json',
+            } , 
+          }
+        ).then((response) => {
+          const gameId = response.data.game.id
+
+          // axios => get data (game data from gameId)
+          axios.get( 
+            `api/games/${gameId}`,
+            { 
+              method: 'get',
+              baseURL: `${apiUrl}/`,
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+                Accept: 'application/json',
+              } , 
+            }
+          ).then((response) => {
+                // add game data from gameId to the end of "gameList"
+                setgameList(gameList => [...gameList, response.data]);
+          })
+        })
+      }
     })
   }, [userId, userToken, apiUrl]);
 
@@ -95,41 +127,6 @@ const GameList = () => {
   }, [fetchCharacters]);
 
 
-  // ===================================
-  // ===== GET ALL GAMES FROM USER =====
-  // ===================================
-
-  // ARRAY of OBJECTS : list of games
-  const [gameList, setgameList] = useState([]);
-
-  // axios => get data
-  const fetchGames = useCallback( async () => {
-
-    // loop FOR for each characters from "charactersList"
-    for (let index = 0; index < characterList.length; index++) {
-      await axios.get( 
-        `api/games/${characterList[index].id}`,
-        { 
-          method: 'get',
-          baseURL: `${apiUrl}/`,
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-            Accept: 'application/json',
-          } , 
-        }
-      ).then((response) => {
-            // add game from characters to the end of "gameList"
-            setgameList(gameList => [...gameList, response.data]);
-      })
-    }
-  }, [userToken, apiUrl, characterList]);
-
-  // do it when new render
-  useEffect(() => {
-    fetchGames();
-  }, [fetchGames]);
-
-  
   // ==============================
   // ===== RENDER OF GAMELIST =====
   // ==============================
@@ -143,13 +140,15 @@ const GameList = () => {
       <PageWrapper>
         <GameListHeader />
         <div className="game-list">
-          {gameList.map((g, i) => <Game key={`game-${i}`} 
+          {gameList.map((g, i) => <Game key={`game-${i}`}
+            gameId={g.id}
             title={g.name}
             createdAt={g.createdAt}
             updatedAt={g.updatedAt}
             status={g.status}
             characters={g.characters}
-            dm={g.dm.login} />)}
+            dm={g.dm.login} 
+            />)}
         </div>
       </PageWrapper>
     );
@@ -160,7 +159,8 @@ const GameList = () => {
       <PageWrapper>
          <GameListHeader />
          <div className="game-list">
-           {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`} 
+           {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`}
+             gameId={g.id}
              title={g.name}
              createdAt={g.createdAt}
              updatedAt={g.updatedAt}
