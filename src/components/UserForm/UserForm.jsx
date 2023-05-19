@@ -8,6 +8,7 @@ import { actionSubmitLoginForm, actionUpdateFormField } from '../../actions/user
 import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import PageWrapper from '../PageWrapper/PageWrapper';
 
 const UserForm = ({ formType }) => {
   const dispatch = useDispatch();
@@ -96,6 +97,7 @@ const UserForm = ({ formType }) => {
 
   if (formType === 'subscribe') {
     return (
+      <PageWrapper>
       <Frame title="Inscription">
         {/* 
           autocomplete="off" does not work in Chrome because Chrome does not respect standards
@@ -123,22 +125,25 @@ const UserForm = ({ formType }) => {
           <button type="submit">Envoyer</button>
         </form>
       </Frame>
+      </PageWrapper>
     );
   }
   else if (formType === 'login') {
     return (
-      <Frame title="Login">
-        <form className="userform-form" onSubmit={handleLogin}>
+      <PageWrapper>
+        <Frame title="Login">
+          <form className="userform-form" onSubmit={handleLogin}>
 
-          <label htmlFor="email">E-mail :</label>
-          <input type="email" id="email" placeholder="Adresse e-mail" value={email} onChange={handleChangeField} />
+            <label htmlFor="email">E-mail :</label>
+            <input type="email" id="email" placeholder="Adresse e-mail" value={email} onChange={handleChangeField} />
 
-          <label htmlFor="password">Mot de passe :</label>
-          <input type="password" id="password" placeholder="Mot de passe" value={password} onChange={handleChangeField} />
+            <label htmlFor="password">Mot de passe :</label>
+            <input type="password" id="password" placeholder="Mot de passe" value={password} onChange={handleChangeField} />
 
-          <button type="submit">Envoyer</button>
-        </form>
-      </Frame>
+            <button type="submit">Envoyer</button>
+          </form>
+        </Frame>
+      </PageWrapper>
     );
   }
 };

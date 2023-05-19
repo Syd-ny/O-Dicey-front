@@ -2,8 +2,17 @@ import "./GameList.scss";
 import GameListHeader from "./GameListHeader/GameListHeader";
 import Game from "./Game/Game";
 import GameCardDetailed from "./Game/GameCardDetailed/GameCardDetailed";
+import CharacterCard from "../CharacterCard/CharacterCard";
+import PageWrapper from "../PageWrapper/PageWrapper";
 
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useRef, useCallback, useState, useEffect } from "react";
+
+
+// ===============================
+// ===== Windows Size Detect =====
+// ===============================
 
 // function => detect screen size
 function useWindowSize() {
@@ -40,82 +49,125 @@ function useWindowSize() {
 }
 
 
+// ===========================
+// ===== EXPORT GAMELIST =====
+// ===========================
+
+
 const GameList = () => {
+
+  // ========================================
+  // ===== GET ALL CHARACTERS FROM USER =====
+  // ========================================
+
+  const userId = useSelector((state) => state.user.user_id);
+  const userToken = useSelector((state) => state.user.token);
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  // ARRAY of OBJECTS : list of characters
+  const [characterList, setCharacterList] = useState([]);
+
+  // axios => get data
+  const fetchCharacters = useCallback( async () => {
+    await axios.get( 
+      `api/users/${userId}`,
+      { 
+        method: 'get',
+        baseURL: `${apiUrl}/`,
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          Accept: 'application/json',
+        } , 
+      }
+    ).then((response) => {
+          // add all characters in "characterList"
+          setCharacterList(response.data.characters);
+    })
+  }, [userId, userToken, apiUrl]);
+
+  // do it when new render
+  const firstRender = useRef(true);
+  useEffect(() => {
+    if (firstRender.current) {
+      fetchCharacters();
+      firstRender.current = false;
+    } 
+  }, [fetchCharacters]);
+
+
+  // ===================================
+  // ===== GET ALL GAMES FROM USER =====
+  // ===================================
+
+  // ARRAY of OBJECTS : list of games
+  const [gameList, setgameList] = useState([]);
+
+  // axios => get data
+  const fetchGames = useCallback( async () => {
+
+    // loop FOR for each characters from "charactersList"
+    for (let index = 0; index < characterList.length; index++) {
+      await axios.get( 
+        `api/games/${characterList[index].id}`,
+        { 
+          method: 'get',
+          baseURL: `${apiUrl}/`,
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            Accept: 'application/json',
+          } , 
+        }
+      ).then((response) => {
+            // add game from characters to the end of "gameList"
+            setgameList(gameList => [...gameList, response.data]);
+      })
+    }
+  }, [userToken, apiUrl, characterList]);
+
+  // do it when new render
+  useEffect(() => {
+    fetchGames();
+  }, [fetchGames]);
+
+
+  // ==============================
+  // ===== RENDER OF GAMELIST =====
+  // ==============================
+
+  //width of the windows
   const width = useWindowSize().width;
 
   // if web => GameCardDetailed
   if (width > 1000) {
     return (
-      <div>
+      <PageWrapper>
         <GameListHeader />
         <div className="game-list">
-          <Game
-            title="test1" />
-          <Game
-            title="test2" />
-          <Game
-            title="test3" />
-          <Game
-            title="test4" />
-          <Game
-            title="test5" />
-          <Game
-            title="test6" />
-          <Game
-            title="test7" />
-          <Game
-            title="test8" />
-          <Game
-            title="test9" />
-          <Game
-            title="test10" />
-          <Game
-            title="test11" />
+          {gameList.map((g, i) => <Game key={`game-${i}`} 
+            title={g.name}
+            createdAt={g.createdAt}
+            updatedAt={g.updatedAt}
+            status={g.status}
+            dm={g.dm.login} />)}
         </div>
-      </div>
+      </PageWrapper>
     );
   } else {
     // else mobile => GameCardDetailed but with less infos (no character card)
     const isMobile = true;
     return (
-      <div>
-        <GameListHeader />
-        <div className="game-list">
-          <GameCardDetailed
-            title="test1"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test2"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test3"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test4"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test5"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test6"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test7"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test8"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test9"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test10"
-            mobile={isMobile} />
-          <GameCardDetailed
-            title="test11"
-            mobile={isMobile} />
+      <PageWrapper>
+         <GameListHeader />
+         <div className="game-list">
+           {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`} 
+             title={g.name}
+             createdAt={g.createdAt}
+             updatedAt={g.updatedAt}
+             status={g.status}
+             dm={g.dm.login}
+             mobile={isMobile} />)}
         </div>
-      </div>
+      </PageWrapper>
     )
   }
 };

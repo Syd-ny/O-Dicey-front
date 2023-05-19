@@ -13,7 +13,6 @@ const authMiddleware = (store) => (next) => async (action) => {
             'Content-Type': 'application/json',
           }
         });
-        console.log(res);
         store.dispatch(actionUserLogin(res.data.data.login, res.data.token, res.data.data.id));
       }
       catch (err) {

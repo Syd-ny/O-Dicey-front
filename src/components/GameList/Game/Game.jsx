@@ -31,6 +31,10 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
 
     const Game = ({
         title,
+        createdAt,
+        updatedAt,
+        status,
+        dm,
     }) => {
         const [isOpen, setIsOpen] = useState(false);
         const scope = useAnimation(isOpen);
@@ -43,6 +47,10 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
                 >
                     <GameCard
                         title={title}
+                        createdAt={createdAt}
+                        updatedAt={updatedAt}
+                        status={status}
+                        dm={dm}
                     />
                     <div className="arrow" style={{ transformOrigin: "50% 55%" }}>
                     </div>
@@ -56,6 +64,10 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
                 >
                     <GameCardDetailed
                         title={title}
+                        createdAt={createdAt}
+                        updatedAt={updatedAt}
+                        status={status}
+                        dm={dm}
                     />
                     <button className='close' onClick={() => setIsOpen(!isOpen)}></button>
                 </div>{" "}
@@ -64,7 +76,11 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
     }
 
 Game.propTypes = {
-    title: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    status: PropTypes.number.isRequired,
+    dm: PropTypes.string.isRequired,
   };
 
 export default Game;
