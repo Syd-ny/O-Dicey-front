@@ -5,7 +5,7 @@ import './UserForm.scss';
 import edit from '../../assets/edit-icon.svg';
 import Frame from '../Frame/Frame';
 import { actionSubmitLoginForm, actionUpdateFormField } from '../../actions/user';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import PageWrapper from '../PageWrapper/PageWrapper';
@@ -95,7 +95,7 @@ const UserForm = ({ formType }) => {
     dispatch(actionSubmitLoginForm());
   };
 
-  if (formType === 'subscribe') {
+  if (formType === 'signup') {
     return (
       <PageWrapper>
       <Frame title="Inscription">
@@ -141,6 +141,7 @@ const UserForm = ({ formType }) => {
             <input type="password" id="password" placeholder="Mot de passe" value={password} onChange={handleChangeField} />
 
             <button type="submit">Envoyer</button>
+            <Link to="/signup" id="signup" className="signup-button">Inscription</Link>
           </form>
         </Frame>
       </PageWrapper>
