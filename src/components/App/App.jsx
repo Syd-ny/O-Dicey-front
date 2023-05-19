@@ -23,7 +23,7 @@ function App() {
       <div className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/register" element={<UserForm formType="subscribe" />} />
+          <Route path="/signup" element={<UserForm formType="signup" />} />
           <Route path="/login" element={<UserForm formType="login" />} />
 
           {/* Restricted routes, user must be logged in */}
@@ -32,6 +32,7 @@ function App() {
               <Route path="/characters" element={<CharacterList />} />
               <Route path="/characters/:charId/edit" element={<CharacterEdit />} />
               <Route path="/games" element={<GameList />} />
+              <Route path="/games/:gameId" element={<Game />} />
               <Route path="/games/new" element={<GameCreate />} />
               <Route path="/game/:gameId" element={<Game />} />
               <Route path="/profile" element={<User />} />
