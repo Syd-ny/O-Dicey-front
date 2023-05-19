@@ -12,6 +12,31 @@
   }
 }
 
+
+.signup-button#signup {
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  background-color: var(--main-blue);
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: hsl(210, 86%, 40%);
+  }
+
+  &.signup-button-light {
+    background-color: var(--light-blue);
+    color: var(--main-blue);
+
+    &:hover {
+      background-color: hsl(212, 52%, 85%);
+    }
+  }
+}
+
+
 @media (prefers-color-scheme: dark) {
   .app {
     --main-blue: #0d5eaf;

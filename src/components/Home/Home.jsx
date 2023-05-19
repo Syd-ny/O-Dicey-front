@@ -1,8 +1,11 @@
 import './Home.scss';
 import Card from '../Card/Card'
 import PageWrapper from '../PageWrapper/PageWrapper';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
+  const isLogged = useSelector((state) => state.user.logged);
   return (
     <PageWrapper>
       <main>
@@ -11,6 +14,10 @@ const Home = () => {
           cardClass='test'
           content="O’Dicey est avant tout destiné aux joueurs de JDRs : néophytes comme chevronnés, l’application se veut facile à prendre en main, et permet une approche rapide de la création de personnages et de parties. Son public cible est donc large, bien qu’elle attirera sans aucun doute en priorité les groupes de joueurs séparés par de longues distances."
         />
+        {!isLogged && (<div className='container container-center'>
+          <p>En route pour l'aventure ! </p>
+          <Link to="/signup" id="signup" className="signup-button signup-button-light">Inscription</Link>
+        </div>)}
         <div className='container'>
           <Card
             cardClass='container-article'

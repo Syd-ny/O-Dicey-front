@@ -18,6 +18,23 @@ main {
         flex-direction: row;
         justify-content: space-between;
       }
+
+      &-center {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        font-size: 2rem;
+        background-color: var(--main-blue);
+        width: fit-content;
+        max-width: 100%;
+        box-sizing: border-box;
+        font-family: 'Aboreto', display;
+        margin: 0 auto;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        padding: 1rem;
+        border-radius: 1rem;
+      }
 }
 
 //card article
