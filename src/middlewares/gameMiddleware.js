@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
+import { GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, UPDATE_MAIN_PICTURE, actionGetGameData, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
 
 const gameMiddleware = (store) => (next) => async (action) => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -44,8 +44,8 @@ const gameMiddleware = (store) => (next) => async (action) => {
         const { token, user_id: userId } = store.getState().user;
         const character = store.getState().gamestate.currentCharacter;
         const gameId = store.getState().gamestate.game.id;
-        const res = await axios.put(`${apiUrl}/api/characters/${character.id}`, 
-        { ...character, user: { id: userId }, game: { id: gameId } }, {
+        const res = await axios.put(`${apiUrl}/api/characters/${character.id}`,
+          { ...character, user: { id: userId }, game: { id: gameId } }, {
           headers: {
             Authorization: `Bearer ${token}`,
           }
@@ -55,6 +55,40 @@ const gameMiddleware = (store) => (next) => async (action) => {
       catch (err) {
         console.log(err);
       }
+      break;
+    }
+
+    case UPDATE_MAIN_PICTURE: {
+      const { token } = store.getState().user;
+      const gameId = store.getState().gamestate.game.id;
+      try {
+        // Set the new image as main picture
+        await axios.put(`${apiUrl}/api/galleries/${action.payload.newId}`,
+          { main_picture: 1 },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+
+        // a game can have no main picture set
+        if (action.payload.oldId !== 0) {
+          // set main picture to 0 for the old image
+          await axios.put(`${apiUrl}/api/galleries/${action.payload.oldId}`,
+            { main_picture: 0 },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              }
+            });
+        }
+        // we update game data
+        store.dispatch(actionGetGameData(gameId));
+      }
+      catch (err) {
+        console.log(err);
+      }
+
       break;
     }
 

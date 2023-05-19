@@ -9,6 +9,7 @@ export const CLEAR_CURRENT_CHARACTER = 'CLEAR_CURRENT_CHARACTER';
 export const UPDATE_NOTES = 'UPDATE_NOTES';
 export const UPDATE_INVENTORY = 'UPDATE_INVENTORY';
 export const SAVE_CHARACTER = 'SAVE_CHARACTER';
+export const UPDATE_MAIN_PICTURE = 'UPDATE_MAIN_PICTURE';
 
 export const actionAddDiceRoll = (roll) => ({
   type: ADD_DICE_ROLL,
@@ -62,4 +63,9 @@ export const actionUpdateInventory = (text) => ({
 
 export const actionSaveCharacter = () => ({
   type: SAVE_CHARACTER,
+});
+
+export const actionUpdateMainPicture = (oldId, newId) => ({
+  type: UPDATE_MAIN_PICTURE,
+  payload: { oldId, newId },
 });
