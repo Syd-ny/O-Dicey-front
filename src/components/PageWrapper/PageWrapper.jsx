@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
+import './PageWrapper.scss'
+
 const PageWrapper = ({ children }) => {
   return (
     <>
       <Header />
-      {children}
+      <div className='main'>{children}</div>
       <Footer />
     </>
   );

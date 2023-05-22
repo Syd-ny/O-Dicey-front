@@ -13,12 +13,20 @@ export const initialState = {
       {
         id: 0,
         name: "",
+        dm: {
+          login: ""
+        },
+        characters: [],
       },
     ],
     DM: [
       {
         id: 0,
         name: "",
+        dm: {
+          login: ""
+        },
+        characters: [],
       },
     ],
   },
