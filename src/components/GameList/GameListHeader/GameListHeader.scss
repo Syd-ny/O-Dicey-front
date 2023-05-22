@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 1rem;
 
-    margin: 1rem 4rem;
+    margin: 2rem 4rem 1rem 4rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid var(--main-blue);
 
@@ -45,19 +45,17 @@
 
 //button
 .classic {
-    width: fit-content;
-    color: white;
-    background-color: var(--main-blue);
-    border: none;
-    border-radius: 1rem;
-    padding: 0.5em 1em;
-    font-weight: bold;
+        width: fit-content;
+        background-color: hsl(210, 86%, 37%);
+        border: none;
+        padding: 0.8em;
+        border-radius: 0.5em;
+        color: white;
+}
 
-    &:hover {
-      background-color: hsl(210, 86%, 45%);
-      cursor: pointer;
-    }
-
+.classic:hover {
+    background-color: hsl(210, 86%, 26%);
+    cursor: pointer;
 }
 
 .game-list-header input {

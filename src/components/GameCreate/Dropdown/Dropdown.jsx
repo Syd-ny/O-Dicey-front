@@ -49,7 +49,7 @@ const GameCreate = (
     )
 }
 
-Dropdown.propTypes = {
+GameCreate.propTypes = {
     title: PropTypes.object.isRequired,
     itemToList: PropTypes.array.isRequired,
 }

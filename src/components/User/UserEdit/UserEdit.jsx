@@ -162,6 +162,7 @@ const UserEdit = ({ formType }) => {
                         />
 
                         <button onClick={saveUserChange} type="submit">Envoyer</button>
+                        <button className='button-go-back' onClick={() => navigate("/profile")}>Retour</button>
                     </form>
                 </Frame>
             </PageWrapper>
@@ -201,8 +202,8 @@ const UserEdit = ({ formType }) => {
                         <div className="userform-form-error">
                             {signUpError.map((e, i) => <p key={`error-${i}`}>{e}</p>)}
                         </div>
-                        <button onClick={saveUserChange} type="submit">Envoyer
-                        </button>
+                        <button onClick={saveUserChange} type="submit">Envoyer</button>
+                        <button className='button-go-back' onClick={() => navigate("/profile")}>Retour</button>
                     </form>
                 </Frame>
             </PageWrapper>

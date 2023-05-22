@@ -157,14 +157,15 @@
 .game-gallery-front {
     max-width: 720px;
     max-height: 480px;
+    align-self: center;
 }
 
-.game-gallery-list {
+.game-gallery .game-gallery-list {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1rem;  
+    gap: 1rem;
 }
 
 .game-gallery-list img{
