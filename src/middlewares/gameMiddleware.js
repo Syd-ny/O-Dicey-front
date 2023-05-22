@@ -41,9 +41,17 @@ const gameMiddleware = (store) => (next) => async (action) => {
 
     case SAVE_CHARACTER: {
       try {
-        const { token, user_id: userId } = store.getState().user;
+        const { token } = store.getState().user;
         const character = store.getState().gamestate.currentCharacter;
         const gameId = store.getState().gamestate.game.id;
+        // if the DM is updating a player character, we need the user id to properly save the updated character
+        // otherwise the DM 'steals' the character if it is saved with his own id
+        const userCharacter = await axios.get(`${apiUrl}/api/characters/${character.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        const { id: userId } = userCharacter.data.user;
         const res = await axios.put(`${apiUrl}/api/characters/${character.id}`,
           { ...character, user: { id: userId }, game: { id: gameId } }, {
           headers: {
