@@ -11,6 +11,7 @@ export const UPDATE_INVENTORY = 'UPDATE_INVENTORY';
 export const SAVE_CHARACTER = 'SAVE_CHARACTER';
 export const UPDATE_MAIN_PICTURE = 'UPDATE_MAIN_PICTURE';
 export const ADD_GALLERY_PICTURE = 'ADD_GALLERY_PICTURE';
+export const UPDATE_CHARACTER_STATS = 'UPDATE_CHARACTER_STATS';
 
 export const actionAddDiceRoll = (roll) => ({
   type: ADD_DICE_ROLL,
@@ -74,4 +75,9 @@ export const actionUpdateMainPicture = (oldId, newId) => ({
 export const actionAddGalleryPicture = (url) => ({
   type: ADD_GALLERY_PICTURE,
   payload: url,
+});
+
+export const actionUpdateCharacterStats = (stats) => ({
+  type: UPDATE_CHARACTER_STATS,
+  payload: stats,
 });

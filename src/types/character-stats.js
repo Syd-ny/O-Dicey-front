@@ -1,6 +1,5 @@
 const defaultStats = {
   "info": {
-    "name": "",
     "level": 0,
     "class": "",
     "background": "",
