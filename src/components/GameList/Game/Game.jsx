@@ -30,13 +30,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
     }
 
     const Game = ({
-        gameId,
-        title,
-        createdAt,
-        updatedAt,
-        status,
-        dm,
-        characters,
+        game,
     }) => {
         const [isOpen, setIsOpen] = useState(false);
         const scope = useAnimation(isOpen);
@@ -48,11 +42,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     <GameCard
-                        title={title}
-                        createdAt={createdAt}
-                        updatedAt={updatedAt}
-                        status={status}
-                        dm={dm}
+                        game={game}
                     />
                     <div className="arrow" style={{ transformOrigin: "50% 55%" }}>
                     </div>
@@ -65,13 +55,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
                     }}
                 >
                     <GameCardDetailed
-                        gameId={gameId}
-                        title={title}
-                        createdAt={createdAt}
-                        updatedAt={updatedAt}
-                        status={status}
-                        dm={dm}
-                        characters={characters}
+                        game={game}
                     />
                     <button className='close' onClick={() => setIsOpen(!isOpen)}></button>
                 </div>{" "}
@@ -80,13 +64,7 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
     }
 
 Game.propTypes = {
-    gameId: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    status: PropTypes.number.isRequired,
-    dm: PropTypes.string.isRequired,
-    characters: PropTypes.array.isRequired,
+    game: PropTypes.object.isRequired,
   };
 
 export default Game;

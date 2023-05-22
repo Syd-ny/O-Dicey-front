@@ -7,7 +7,6 @@ import GameList from "../GameList/GameList";
 import Home from "../Home/Home";
 import User from "../User/User";
 import UserEdit from "../User/UserEdit/UserEdit";
-import UserPwd from "../User/UserPwd/UserPwd";
 import UserForm from "../UserForm/UserForm";
 import CharacterList from "../CharacterList/CharacterList";
 import GameCreate from "../GameCreate/GameCreate";
@@ -36,8 +35,8 @@ function App() {
               <Route path="/games/new" element={<GameCreate />} />
               <Route path="/game/:gameId" element={<Game />} />
               <Route path="/profile" element={<User />} />
-              <Route path="/profile/edit" element={<UserEdit />} />
-              <Route path="/profile/pwd" element={<UserPwd />} />
+              <Route path="/profile/edit" element={<UserEdit formType="userEdit" />} />
+              <Route path="/profile/pwd" element={<UserEdit formType="userPwd" />} />
             </>
           )}
 

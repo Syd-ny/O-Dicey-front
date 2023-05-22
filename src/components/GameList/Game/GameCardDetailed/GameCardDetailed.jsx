@@ -7,25 +7,19 @@ import { useNavigate } from 'react-router-dom';
 import CharacterCardSmall from '../../../CharacterCard/CharacterCardSmall';
 
 const GameCardDetailed = ({
-    gameId,
-    title,
-    createdAt,
-    updatedAt,
-    status,
-    dm,
-    characters,
+    game,
     mobile,
 }) => {
 
     const navigate = useNavigate();
 
     var gameStatusActive = ""
-    if ( status == 0 ) {
+    if ( game.status == 0 ) {
         gameStatusActive = {
             name : "En cours",
             class: "green",
         }
-    } else if ( status == 1 ) {
+    } else if ( game.status == 1 ) {
         gameStatusActive = {
             name : "Terminée",
             class: "red",
@@ -61,7 +55,7 @@ const GameCardDetailed = ({
         if ( mobile == undefined ) {
             return (
                 <div className="gallery">
-                    {characters.map((c, i) => <CharacterCardSmall key={`game-${i}`} 
+                    {game.characters.map((c, i) => <CharacterCardSmall key={`game-${i}`} 
                                 name={c.name}
                                 />)}
                 </div>
@@ -77,15 +71,11 @@ const GameCardDetailed = ({
         <div className="gameDetailed">
             <div className="game-header">
                 <GameCard
-                    title={title}
-                    createdAt={createdAt}
-                    updatedAt={updatedAt}
-                    status={status} 
-                    dm={dm}
+                    game={game}
                 />
                 <p className="game-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum suscipit, quo sit iste blanditiis unde explicabo voluptatibus tenetur quaerat cupiditate nulla, veritatis rerum non animi laborum reprehenderit praesentium atque sed?</p>
                 <div className="game-status">
-                    <button onClick={() => navigate(`/games/${gameId}`)} className='classic'>Rejoindre</button>
+                    <button onClick={() => navigate(`/games/${game.id}`)} className='classic'>Rejoindre</button>
                     <Dropdown
                         title={gameStatusActive}
                         itemToList={gameStatus}
@@ -98,13 +88,7 @@ const GameCardDetailed = ({
 };
 
 GameCardDetailed.propTypes = {
-    gameId: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    status: PropTypes.number.isRequired,
-    dm: PropTypes.string.isRequired,
-    characters: PropTypes.array.isRequired,
+    game: PropTypes.object.isRequired,
     mobile: PropTypes.bool,
     };
 

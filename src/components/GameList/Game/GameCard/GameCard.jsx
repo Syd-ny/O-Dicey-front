@@ -2,19 +2,15 @@ import PropTypes from 'prop-types';
 import "./GameCard.scss";
 
 const GameCard = ({
-    title,
-    createdAt,
-    updatedAt,
-    status,
-    dm,
+    game,
 }) => {
     
     const Status = () => {
-        if (status == 0) {
+        if (game.status == 0) {
             return (
                 <span className='game-status-ongoing'>En cours</span>
             )
-        } else if (status == 1) {
+        } else if (game.status == 1) {
             return (
                 <span className='game-status-finished'>Terminée</span>
             )
@@ -27,13 +23,13 @@ const GameCard = ({
 
     // transform date if != null
     var dateCreatedAt = ""
-    if (createdAt != null) {
-        dateCreatedAt = createdAt.split('T')[0]
+    if (game.createdAt != null) {
+        dateCreatedAt = game.createdAt.split('T')[0]
     }
 
     var dateUpdatedAt = ""
-    if (updatedAt != null) {
-        dateUpdatedAt = updatedAt.split('T')[0]
+    if (game.updatedAt != null) {
+        dateUpdatedAt = game.updatedAt.split('T')[0]
     }
    
 
@@ -42,8 +38,8 @@ const GameCard = ({
             <img className="gamecard-img" src="https://i.imgur.com/i1m3wz0.png" alt="" />
             <div className="gamecard-information">
                 <header className="gamecard-header">
-                    <h3>{title}</h3>
-                    <p>Maître du jeu : {dm}</p>
+                    <h3>{game.name}</h3>
+                    <p>Maître du jeu : {game.dm.login}</p>
                 </header>
                 <div className="gamecard-footer">
                     <p>Créé le : {dateCreatedAt}</p>
@@ -56,11 +52,7 @@ const GameCard = ({
 };
 
 GameCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    status: PropTypes.number.isRequired,
-    dm: PropTypes.string.isRequired,
+    game: PropTypes.object.isRequired,
   };
 
 export default GameCard;

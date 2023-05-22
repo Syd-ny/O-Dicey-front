@@ -17,6 +17,9 @@ const User = () => {
 
     const [user, setUser] = useState([]);
 
+    const gameListData = useSelector((state) => state.user);
+    console.log(gameListData)
+
     const fetchUser = useCallback( async () => {
 
         // axios => get data (user data from userId)
@@ -26,8 +29,8 @@ const User = () => {
                 method: 'get',
                 baseURL: `${apiUrl}/`,
                 headers: {
-                Authorization: `Bearer ${userToken}`,
-                Accept: 'application/json',
+                    Authorization: `Bearer ${userToken}`,
+                    Accept: 'application/json',
                 }, 
             }
         ).then((response) => {
@@ -46,6 +49,21 @@ const User = () => {
     }, [fetchUser]);
 
 
+    const deleteA = () => { 
+        axios.delete(
+            `api/users/${userId}`,
+            {
+                method: 'delete',
+                baseURL: `${apiUrl}/`,
+                headers: {
+                    Authorization: `Bearer ${userToken}`,
+                }, 
+            }
+        ).then(
+            navigate("/")
+        )
+    }
+
     return (
       <PageWrapper>
         <Frame title="Profil">
@@ -55,7 +73,12 @@ const User = () => {
             <p className='user-info'>{user.login}</p>
             <button onClick={() => navigate("/profile/edit")} className='user-button' type="submit">Modifier</button>
             <button onClick={() => navigate("/profile/pwd")} className='user-button' type="submit">Changer de mot de passe</button>
-            <button className='user-button' type="submit">Supprimer</button>
+            <button 
+                className='user-button' 
+                type="submit"
+                onClick={deleteA}>
+                    Supprimer
+            </button>
         </Frame>
       </PageWrapper>
     );
