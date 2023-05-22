@@ -98,7 +98,7 @@ const CharacterSheet = () => {
         <label htmlFor="wisdom">Sagesse :</label>
         <input type="number" id="wisdom" value={stats.characteristics.wisdom} onChange={updateCharacterisitics} />
 
-        <label htmlFor="charisma">Charisma :</label>
+        <label htmlFor="charisma">Charisme :</label>
         <input type="number" id="charisma" value={stats.characteristics.charisma} onChange={updateCharacterisitics} />
       </section>
     </section>
