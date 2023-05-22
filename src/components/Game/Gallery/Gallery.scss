@@ -11,8 +11,11 @@
     max-width: 80%;
     cursor: pointer;
     
+    border-radius: 1rem;
+
     &.active {
-      border: 0.5rem solid red;
+      border: 0.2rem solid var(--main-yellow);
+      filter: drop-shadow(0 0 5px #000);
     }
  }
 
@@ -24,5 +27,6 @@
     gap: 1rem;
     width: 100%;
     box-sizing: border-box;
+    padding: 1rem 0;
   }
 }
