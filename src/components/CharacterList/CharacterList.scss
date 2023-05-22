@@ -1,23 +1,23 @@
 .character-list {
   box-sizing: border-box;
   
-  padding: 1rem;
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
-  width: 100%;
-  max-width: 900px;
+  margin: 2rem 4rem 1rem 4rem;
+  width: calc(100% - 8rem);
 
   &-header {
-    display: grid;
-    
-    grid-template-columns: repeat(1, 1fr);
-    justify-items: center;
-    @media (min-width: 768px) {
-      grid-template: auto 1fr / 2fr 1fr;
-      justify-items: initial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--main-blue);
+
+    @media (min-width: 800px) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
-    gap: 1em;
 
     button {
       width: fit-content;
@@ -26,6 +26,12 @@
       padding: 0.8em;
       border-radius: 0.5em;
       color: white;
+
+      @media (min-width: 768px) {
+        // flex-direction: row;
+        // justify-content: space-between;
+        align-self: center;
+      }
     }
 
     button:hover {
@@ -35,6 +41,8 @@
 
     h2 {
       font-size: 2em;
+      font-family: 'Aboreto', display;
+      font-weight: bold;
     }
   }
 
@@ -49,5 +57,23 @@
 
     gap: 2em;
     margin: 2em 0;
+  }
+}
+
+.none {
+  text-align: center;
+}
+
+.character-list div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  @media (min-width: 800px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
   }
 }

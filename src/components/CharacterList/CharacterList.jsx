@@ -24,14 +24,16 @@ const CharacterList = () => {
     <PageWrapper>
       <div className="character-list">
         <header className="character-list-header">
-          <h2>Mes personnages</h2>
+          <div>
+            <h2>Mes personnages</h2>
+            <button type="button">Nouveau personnage</button>
+          </div>
           <input type="search" name="character-search" id="character-search" placeholder="Rechercher un personnage" />
-          <button type="button">Nouveau personnage</button>
         </header>
         <section className="character-list-cards">
           {characterList.map((c) => <CharacterCard key={`character-${c.id}`} character={c} gameName={c.game.name}/>)}
         </section>
-        {characterList.length === 0 && <p>Aucun personnage</p>}
+        {characterList.length === 0 && <p className="none">Aucun personnage</p>}
       </div>
     </PageWrapper>
   );
