@@ -10,6 +10,7 @@ export const UPDATE_NOTES = 'UPDATE_NOTES';
 export const UPDATE_INVENTORY = 'UPDATE_INVENTORY';
 export const SAVE_CHARACTER = 'SAVE_CHARACTER';
 export const UPDATE_MAIN_PICTURE = 'UPDATE_MAIN_PICTURE';
+export const ADD_GALLERY_PICTURE = 'ADD_GALLERY_PICTURE';
 
 export const actionAddDiceRoll = (roll) => ({
   type: ADD_DICE_ROLL,
@@ -68,4 +69,9 @@ export const actionSaveCharacter = () => ({
 export const actionUpdateMainPicture = (oldId, newId) => ({
   type: UPDATE_MAIN_PICTURE,
   payload: { oldId, newId },
+});
+
+export const actionAddGalleryPicture = (url) => ({
+  type: ADD_GALLERY_PICTURE,
+  payload: url,
 });

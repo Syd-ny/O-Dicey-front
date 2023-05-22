@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import './Gallery.scss';
-import { actionUpdateMainPicture } from "../../../actions/gamestate";
+import { actionAddGalleryPicture, actionUpdateMainPicture } from "../../../actions/gamestate";
+import { useState } from "react";
 
 const Gallery = () => {
   const dispatch = useDispatch();
   const { galleries } = useSelector((state) => state.gamestate.game);
+  const [newImage, setNewImage] = useState("");
 
   const handleSelectImage = (id) => {
     // check if a main picture is set, the middleware handle 0 as a special value
@@ -17,6 +19,21 @@ const Gallery = () => {
   return (
     <section className="game-gallery">
       <h2>Galerie</h2>
+      <div className="game-gallery-add">
+        <label>Ajouter une image :</label>
+        <input
+          type="url"
+          placeholder="URL de l'image"
+          value={newImage}
+          onChange={(e) => setNewImage(e.target.value)}
+        />
+        <button type="button" onClick={() => {
+          dispatch(actionAddGalleryPicture(newImage));
+          setNewImage("");
+        }}>
+          Envoyer
+        </button>
+      </div>
       <div className="game-gallery-images">
         {galleries.map((img) => {
           const elementClass = img.mainPicture === 1 ? 'active' : '';

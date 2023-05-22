@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, UPDATE_MAIN_PICTURE, actionGetGameData, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
+import { ADD_GALLERY_PICTURE, GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, UPDATE_MAIN_PICTURE, actionGetGameData, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
 
 const gameMiddleware = (store) => (next) => async (action) => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -89,6 +89,29 @@ const gameMiddleware = (store) => (next) => async (action) => {
         console.log(err);
       }
 
+      break;
+    }
+
+    case ADD_GALLERY_PICTURE: {
+      const { token } = store.getState().user;
+      const gameId = store.getState().gamestate.game.id;
+
+      try {
+        await axios.post(`${apiUrl}/api/galleries`, {
+          picture: action.payload,
+          game: {
+            id: gameId,
+          }
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
+        store.dispatch(actionGetGameData(gameId));
+      }
+      catch (err) {
+        console.log(err);
+      }
       break;
     }
 
