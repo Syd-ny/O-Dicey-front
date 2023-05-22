@@ -2,6 +2,10 @@ export const UPDATE_FORM_FIELD = 'UPDATE_FORM_FIELD';
 export const SUBMIT_LOGIN_FORM = 'SUBMIT_LOGIN_FORM';
 export const USER_LOGIN = 'USER_LOGIN'; // login form submission OK, store the token and mark user as logged in
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const GET_CHARACTER_LIST = 'GET_CHARACTER_LIST';
+export const UPDATE_CHARACTER_LIST = 'UPDATE_CHARACTER_LIST';
+export const GET_GAME_LIST = 'GET_GAME_LIST';
+export const UPDATE_GAME_LIST = 'UPDATE_GAME_LIST';
 
 export const actionUpdateFormField = (name, value) => ({
   type: UPDATE_FORM_FIELD,
@@ -19,4 +23,22 @@ export const actionUserLogin = (pseudo, token, id) => ({
 
 export const actionUserLogout = () => ({
   type: USER_LOGOUT,
+});
+
+export const actionGetCharacterList = () => ({
+  type: GET_CHARACTER_LIST
+});
+
+export const actionUpdateCharacterList = (list) => ({
+  type: UPDATE_CHARACTER_LIST,
+  payload: list,
+});
+
+export const actionGetGameList = () => ({
+  type: GET_GAME_LIST,
+});
+
+export const actionUpdateGameList = (list) => ({
+  type: UPDATE_GAME_LIST,
+  payload: list,
 });

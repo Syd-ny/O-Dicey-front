@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './CharacterCard.scss';
 
-const CharacterCard = ({ edit, character }) => {
+const CharacterCard = ({ edit, character, gameName }) => {
   const [characterImagePositionX, setCharacterImagePositionX] = useState(50);
   const [characterImagePositionY, setCharacterImagePositionY] = useState(10);
   const [characterImageSize, setCharacterImageSize] = useState(250);
@@ -85,7 +85,7 @@ const CharacterCard = ({ edit, character }) => {
     <article className={cardClass} style={cardStyle}>
       <header className="character-card-header">
         <section className="character-card-header-info">
-          <h1 className="character-card-header-info-name"><Link to={`/characters/${character.id}/edit`}>{character.stats.info.name}</Link></h1>
+          <h1 className="character-card-header-info-name"><Link to={`/characters/${character.id}/edit`}>{character.name}</Link></h1>
           <h2 className="character-card-header-info-race">{character.stats.info.race}</h2>
           <h2 className="character-card-header-info-class">{character.stats.info.class}</h2>
         </section>
@@ -126,7 +126,7 @@ const CharacterCard = ({ edit, character }) => {
         </ul>
       </main>
       <footer className="character-card-footer">
-        <section className="game-title"><h2>{character.game.name}</h2></section>
+        <section className="game-title"><h2>{!edit ? gameName : <Link to={`/games/${character.game.id}`}>{gameName}</Link>}</h2></section>
         <section className="character-actions">
           <button>🖋️</button>
           <button>🗑️</button>
@@ -162,6 +162,7 @@ CharacterCard.propTypes = {
     stats: PropTypes.object,
     game: PropTypes.object,
   }),
+  gameName: PropTypes.string,
 };
 
 CharacterCard.defaultProps = {
@@ -201,6 +202,7 @@ CharacterCard.defaultProps = {
       name: "",
     }
   },
+  gameName: "",
 };
 
 export default CharacterCard;

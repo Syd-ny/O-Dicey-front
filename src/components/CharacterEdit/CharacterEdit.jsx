@@ -1,18 +1,20 @@
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import defaultStats from '../../types/character-stats';
 import './CharacterEdit.scss';
 import CharacterCard from '../CharacterCard/CharacterCard';
 import PageWrapper from '../PageWrapper/PageWrapper';
+import { actionGetGameList } from '../../actions/user';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const CharacterEdit = () => {
   const { charId } = useParams();
   const firstRender = useRef(true);
+  const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.user.user_id);
   const userToken = useSelector((state) => state.user.token);
@@ -27,6 +29,14 @@ const CharacterEdit = () => {
       name: ""
     },
   });
+
+  const { games } = useSelector((state) => state.user);
+  const [currentGame, setCurrentGame] = useState({id: 0, name: ""});
+
+  useEffect(() => {
+    const findCurrentGame = games.player.filter((g) => g.id === character.game.id)[0];
+    if(findCurrentGame !== undefined) setCurrentGame(findCurrentGame);
+  }, [games, character]);
 
   const [info, setInfo] = useState(defaultStats.info);
 
@@ -44,14 +54,15 @@ const CharacterEdit = () => {
 
   useEffect(() => {
     if (firstRender.current) {
+      dispatch(actionGetGameList());
       fetchCharacter();
       firstRender.current = false;
     }
-  }, [fetchCharacter]);
+  }, [fetchCharacter, dispatch]);
 
   useEffect(() => {
     setInfo(character.stats.info);
-    setCharacteristics(character.stats.characteristics)
+    setCharacteristics(character.stats.characteristics);
   }, [character]);
 
   useEffect(() => {
@@ -95,15 +106,13 @@ const CharacterEdit = () => {
     <PageWrapper>
       <div className="character-edit">
 
-        <CharacterCard character={character} edit />
+        <CharacterCard character={character} gameName={currentGame.name} edit />
 
         <button onClick={() => saveCharacter()}>Sauvegarder</button>
 
         <section className="character-edit-info">
           <h2>Infos</h2>
           <form className="character-edit-info-form">
-            <label htmlFor="name">Nom :</label>
-            <input type="text" name="name" id="name" value={info.name} onChange={changeInfo} />
             <label htmlFor="level">Niveau :</label>
             <input type="number" name="level" id="level" value={info.level} onChange={changeInfo} />
             <label htmlFor="class">Classe :</label>

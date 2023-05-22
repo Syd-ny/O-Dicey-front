@@ -1,4 +1,4 @@
-import { UPDATE_FORM_FIELD, USER_LOGIN, USER_LOGOUT } from "../actions/user";
+import { UPDATE_CHARACTER_LIST, UPDATE_FORM_FIELD, UPDATE_GAME_LIST, USER_LOGIN, USER_LOGOUT } from "../actions/user";
 
 export const initialState = {
   logged: false,
@@ -7,6 +7,21 @@ export const initialState = {
   password: '',
   token: '',
   user_id: 0,
+  characters: [],
+  games: {
+    player: [
+      {
+        id: 0,
+        name: "",
+      },
+    ],
+    DM: [
+      {
+        id: 0,
+        name: "",
+      },
+    ],
+  },
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -20,7 +35,15 @@ const reducer = (state = initialState, action = {}) => {
     }
 
     case USER_LOGOUT: {
-      return { ...state, logged: false, token: '' };
+      return { initialState };
+    }
+
+    case UPDATE_CHARACTER_LIST: {
+      return { ...state, characters: action.payload };
+    }
+
+    case UPDATE_GAME_LIST: {
+      return { ...state, games: action.payload };
     }
 
     default: return state;
