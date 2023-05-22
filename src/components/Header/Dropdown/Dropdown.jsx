@@ -26,7 +26,7 @@ const Dropdown = () => {
           <nav className={navClassName}>
             <Link to="/characters" className="header-dropdown-nav-site">Liste des personnages</Link>
             <Link to="/games" className="header-dropdown-nav-site">Liste des parties</Link>
-            <a href="#">Informations personnelles</a>
+            <Link to="/profile">Informations personnelles</Link>
             <Link to="/" onClick={handleLogout}>Déconnexion</Link>
           </nav>
         </>

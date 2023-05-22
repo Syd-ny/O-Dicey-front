@@ -1,0 +1,36 @@
+.frame-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.user-title {
+    font-weight: bold;
+}
+
+.user-info {
+    background-color: white;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+}
+
+.user-button {
+    width: fit-content;
+
+    color: white;
+    background-color: var(--main-blue);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+
+    &:hover {
+      background-color: hsl(210, 86%, 45%);
+      cursor: pointer;
+    }
+
+}
