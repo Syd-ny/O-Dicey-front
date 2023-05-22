@@ -8,6 +8,7 @@ import Notes from '../Notes/Notes';
 import Inventory from '../Inventory/Inventory';
 import { User, Users, FileText, ShoppingBag, Box, Map } from 'feather-icons-react/build/IconComponents';
 import CharacterSheet from '../CharacterSheet/CharacterSheet';
+import Gallery from '../Gallery/Gallery';
 
 const GameTabs = () => {
   const [currentTab, setCurrentTab] = useState("sheet"); // display character sheet by default
@@ -66,7 +67,7 @@ const GameTabs = () => {
         {currentTab === "notes" && <Notes />}
         {currentTab === "inventory" && <Inventory />}
         {currentTab === "dice" && <DiceRoller />}
-        {currentTab === "gallery" && <p>Galerie</p>}
+        {currentTab === "gallery" && <Gallery />}
       </div>
     </div>
   );

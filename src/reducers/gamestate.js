@@ -21,7 +21,8 @@ const initialState = {
     characters: [],
     dm: {
       id: 0,
-    }
+    },
+    galleries: [],
   }
 };
 

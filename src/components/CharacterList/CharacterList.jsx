@@ -1,34 +1,24 @@
 import axios from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CharacterCard from "../CharacterCard/CharacterCard";
 
 import './CharacterList.scss';
 import PageWrapper from "../PageWrapper/PageWrapper";
+import { actionGetCharacterList } from "../../actions/user";
 
 const CharacterList = () => {
+  const dispatch = useDispatch();
   const firstRender = useRef(true);
-  const userId = useSelector((state) => state.user.user_id);
-  const userToken = useSelector((state) => state.user.token);
-  const [characterList, setCharacterList] = useState([]);
+  const characterList = useSelector((state) => state.user.characters);
 
-  const fetchCharacters = useCallback(async () => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const res = await axios.get(`${apiUrl}/api/users/${userId}/characters`, {
-      headers: {
-        Authorization: `Bearer ${userToken}`,
-        Accept: 'application/json',
-      }
-    });
-    setCharacterList(res.data);
-  }, [userId, userToken]);
 
   useEffect(() => {
     if (firstRender.current) {
-      fetchCharacters();
+      dispatch(actionGetCharacterList());
       firstRender.current = false;
     }
-  }, [fetchCharacters]);
+  }, [dispatch]);
 
   return (
     <PageWrapper>
@@ -39,7 +29,7 @@ const CharacterList = () => {
           <button type="button">Nouveau personnage</button>
         </header>
         <section className="character-list-cards">
-          {characterList.map((c) => <CharacterCard key={`character-${c.id}`} character={c} />)}
+          {characterList.map((c) => <CharacterCard key={`character-${c.id}`} character={c} gameName={c.game.name}/>)}
         </section>
         {characterList.length === 0 && <p>Aucun personnage</p>}
       </div>
