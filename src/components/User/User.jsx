@@ -17,9 +17,6 @@ const User = () => {
 
     const [user, setUser] = useState([]);
 
-    const gameListData = useSelector((state) => state.user);
-    console.log(gameListData)
-
     const fetchUser = useCallback( async () => {
 
         // axios => get data (user data from userId)

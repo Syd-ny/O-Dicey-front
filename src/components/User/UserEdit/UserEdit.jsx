@@ -11,6 +11,18 @@ import { useNavigate } from 'react-router-dom';
 const UserEdit = ({ formType }) => {
 
     const navigate = useNavigate();
+    const [signUpError, setError] = useState([""]);
+    const [user, setUser] = useState([]);
+    const [updatedUserData, setUpdatedUserData] = useState({});
+
+    const userId = useSelector((state) => state.user.user_id);
+    const userToken = useSelector((state) => state.user.token);
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+    
+    // ===============================
+    // ===== DETECT CHANGE FIELD =====
+    // ===============================
 
     const changeField = (initialValue, setValue) => {
         return (name, value) => {
@@ -20,18 +32,16 @@ const UserEdit = ({ formType }) => {
     };
     
     const handleChangeField = (event) => {
-        changeField(user, setUser)(event.target.id, event.target.value);
+        changeField(updatedUserData, setUpdatedUserData)(event.target.id, event.target.value);
     }
     
     
-    const userId = useSelector((state) => state.user.user_id);
-    const userToken = useSelector((state) => state.user.token);
-    const apiUrl = import.meta.env.VITE_API_URL;
-    
-    const [user, setUser] = useState([]);
+    // =========================
+    // ===== GET USER DATA =====
+    // =========================
     
     const fetchUser = useCallback( async () => {
-    
+
         // axios => get data (user data from userId)
         await axios.get(
             `api/users/${userId}`,
@@ -57,13 +67,19 @@ const UserEdit = ({ formType }) => {
             firstRender.current = false;
         } 
     }, [fetchUser]);
+
+
+    // =========================
+    // ===== PUT USER DATA =====
+    // =========================
     
     const changeUserInfo = async () => {
+
         const apiUrl = import.meta.env.VITE_API_URL;
         try {
             const res = await axios.put(
                 `${apiUrl}/api/users/${userId}`,
-                user, 
+                updatedUserData, 
                 {
                     headers: {
                         'Authorization': `Bearer ${userToken}`,
@@ -73,16 +89,43 @@ const UserEdit = ({ formType }) => {
             );
             setUser(res.data);
             navigate("/profile");
-          }
-          catch (err) {
+        }
+        catch (err) {
             console.error(err);
-          }
+        }
     }
+
+
+    // ======================================
+    // ===== DETECT ANY ERROR FROM FORM =====
+    // ======================================
 
     const saveUserChange = (event) => {
         event.preventDefault();
+        let error = false;
+        const errorList = [];
+        // if it's a password change
+        if (updatedUserData.password) {
+            if (updatedUserData.password === undefined || updatedUserData.password === "") {
+                errorList.push("Le mot de passe doit être rempli")
+                error = true;
+            }
+            if (updatedUserData.password != updatedUserData.passwordcheck) {
+                errorList.push("Les mots de passe ne sont pas identiques")
+                error = true;
+            }
+        }
+        if (error) {
+            setError(errorList);
+            return;
+        }
         changeUserInfo();
     };
+
+        
+    // ====================================
+    // ===== RENDER OF USER INFO EDIT =====
+    // ====================================
 
     if (formType === "userEdit") {
         return (
@@ -118,28 +161,48 @@ const UserEdit = ({ formType }) => {
                             onChange={handleChangeField} 
                         />
 
-                        <button onClick={saveUserChange} 
-                        // type="submit"
-                        >Envoyer</button>
+                        <button onClick={saveUserChange} type="submit">Envoyer</button>
                     </form>
                 </Frame>
             </PageWrapper>
         );
+
+
+    // ==============================
+    // ===== RENDER OF PSW EDIT =====
+    // ==============================
+
     } else if (formType === "userPwd") {
         return (
             <PageWrapper>
                 <Frame title="Mot de passe">
                     <form className="userform-form">
-                        <label htmlFor="password">Ancien mot de passe :</label>
-                        <input className='pwd-old' type="password" id="password" placeholder="Mot de passe" />
+                        {/* <label htmlFor="password">Ancien mot de passe :</label>
+                        <input className='pwd-old' type="password" id="password" placeholder="Mot de passe" /> */}
     
                         <label htmlFor="password">Nouveau mot de passe :</label>
-                        <input type="password" id="password" placeholder="Mot de passe" />
+                        <input 
+                            type="password" 
+                            id="password" 
+                            placeholder="Mot de passe" 
+                            value={updatedUserData.password}
+                            onChange={handleChangeField} 
+                        />
     
                         <label htmlFor="password">Confirmez le nouveau mot de passe :</label>
-                        <input type="password" id="password" placeholder="Confirmez le mot de passe" />
-    
-                        <button type="submit">Envoyer</button>
+                        <input 
+                            type="password" 
+                            id="passwordcheck" 
+                            placeholder="Confirmez le mot de passe" 
+                            value={updatedUserData.passwordCheck}
+                            onChange={handleChangeField}
+                        />
+
+                        <div className="userform-form-error">
+                            {signUpError.map((e, i) => <p key={`error-${i}`}>{e}</p>)}
+                        </div>
+                        <button onClick={saveUserChange} type="submit">Envoyer
+                        </button>
                     </form>
                 </Frame>
             </PageWrapper>

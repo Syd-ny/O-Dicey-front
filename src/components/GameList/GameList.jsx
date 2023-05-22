@@ -65,7 +65,7 @@ const GameList = () => {
   const gameListData = useSelector((state) => state.user.games);
 
   // concat gamesDM & gamesPlayer
-  const gameList = gameListData.DM.concat(gameListData.player);
+  const gameList = [...gameListData.DM, ...gameListData.player];
 
   useEffect(() => {
     if (firstRender.current) {

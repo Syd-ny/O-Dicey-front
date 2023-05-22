@@ -72,7 +72,6 @@ const UserForm = ({ formType }) => {
     }
     if (error) {
       setSignUpError(errorList);
-      return;
     }
 
     submitSignUpForm();

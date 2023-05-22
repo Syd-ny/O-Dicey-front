@@ -55,8 +55,9 @@ const GameCardDetailed = ({
         if ( mobile == undefined ) {
             return (
                 <div className="gallery">
-                    {game.characters.map((c, i) => <CharacterCardSmall key={`game-${i}`} 
+                    {game.characters.map((c, i) => <CharacterCardSmall key={`character-${i}`} 
                                 name={c.name}
+                                character={c}
                                 />)}
                 </div>
             );
