@@ -75,8 +75,9 @@ const GameCardDetailed = ({
                     game={game}
                 />
                 <p className="game-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum suscipit, quo sit iste blanditiis unde explicabo voluptatibus tenetur quaerat cupiditate nulla, veritatis rerum non animi laborum reprehenderit praesentium atque sed?</p>
+
                 <div className="game-status">
-                    <button onClick={() => navigate(`/games/${game.id}`)} className='classic'>Rejoindre</button>
+                    <button className="game-button" onClick={() => navigate(`/games/${game.id}`)}>Rejoindre</button>
                     <Dropdown
                         title={gameStatusActive}
                         itemToList={gameStatus}

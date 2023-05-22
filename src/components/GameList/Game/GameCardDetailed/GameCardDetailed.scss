@@ -25,7 +25,7 @@
 .game-status {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 4rem;
     
 }
 
@@ -51,6 +51,32 @@
     top: calc(-300% + 4px);
 }
 
-.game-status .custom-dropdown, .game-status .custom-dropdown .items-holder  {
+.game-status .custom-dropdown, .game-status .custom-dropdown .items-holder {
     width: 150px;
+}
+
+.game-status .custom-dropdown, .game-status .custom-dropdown .custom-dropdown-selection {
+    width: 120px;
+}
+
+.game-status .custom-dropdown, .game-status .custom-dropdown .items-holder .dropdown-item {
+    width: 120px;
+}
+
+
+.game-status .game-button {
+    width: fit-content;
+
+    color: white;
+    background-color: var(--main-blue);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+
+    &:hover {
+      background-color: hsl(210, 86%, 45%);
+      cursor: pointer;
+    }
+
 }
