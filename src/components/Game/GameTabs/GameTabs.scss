@@ -8,6 +8,7 @@
   height: calc(100dvh - 4rem);
 
   @media (max-width: 767px) {
+    height: calc(100dvh - 3rem);
     &-nav {
       nav {
         .tab {
