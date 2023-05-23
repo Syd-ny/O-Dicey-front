@@ -43,7 +43,7 @@ const reducer = (state = initialState, action = {}) => {
     }
 
     case USER_LOGOUT: {
-      return { initialState };
+      return { ...initialState };
     }
 
     case UPDATE_CHARACTER_LIST: {
