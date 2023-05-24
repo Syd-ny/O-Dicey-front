@@ -25,9 +25,24 @@
         background-color: var(--main-blue); // TODO: changer par un placeholder
         background-size: cover;
         background-position: center;
+        position: relative;
+
+        &-name {
+          background-color: var(--main-blue);
+          padding: 0.8rem;
+          position: absolute;
+          left: 4.5rem;
+          color: white;
+          border-radius: 1rem;
+          display: none;
+        }
 
         &:hover {
           scale: 110%;
+
+          .game-avatars-list-item-name {
+            display: block;
+          }
         }
 
         &-active {
