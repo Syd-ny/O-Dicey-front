@@ -69,7 +69,6 @@ const GameCreate = () => {
 
     const handleSignUpChangeField = (event) => {
         if (gameCreateError.length > 0) setGameCreateError([]); // bad error handling
-        // setGameCreateForm({ ...gameCreateForm, [event.target.id]: event.target.value });
         setGameCreateForm({...gameCreateForm, name: event.target.value});
     };
     
@@ -109,18 +108,37 @@ const GameCreate = () => {
                         }
                     )
                 }
+                const urlFront = UrlsList[slideNumber];
+                delUrl(slideNumber)
+
+                // axios send Gallery Front
+                axios.post(
+                    `${apiUrl}/api/galleries`,
+                    {
+                        picture: urlFront,
+                        mainPicture: 1,
+                        game: {
+                            id: response.data.id,
+                        }
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${user.token}`,
+                            Accept: 'application/json',
+                        }, 
+                    }
+                )
+
                 for (let index = 0; index < UrlsList.length; index++) {
                     const urlToSend = UrlsList[index];
 
                     // axios send Gallery
                     axios.post(
-                        `${apiUrl}/api/galleries/`,
+                        `${apiUrl}/api/galleries`,
                         {
-                            picture: "https://i.imgur.com/xaZob3f.png",
+                            picture: urlToSend,
                             game: {
-                                id: 50,
+                                id: response.data.id,
                             }
-                            // game: 50
                         }, {
                             headers: {
                                 Authorization: `Bearer ${user.token}`,
@@ -353,7 +371,6 @@ const GameCreate = () => {
             : setSlideNumber(slideNumber + 1)
     }
 
-
     return (
         <PageWrapper>
             <div className="game-create">
@@ -383,11 +400,12 @@ const GameCreate = () => {
                             </div>
                             <div className="game-form-part">
                                 <label htmlFor="game-status">Statut de la Partie :</label>
-                                <Dropdown
+                                <p className="game-status-default">En cours</p>
+                                {/* <Dropdown
                                     title={status}
                                     itemToList={gameStatus}
                                     valueDropdown={updateStatusForm}
-                                />
+                                /> */}
                             </div>
                         </form>
                         <div className="game-form-part">
@@ -413,12 +431,12 @@ const GameCreate = () => {
                         {/* <div className="game-gallery-part"> */}
                             <div className="game-gallery">
                                 {UrlsList.length !== 0 && (
-                                <div>
+                                <div className="game-gallery-header">
                                     <h3>Front Image :</h3>
                                     <div className="game-gallery-front-container">
-                                        <button onClick={prevSlide}>L</button>
+                                        <button className="gallery-list-slide-button" onClick={prevSlide}>L</button>
                                         <img className="game-gallery-front" src={UrlsList[slideNumber]} alt="" />
-                                        <button onClick={nextSlide}>R</button>
+                                        <button className="gallery-list-slide-button" onClick={nextSlide}>R</button>
                                     </div>
                                     <button className="gallery-list-li-button" onClick={() => delUrl(slideNumber)}>Supprimer</button>
                                 </div>
