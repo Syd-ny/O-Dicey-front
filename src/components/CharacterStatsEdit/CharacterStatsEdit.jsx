@@ -24,9 +24,9 @@ const CharacterStatsEdit = ({ stats, setStats }) => {
   };
 
   return (
-    <section className="character-stats">
-      <section className="character-stats-section">
-        <h2>Informations</h2>
+    <section className="character-stats-edit">
+      <section className="character-stats-edit-section">
+        <h2 className="character-stats-edit-section-heading">Informations</h2>
 
         <label htmlFor="level">Niveau :</label>
         <input type="number" id="level" value={stats.info.level} onChange={updateInfo} />
@@ -68,8 +68,8 @@ const CharacterStatsEdit = ({ stats, setStats }) => {
         <input type="text" id="hair" value={stats.info.hair} onChange={updateInfo} />
       </section>
 
-      <section className="character-stats-section">
-        <h2>Caractéristiques</h2>
+      <section className="character-stats-edit-section">
+        <h2 className="character-stats-edit-section-heading">Caractéristiques</h2>
 
         <label htmlFor="strength">Force :</label>
         <input type="number" id="strength" value={stats.characteristics.strength} onChange={updateCharacterisitics} />

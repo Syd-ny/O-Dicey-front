@@ -90,31 +90,38 @@ const CharacterCreate = () => {
     <PageWrapper>
       <section className="character-create">
         <header>
-          <h2>Créer un personnage</h2>
-          <label htmlFor="game">Sélectionner une partie :</label>
-          <select onChange={handleSelectGame} defaultValue="0" id="game">
-            <option value="0" disabled>Sélectionner une partie</option>
+          <h2 className="character-create-heading">Créer un personnage</h2>
+          
+          <section className="character-create-game">
+            <h2 className="character-create-game-heading">Partie</h2>
 
-            {invites.map((invite) => {
-              return (
-                <option key={`invite-${invite.id}`} value={invite.game.id}>{invite.game.name}</option>
-              );
-            })}
+            <label htmlFor="game">Sélectionner une partie :</label>
 
-          </select>
+            <select onChange={handleSelectGame} defaultValue="0" id="game">
+              <option value="0" disabled>Sélectionner une partie</option>
 
-          {gameData !== null && (
-            <section className="character-create-game">
-              <p>Nom de la partie: {gameData.name}</p>
-              <p>Nom du MJ: {gameData.dm.login}</p>
-              <p>Mode de jeu: {gameData.mode.name}</p>
-            </section>
-          )}
+              {invites.map((invite) => {
+                return (
+                  <option key={`invite-${invite.id}`} value={invite.game.id}>{invite.game.name}</option>
+                );
+              })}
+            </select>
+
+            {gameData !== null && (
+              <section className="character-create-game-data">
+                <p className="character-create-game-data-name">{gameData.name}</p>
+                <p className="character-create-game-data-dm">MJ : <span>{gameData.dm.login}</span></p>
+                <p className="character-create-game-data-mode">{gameData.mode.name}</p>
+              </section>
+            )}
+          </section>
+
         </header>
         {characterStats !== null && (
           <section className="character-create-form">
 
             <section className="character-create-form-section">
+              <h2 className="character-create-form-section-heading">&Eacute;tat civil</h2>
               <label htmlFor="name">Nom du personnage :</label>
               <input type="text" id="name" placeholder="Entrez un nom" value={characterName} onChange={(e) => setCharacterName(e.target.value)} />
               <label htmlFor="picture">Image du personnage :</label>
@@ -124,12 +131,12 @@ const CharacterCreate = () => {
             <CharacterStatsEdit setStats={setCharacterStats} stats={characterStats} />
 
             <section className="character-create-form-section">
-              <h2>Inventaire</h2>
+              <h2 className="character-create-form-section-heading">Inventaire</h2>
               <textarea value={characterInventory} onChange={(e) => setCharacterInventory(e.target.value)} />
             </section>
 
             <section className="character-create-form-section">
-              <h2>Notes</h2>
+              <h2 className="character-create-form-section-heading">Notes</h2>
               <textarea value={characterNotes} onChange={(e) => setCharacterNotes(e.target.value)} />
             </section>
 
