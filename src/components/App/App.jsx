@@ -4,6 +4,7 @@ import "./App.scss"
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import GameList from "../GameList/GameList";
+import GameEdit from "../GameEdit/GameEdit";
 import Home from "../Home/Home";
 import User from "../User/User";
 import UserEdit from "../User/UserEdit/UserEdit";
@@ -33,7 +34,7 @@ function App() {
               <Route path="/games" element={<GameList />} />
               <Route path="/games/:gameId" element={<Game />} />
               <Route path="/games/new" element={<GameCreate />} />
-              <Route path="/game/:gameId" element={<Game />} />
+              <Route path="/games/:gameId/edit" element={<GameEdit />} />
               <Route path="/profile" element={<User />} />
               <Route path="/profile/edit" element={<UserEdit formType="userEdit" />} />
               <Route path="/profile/pwd" element={<UserEdit formType="userPwd" />} />

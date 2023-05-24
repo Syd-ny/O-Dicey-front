@@ -1,37 +1,38 @@
 import PropTypes from 'prop-types';
 import { useState } from "react";
-import Dropdown from "../../Header/Dropdown/Dropdown";
 import "./Dropdown.scss";
 
-const GameCreate = (
+const Dropdown = (
     {   
         title,
         itemToList,
+        valueDropdown,
+        defaultValue,
     }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-    const [itemsList, setItemsList] = itemToList;
 
     const [selectedItemIndex, setSelectedItemIndex] = useState(null);
-
+    
     return (
         <div>
             <div className="custom-dropdown">
                 <div className={
-                    "custom-dropdown-selection " + (isDropdownVisible ? "visible " : "") + (selectedItemIndex != undefined ? itemsList[selectedItemIndex].class : title.class)
+                    "custom-dropdown-selection " + (isDropdownVisible ? "visible " : "") + (defaultValue != null ? itemToList[defaultValue].class : selectedItemIndex != undefined ? itemToList[selectedItemIndex].class : title.class)
                     } onClick={event => {
                         setIsDropdownVisible(!isDropdownVisible);
                     }
                 }>
-                    {selectedItemIndex != null ? itemsList[selectedItemIndex].name : title.name}
+                    {defaultValue != null ? itemToList[defaultValue].name : selectedItemIndex != null ? itemToList[selectedItemIndex].name : title.name}
                 </div>
                 {
                     isDropdownVisible ? (
                         <div className="items-holder">
                             {
-                                itemsList.map((item, index) => (
-                                    <div key={item.value} className={`dropdown-item ${item.class}`} onClick={event => {
+                                itemToList.map((item, index) => (
+                                    <div key={item.id} className={`dropdown-item ${item.class}`} onClick={event => {
                                         setSelectedItemIndex(index);
+                                        valueDropdown(item.id);
                                         setIsDropdownVisible(false);
                                     }}>
                                         {
@@ -49,9 +50,10 @@ const GameCreate = (
     )
 }
 
-GameCreate.propTypes = {
+Dropdown.propTypes = {
     title: PropTypes.object.isRequired,
     itemToList: PropTypes.array.isRequired,
+    // valueDropdown: PropTypes.function
 }
 
-export default GameCreate;
+export default Dropdown;
