@@ -13,6 +13,7 @@ import GameCreate from "../GameCreate/GameCreate";
 import ErrorCode from "../ErrorCode/ErrorCode";
 import CharacterEdit from "../CharacterEdit/CharacterEdit";
 import Game from "../Game/Game";
+import CharacterCreate from "../CharacterCreate/CharacterCreate";
 
 function App() {
   const isLogged = useSelector((state) => state.user.logged);
@@ -30,6 +31,7 @@ function App() {
             <>
               <Route path="/characters" element={<CharacterList />} />
               <Route path="/characters/:charId/edit" element={<CharacterEdit />} />
+              <Route path="/characters/create" element={<CharacterCreate />} />
               <Route path="/games" element={<GameList />} />
               <Route path="/games/:gameId" element={<Game />} />
               <Route path="/games/new" element={<GameCreate />} />

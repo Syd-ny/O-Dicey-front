@@ -1,0 +1,39 @@
+.character-create {
+  max-width: 500px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 1rem;
+
+  header {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      margin-bottom: 0.3rem;
+    }
+    select {
+      margin-bottom: 0.5rem;
+    }
+
+    margin-bottom: 2rem;
+  }
+
+  &-form {
+    label {
+      margin-bottom: 0.3rem;
+    }
+    input {
+      margin-bottom: 0.5rem;
+    }
+
+    &-section {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
