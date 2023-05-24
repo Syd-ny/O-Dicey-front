@@ -92,7 +92,7 @@ const GameList = () => {
             game={g}
             />)}
         </div>
-        {gameList .length === 0 && <p className="none">Aucune partie</p>}
+        {gameList.length === 0 && <p className="none">Aucune partie</p>}
       </PageWrapper>
     );
   } else {
@@ -107,7 +107,7 @@ const GameList = () => {
             mobile={isMobile}
           />)}
         </div>
-        {gameList .length === 0 && <p className="none">Aucune partie</p>}
+        {gameList.length === 0 && <p className="none">Aucune partie</p>}
       </PageWrapper>
     )
   }

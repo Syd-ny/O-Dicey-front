@@ -4,6 +4,7 @@ import GameCard from "../GameCard/GameCard";
 import Dropdown from "../../../GameCreate/Dropdown/Dropdown";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import CharacterCardSmall from '../../../CharacterCard/CharacterCardSmall';
 
 const GameCardDetailed = ({
@@ -12,6 +13,9 @@ const GameCardDetailed = ({
 }) => {
 
     const navigate = useNavigate();
+
+    const user = useSelector((state) => state.user)
+
 
     var gameStatusActive = ""
     if ( game.status == 0 ) {
@@ -35,17 +39,17 @@ const GameCardDetailed = ({
     const gameStatus = useState([
         {
             name: "En cours",
-            value: "ongoing",
+            id: "ongoing",
             class: "green"
         },
         {
             name: "Inactive",
-            value: "inactive",
+            id: "inactive",
             class: "orange"
         },
         {
             name: "Terminée",
-            value: "finished",
+            id: "finished",
             class: "red"
         }
     ]);
@@ -82,6 +86,7 @@ const GameCardDetailed = ({
                         title={gameStatusActive}
                         itemToList={gameStatus}
                     />
+                    {game.dm.id === user.user_id && <button className="game-edit-button" onClick={() => navigate(`/games/${game.id}/edit`)}>Modifier</button>}
                 </div>
             </div>
             <Gallery />
