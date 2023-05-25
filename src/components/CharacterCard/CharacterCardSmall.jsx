@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 
 import './CharacterCardSmall.scss';
+import defaultStats from '../../types/character-stats';
+import placeholder from '../../assets/placeholder.png';
 
 const CharacterCardSmall = ({ character }) => {
-  const cardStyle = { backgroundImage: `url(${character.picture})` };
+  const cardStyle = { backgroundImage: `url(${character.picture !== '' ? character.picture : placeholder})` };
 
   return (
     <article className="character-card-small" style={cardStyle}>
@@ -45,7 +47,7 @@ const CharacterCardSmall = ({ character }) => {
           </li>
           <li>
             <h3>HP</h3>
-            <p>20</p>
+            <p>{character.stats.hp.current}</p>
           </li>
         </ul>
       </main>
@@ -67,32 +69,7 @@ CharacterCardSmall.defaultProps = {
     id: 0,
     picture: "",
     name: "",
-    stats: {
-      info: {
-        name: "",
-        level: 0,
-        class: "",
-        background: "",
-        player_name: "",
-        race: "",
-        alignment: "",
-        experience: 0,
-        age: 0,
-        height: 0,
-        weight: 0,
-        eyes: "",
-        skin: "",
-        hair: ""
-      },
-      characteristics: {
-        strength: 0,
-        dexterity: 0,
-        constitution: 0,
-        intelligence: 0,
-        wisdom: 0,
-        charisma: 0
-      }
-    },
+    stats: defaultStats,
   },
 };
 
