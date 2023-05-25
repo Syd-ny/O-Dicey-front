@@ -43,9 +43,6 @@ const CharacterStatsEdit = ({ stats, setStats }) => {
         <label htmlFor="background">Historique :</label>
         <input type="text" id="background" value={stats.info.background} onChange={updateInfo} />
 
-        <label htmlFor="player_name">Nom du joueur :</label>
-        <input type="text" id="player_name" value={stats.info.player_name} onChange={updateInfo} />
-
         <label htmlFor="alignment">Alignement :</label>
         <input type="text" id="alignment" value={stats.info.alignment} onChange={updateInfo} />
 
