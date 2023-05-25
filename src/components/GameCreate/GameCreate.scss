@@ -277,3 +277,10 @@
 .fullScreenImage img{
     width: 600px;
 }
+
+.game-form-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem
+}

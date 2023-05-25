@@ -18,12 +18,24 @@ const Dropdown = (
         <div>
             <div className="custom-dropdown">
                 <div className={
-                    "custom-dropdown-selection " + (isDropdownVisible ? "visible " : "") + (defaultValue != null ? itemToList[defaultValue].class : selectedItemIndex != undefined ? itemToList[selectedItemIndex].class : title.class)
+                    "custom-dropdown-selection " + (isDropdownVisible ? "visible " : "") + (
+                        selectedItemIndex != undefined
+                            ? itemToList[selectedItemIndex].class 
+                            : defaultValue != null 
+                                ? itemToList[defaultValue].class 
+                                : title.class
+                        )
                     } onClick={event => {
                         setIsDropdownVisible(!isDropdownVisible);
                     }
                 }>
-                    {defaultValue != null ? itemToList[defaultValue].name : selectedItemIndex != null ? itemToList[selectedItemIndex].name : title.name}
+                    {
+                        selectedItemIndex != null
+                            ? itemToList[selectedItemIndex].name
+                            : defaultValue != null
+                                ? itemToList[defaultValue].name 
+                                : title.name
+                    }
                 </div>
                 {
                     isDropdownVisible ? (
