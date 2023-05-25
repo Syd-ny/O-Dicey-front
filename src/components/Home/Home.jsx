@@ -25,7 +25,7 @@ const Home = () => {
             content="O’Dicey est une application web et mobile, destinée à l’aide de jeux de rôle (JDR). Divisée en deux grands axes, elle propose dans un premier temps une table de jeu virtuelle, où les joueurs (PJ) et le maître du jeu (MJ) pourront centraliser les données relatives à leur partie : fiches de personnages, supports visuels (cartes, artworks), notes prises au cours de l’aventure… Cet espace de jeu sera également équipé d’un système de lancers de dés automatisés, utiles pour le MJ comme les joueurs."
           />
           <div className='container-img'>
-              <img src="https://i.imgur.com/wPO6LB2.png" alt="" />
+              <img src="https://i.imgur.com/OrFFW5K.jpeg" alt="" />
           </div>
         </div>
         {/* <Card
