@@ -89,7 +89,6 @@ const GameList = () => {
   const [searchGame, setSearchGame] = useState("");
   const [searchGameResults, setSearchGameResults] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState(0);
-  // console.log(gameList)
 
   const handleChange = event => {
     setSearchGame(event.target.value);
@@ -108,6 +107,12 @@ const GameList = () => {
         return ( game.dm.login.toLowerCase().includes(searchGame) || game.name.toLowerCase().includes(searchGame) ) && game.status === selectedStatus
       })
     }
+    results.sort((a, b) => {
+      const dateA = Date.parse(a.createdAt);
+      const dateB = Date.parse(b.createdAt);
+
+      return dateB - dateA;
+    });
     setSearchGameResults(results);
   }, [searchGame, selectedStatus]);
 
