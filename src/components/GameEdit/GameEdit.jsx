@@ -302,9 +302,29 @@ const GameEdit = () => {
             }
         })
 
-
         // axios => get data (mode data) 
         await axios.get(
+            `api/games/${gameId}/galleries`,
+            {
+                method: 'get',
+                baseURL: `${apiUrl}/`,
+                headers: {
+                Authorization: `Bearer ${userToken}`,
+                Accept: 'application/json',
+                },
+            }
+        ).then((response) => {
+            // for (let index = 0; index < response.data.length; index++) {
+                setUrlsList(...urlsList, response.data);
+                for (let index = 0; index < response.data.length; index++) {
+                    newUrlsList.push(response.data[index].picture);
+                    oldUrlsList.push(response.data[index].picture);
+                }
+            // }
+        })
+
+        // axios => get data (mode data) 
+        axios.get(
             "api/modes/",
             {
                 method: 'get',
@@ -316,6 +336,7 @@ const GameEdit = () => {
             }
         ).then((response) => {
             setModes([response.data]);
+            // setGameCreateForm({...gameCreateForm, modes: response.data[0].id});
         })
 
         // axios => get data (all users)
