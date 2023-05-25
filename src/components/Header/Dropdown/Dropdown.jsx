@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Dropdown.scss';
 import { Link } from 'react-router-dom';
 import { actionUserLogout } from '../../../actions/user';
+import { Menu } from 'feather-icons-react/build/IconComponents';
 
 const Dropdown = () => {
   const dispatch = useDispatch();
@@ -19,10 +20,13 @@ const Dropdown = () => {
   }
 
   return (
-    <div className="header-dropdown" onClick={() => {if(isLogged) setIsNavVisible(!isNavVisible)}}>
+    <div className="header-dropdown" onClick={() => { if (isLogged) setIsNavVisible(!isNavVisible) }}>
       {isLogged ? (
         <>
-          <h2 className={titleClassName}>{pseudo}</h2>
+          <h2 className={titleClassName}>
+            <span className="menu-desktop">{pseudo}</span>
+            <span className="menu-mobile"><Menu /></span>
+          </h2>
           <nav className={navClassName}>
             <Link to="/characters" className="header-dropdown-nav-site">Liste des personnages</Link>
             <Link to="/games" className="header-dropdown-nav-site">Liste des parties</Link>
