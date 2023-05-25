@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import './Gallery.scss';
-import { actionAddGalleryPicture, actionUpdateMainPicture } from "../../../actions/gamestate";
+import { actionAddGalleryPicture, actionDeleteGalleryPicture, actionUpdateMainPicture } from "../../../actions/gamestate";
 import { useState } from "react";
 
 const Gallery = () => {
@@ -14,6 +14,10 @@ const Gallery = () => {
     const mainPicture = galleries.filter((i) => i.mainPicture === 1);
     const oldId = mainPicture.length > 0 ? mainPicture[0].id : 0;
     dispatch(actionUpdateMainPicture(oldId, id));
+  };
+
+  const handleDeleteImage = (id) => {
+    dispatch(actionDeleteGalleryPicture(id));
   };
 
   return (
@@ -37,7 +41,12 @@ const Gallery = () => {
       <div className="game-gallery-images">
         {galleries.map((img) => {
           const elementClass = img.mainPicture === 1 ? 'active' : '';
-          return <img key={`gallery-${img.id}`} className={elementClass} src={img.picture} onClick={() => handleSelectImage(img.id)} />
+          return (
+            <div key={`gallery-${img.id}`} className="game-gallery-images-item">
+              <button type="button" onClick={() => handleDeleteImage(img.id)}>🗑️</button>
+              <img className={elementClass} src={img.picture} onClick={() => handleSelectImage(img.id)} />
+            </div>
+          );
         })}
       </div>
     </section>

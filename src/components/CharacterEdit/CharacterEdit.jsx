@@ -63,10 +63,18 @@ const CharacterEdit = () => {
     setCharacter({ ...character, stats });
   };
 
+  const setCharacterField = (field, value) => {
+    setCharacter({ ...character, [field]: value });
+  };
+
   const saveCharacter = async () => {
     try {
       // sanitization: the API just wants game and user id when making a PUT request
-      const updatedCharacter = { ...character, game: { id: character.game.id }, user: { id: userId } };
+      const updatedCharacter = {
+        ...character,
+        game: { id: character.game.id },
+        user: { id: userId }
+      };
       const res = await axios.put(`${apiUrl}/api/characters/${charId}`, updatedCharacter, {
         headers: {
           'Authorization': `Bearer ${userToken}`,
@@ -88,6 +96,16 @@ const CharacterEdit = () => {
 
         <button onClick={() => saveCharacter()}>Sauvegarder</button>
 
+        <section className="character-stats-edit">
+          <section className="character-stats-edit-section">
+            <h2 className="character-stats-edit-section-heading">&Eacute;tat civil</h2>
+            <label htmlFor="name">Nom du personnage :</label>
+            <input type="text" id="name" placeholder="Entrez un nom" value={character.name} onChange={(e) => setCharacterField('name', e.target.value)} />
+            <label htmlFor="picture">Image du personnage :</label>
+            <input type="url" id="picture" placeholder="Entrez l'URL d'une image" value={character.picture} onChange={(e) => setCharacterField('picture', e.target.value)} />
+          </section>
+        </section>
+        
         <CharacterStatsEdit setStats={setStats} stats={character.stats} />
       </div>
     </PageWrapper>

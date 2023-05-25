@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './UserForm.scss';
 import edit from '../../assets/edit-icon.svg';
 import Frame from '../Frame/Frame';
-import { actionSubmitLoginForm, actionUpdateFormField } from '../../actions/user';
+import { actionGetCharacterList, actionGetGameList, actionSubmitLoginForm, actionUpdateFormField } from '../../actions/user';
 import { Link, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
@@ -72,12 +72,16 @@ const UserForm = ({ formType }) => {
     }
     if (error) {
       setSignUpError(errorList);
+      return;
     }
 
     submitSignUpForm();
   };
 
   if (isLogged) {
+    // not perfect, should be done elsewhere
+    dispatch(actionGetCharacterList());
+    dispatch(actionGetGameList());
     return <Navigate to="/" />
   }
 

@@ -1,10 +1,18 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './CharacterCard.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionGetCharacterList } from '../../actions/user';
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const CharacterCard = ({ edit, character, gameName }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user_id: userId, token } = useSelector((state) => state.user);
   const [characterImagePositionX, setCharacterImagePositionX] = useState(50);
   const [characterImagePositionY, setCharacterImagePositionY] = useState(10);
   const [characterImageSize, setCharacterImageSize] = useState(250);
@@ -81,11 +89,32 @@ const CharacterCard = ({ edit, character, gameName }) => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${apiUrl}/api/characters/${character.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (edit) {
+        // if we are editing the character we need to leave the page
+        navigate(`/characters`);
+      } else {
+        // otherwise we reload the character list
+        dispatch(actionGetCharacterList());
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <article className={cardClass} style={cardStyle}>
       <header className="character-card-header">
         <section className="character-card-header-info">
-          <h1 className="character-card-header-info-name"><Link to={`/characters/${character.id}/edit`}>{character.name}</Link></h1>
+          <h1 className="character-card-header-info-name">{character.name}</h1>
           <h2 className="character-card-header-info-race">{character.stats.info.race}</h2>
           <h2 className="character-card-header-info-class">{character.stats.info.class}</h2>
         </section>
@@ -128,8 +157,8 @@ const CharacterCard = ({ edit, character, gameName }) => {
       <footer className="character-card-footer">
         <section className="game-title"><h2>{!edit ? gameName : <Link to={`/games/${character.game.id}`}>{gameName}</Link>}</h2></section>
         <section className="character-actions">
-          <button>🖋️</button>
-          <button>🗑️</button>
+          <button onClick={() => navigate(`/characters/${character.id}/edit`)}>🖋️</button>
+          <button onClick={() => handleDelete()}>🗑️</button>
         </section>
         <section className="character-image-edit">
           <section className="character-image-edit-actions">
