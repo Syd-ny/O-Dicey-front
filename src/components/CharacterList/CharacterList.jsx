@@ -6,9 +6,11 @@ import CharacterCard from "../CharacterCard/CharacterCard";
 import './CharacterList.scss';
 import PageWrapper from "../PageWrapper/PageWrapper";
 import { actionGetCharacterList } from "../../actions/user";
+import { useNavigate } from "react-router-dom";
 
 const CharacterList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const firstRender = useRef(true);
   const characterList = useSelector((state) => state.user.characters);
 
@@ -26,7 +28,7 @@ const CharacterList = () => {
         <header className="character-list-header">
           <div>
             <h2>Mes personnages</h2>
-            <button type="button">Nouveau personnage</button>
+            <button type="button" onClick={() => navigate("/characters/create")}>Nouveau personnage</button>
           </div>
           <input type="search" name="character-search" id="character-search" placeholder="Rechercher un personnage" />
         </header>

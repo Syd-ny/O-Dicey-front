@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_GALLERY_PICTURE, GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, UPDATE_MAIN_PICTURE, actionGetGameData, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
+import { ADD_GALLERY_PICTURE, DELETE_GALLERY_PICTURE, GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, UPDATE_MAIN_PICTURE, actionGetGameData, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
 
 const gameMiddleware = (store) => (next) => async (action) => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -120,6 +120,26 @@ const gameMiddleware = (store) => (next) => async (action) => {
       catch (err) {
         console.log(err);
       }
+      break;
+    }
+
+    case DELETE_GALLERY_PICTURE: {
+      const { token } = store.getState().user;
+      const gameId = store.getState().gamestate.game.id;
+
+      try {
+        await axios.delete(`${apiUrl}/api/galleries/${action.payload}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        store.dispatch(actionGetGameData(gameId));
+      }
+      catch (err) {
+        console.log(err);
+      }
+
       break;
     }
 
