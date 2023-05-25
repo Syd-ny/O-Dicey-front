@@ -4,8 +4,24 @@
 
   padding: 0.5em;
 
+  .menu-desktop {
+    display: none;
+  }
+
+  .menu-mobile {
+    display: initial;
+  }
+
   @media (min-width: 768px) {
     padding: 1em;
+
+    .menu-desktop {
+      display: initial;
+    }
+
+    .menu-mobile {
+      display: none;
+    }
   }
 
   &-title {
