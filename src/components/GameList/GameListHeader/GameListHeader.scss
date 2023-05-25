@@ -65,3 +65,16 @@
     border: none;
     padding: 0.4rem 0.6rem;
 }
+
+.game-list-header .search-button {
+    display: flex;
+    flex-direction: row;
+}
+
+.search-button-green {
+    background-color: green;
+}
+
+.search-button-red {
+    background-color: red;
+}

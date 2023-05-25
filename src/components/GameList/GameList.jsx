@@ -66,6 +66,10 @@ const GameList = () => {
 
   // concat gamesDM & gamesPlayer
   const gameList = [...gameListData.DM, ...gameListData.player];
+  const gameListName = []
+  for (let index = 0; index < gameList.length; index++) {
+    gameListName.push(gameList[index].name);
+  }
 
   useEffect(() => {
     if (firstRender.current) {
@@ -82,13 +86,50 @@ const GameList = () => {
   //width of the windows
   const width = useWindowSize().width;
 
+  const [searchGame, setSearchGame] = useState("");
+  const [searchGameResults, setSearchGameResults] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState(0);
+  // console.log(gameList)
+
+  const handleChange = event => {
+    setSearchGame(event.target.value);
+  };
+
+  // Search Filter
+  useEffect(() => {
+    var results = []
+    if (selectedStatus === -1) {
+      results = gameList.filter(game => {
+        console.log(game.dm.login)
+        return ( game.dm.login.toLowerCase().includes(searchGame) || game.name.toLowerCase().includes(searchGame) ) && game.status !== 2
+      })
+    } else {
+      results = gameList.filter(game => {
+        return ( game.dm.login.toLowerCase().includes(searchGame) || game.name.toLowerCase().includes(searchGame) ) && game.status === selectedStatus
+      })
+    }
+    setSearchGameResults(results);
+  }, [searchGame, selectedStatus]);
+
+  // Status Filter
+  const setStatusFilter = (status) => {
+      if (status === selectedStatus) {
+        setSelectedStatus(-1);
+      } else {
+        setSelectedStatus(status);
+      }
+    }
+
   // if web => GameCardDetailed
   if (width > 1000) {
     return (
       <PageWrapper>
-        <GameListHeader />
+        <GameListHeader 
+          searchValue={handleChange}
+          statusValue={setStatusFilter}
+        />
         <div className="game-list">
-          {gameList.map((g) => <Game key={`game-${g.id}`}
+          {searchGameResults.map((g) => <Game key={`game-${g.id}`}
             game={g}
             />)}
         </div>
@@ -100,9 +141,12 @@ const GameList = () => {
     const isMobile = true;
     return (
       <PageWrapper>
-        <GameListHeader />
+        <GameListHeader 
+          searchValue={handleChange}
+          // statusValue
+        />
         <div className="game-list">
-          {gameList.map((g, i) => <GameCardDetailed key={`game-${i}`}
+          {searchGameResults.map((g, i) => <GameCardDetailed key={`game-${i}`}
             game={g}
             mobile={isMobile}
           />)}
