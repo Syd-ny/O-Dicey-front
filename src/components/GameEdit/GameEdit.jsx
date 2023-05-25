@@ -131,7 +131,7 @@ const GameEdit = () => {
                     // if it's a new gallery
                     if (!oldUrlsList.includes(urlToSend)) {
                         // if it's not the front
-                        if (urlToSend !== urlsList[slideNumber]) {
+                        if (urlToSend !== newUrlsList[slideNumber]) {
                             // axios send Gallery
                             axios.post(
                                 `${apiUrl}/api/galleries`,
@@ -152,7 +152,7 @@ const GameEdit = () => {
                             axios.post(
                                 `${apiUrl}/api/galleries`,
                                 {
-                                    picture: urlsList[slideNumber],
+                                    picture: newUrlsList[slideNumber],
                                     mainPicture: 1,
                                     game: {
                                         id: response.data.id,
@@ -168,7 +168,7 @@ const GameEdit = () => {
                     // if the gallery already in
                     } else {
                         // if it's not the new front but was previoulsy
-                        if (urlToSend !== urlsList[slideNumber] && urlsList[oldUrlsList.indexOf(urlToSend)].mainPicture === 1) {
+                        if (urlToSend !== newUrlsList[slideNumber] && urlsList[oldUrlsList.indexOf(urlToSend)].mainPicture === 1) {
                             axios.put(
                                 `${apiUrl}/api/galleries/${urlsList[oldUrlsList.indexOf(urlToSend)].id}`,
                                 {
@@ -181,10 +181,12 @@ const GameEdit = () => {
                                 }
                             )
                         // if it's the new front but wasn't previously
-                        } else if (urlToSend === urlsList[slideNumber] && urlsList[oldUrlsList.indexOf(urlToSend)].mainPicture === 0) {
-                            axios.post(
+                        } else if (urlToSend === newUrlsList[slideNumber] && urlsList[oldUrlsList.indexOf(urlToSend)].mainPicture === 0) {
+                            axios.put(
                                 `${apiUrl}/api/galleries/${urlsList[oldUrlsList.indexOf(urlToSend)].id}`,
                                 {
+                                    mainPicture: 1,
+                                }, {
                                     headers: {
                                         Authorization: `Bearer ${user.token}`,
                                         Accept: 'application/json',
@@ -210,7 +212,7 @@ const GameEdit = () => {
                     }
                 }
             }).then(() => {
-                navigate('/games')
+                // navigate('/games')
             });
         }
         catch (err) {
@@ -303,27 +305,6 @@ const GameEdit = () => {
         })
 
         // axios => get data (mode data) 
-        await axios.get(
-            `api/games/${gameId}/galleries`,
-            {
-                method: 'get',
-                baseURL: `${apiUrl}/`,
-                headers: {
-                Authorization: `Bearer ${userToken}`,
-                Accept: 'application/json',
-                },
-            }
-        ).then((response) => {
-            // for (let index = 0; index < response.data.length; index++) {
-                setUrlsList(...urlsList, response.data);
-                for (let index = 0; index < response.data.length; index++) {
-                    newUrlsList.push(response.data[index].picture);
-                    oldUrlsList.push(response.data[index].picture);
-                }
-            // }
-        })
-
-        // axios => get data (mode data) 
         axios.get(
             "api/modes/",
             {
@@ -336,7 +317,6 @@ const GameEdit = () => {
             }
         ).then((response) => {
             setModes([response.data]);
-            // setGameCreateForm({...gameCreateForm, modes: response.data[0].id});
         })
 
         // axios => get data (all users)
@@ -356,7 +336,7 @@ const GameEdit = () => {
         })
 
 
-        // axios => get data (game data) 
+        // axios => get data (gallerie data) 
         await axios.get(
             `api/games/${gameId}/galleries`,
             {
