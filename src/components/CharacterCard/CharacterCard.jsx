@@ -90,23 +90,25 @@ const CharacterCard = ({ edit, character, gameName }) => {
   };
 
   const handleDelete = async () => {
-    try {
-      await axios.delete(`${apiUrl}/api/characters/${character.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce personnage ?")) {
+      try {
+        await axios.delete(`${apiUrl}/api/characters/${character.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+  
+        if (edit) {
+          // if we are editing the character we need to leave the page
+          navigate(`/characters`);
+        } else {
+          // otherwise we reload the character list
+          dispatch(actionGetCharacterList());
         }
-      });
-
-      if (edit) {
-        // if we are editing the character we need to leave the page
-        navigate(`/characters`);
-      } else {
-        // otherwise we reload the character list
-        dispatch(actionGetCharacterList());
       }
-    }
-    catch (err) {
-      console.log(err);
+      catch (err) {
+        console.log(err);
+      }
     }
   };
 
