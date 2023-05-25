@@ -108,44 +108,41 @@ const GameCreate = () => {
                         }
                     )
                 }
-                const urlFront = UrlsList[slideNumber];
-                delUrl(slideNumber)
-
-                // axios send Gallery Front
-                axios.post(
-                    `${apiUrl}/api/galleries`,
-                    {
-                        picture: urlFront,
-                        mainPicture: 1,
-                        game: {
-                            id: response.data.id,
-                        }
-                    }, {
-                        headers: {
-                            Authorization: `Bearer ${user.token}`,
-                            Accept: 'application/json',
-                        }, 
-                    }
-                )
-
-                for (let index = 0; index < UrlsList.length; index++) {
-                    const urlToSend = UrlsList[index];
-
-                    // axios send Gallery
-                    axios.post(
-                        `${apiUrl}/api/galleries`,
-                        {
-                            picture: urlToSend,
-                            game: {
-                                id: response.data.id,
+                for (let index = 0; index < urlsList.length; index++) {
+                    const urlToSend = urlsList[index];
+                    if (urlToSend !== urlsList[slideNumber]) {
+                        // axios send Gallery
+                        axios.post(
+                            `${apiUrl}/api/galleries`,
+                            {
+                                picture: urlToSend,
+                                game: {
+                                    id: response.data.id,
+                                }
+                            }, {
+                                headers: {
+                                    Authorization: `Bearer ${user.token}`,
+                                    Accept: 'application/json',
+                                }, 
                             }
-                        }, {
-                            headers: {
-                                Authorization: `Bearer ${user.token}`,
-                                Accept: 'application/json',
-                            }, 
-                        }
-                    )
+                        )
+                    } else {
+                        axios.post(
+                            `${apiUrl}/api/galleries`,
+                            {
+                                picture: urlsList[slideNumber],
+                                mainPicture: 1,
+                                game: {
+                                    id: response.data.id,
+                                }
+                            }, {
+                                headers: {
+                                    Authorization: `Bearer ${user.token}`,
+                                    Accept: 'application/json',
+                                }, 
+                            }
+                        )
+                    }
                 }
             }).then(() => {
                 navigate('/games')
@@ -190,7 +187,6 @@ const GameCreate = () => {
     const modesList = modes[0]
 
 
-
     const [player, setPlayer] = useState("");
     const [playersList, setPlayersList] = useState([]);
 
@@ -199,7 +195,7 @@ const GameCreate = () => {
     const fetchUsers = useCallback( async () => {
 
         // axios => get data (mode data) 
-        axios.get(
+        await axios.get(
             "api/modes/",
             {
                 method: 'get',
@@ -310,18 +306,18 @@ const GameCreate = () => {
         setUrl(event.target.value);
     }
 
-    const [UrlsList, setUrlsList] = useState([]);
+    const [urlsList, setUrlsList] = useState([]);
 
     // Add player from playersList
     const addUrl = (url) => {
-        setUrlsList([...UrlsList, url]);
+        setUrlsList([...urlsList, url]);
     }
 
     const handleUrlGallerySubmit = (event) => {
         event.preventDefault();
         setUrlGalleryError([]);
         // check if there is an index inside "loginsList" for "player"
-        const indexOf = UrlsList.indexOf(url);
+        const indexOf = urlsList.indexOf(url);
         let error = false;
         const errorList = [];
         if (url === "") {
@@ -350,7 +346,7 @@ const GameCreate = () => {
             return oldValues.filter((_, i) => i !== index)
         })
         slideNumber === 0 
-            ? setSlideNumber(UrlsList.length - 2) 
+            ? setSlideNumber(urlsList.length - 2) 
             : setSlideNumber(slideNumber - 1)
     }
 
@@ -360,13 +356,13 @@ const GameCreate = () => {
     // Previous Image
     const prevSlide = () => {
         slideNumber === 0 
-            ? setSlideNumber(UrlsList.length -1) 
+            ? setSlideNumber(urlsList.length -1) 
             : setSlideNumber(slideNumber - 1)
     }
 
     // Next Image  
     const nextSlide = () => {
-        slideNumber + 1 === UrlsList.length 
+        slideNumber + 1 === urlsList.length 
             ? setSlideNumber(0) 
             : setSlideNumber(slideNumber + 1)
     }
@@ -386,7 +382,6 @@ const GameCreate = () => {
                                     placeholder="Nom de la Partie"
                                     value={gameCreateForm.name}
                                     onChange={handleSignUpChangeField}
-                                    // onChange={e => this.setGameCreateForm({ name: e.target.value })}
                                 />
                             </div>
                     
@@ -401,11 +396,6 @@ const GameCreate = () => {
                             <div className="game-form-part">
                                 <label htmlFor="game-status">Statut de la Partie :</label>
                                 <p className="game-status-default">En cours</p>
-                                {/* <Dropdown
-                                    title={status}
-                                    itemToList={gameStatus}
-                                    valueDropdown={updateStatusForm}
-                                /> */}
                             </div>
                         </form>
                         <div className="game-form-part">
@@ -413,7 +403,12 @@ const GameCreate = () => {
                                 <label htmlFor="player-list">Liste des Joueurs : </label>
                                 <ul className="player-list-ul">
                                     <li>{user.pseudo} <span className="mj">MJ</span></li>
-                                    {playersList.map((p) => <li className="player-list-li" key={p.id}>{p.login} <button onClick={() => delPlayer(p.id)}>d</button></li>)}
+                                    {playersList.map((p) => 
+                                        <li className="player-list-li" key={p.id}>
+                                            {p.login} 
+                                            <button onClick={() => delPlayer(p.id)}>d</button>
+                                        </li>
+                                    )}
                                 </ul>
                                 <input
                                     type="text"
@@ -428,59 +423,63 @@ const GameCreate = () => {
                         </div>
                     </div>
                     <div className="game-form-right">
-                        {/* <div className="game-gallery-part"> */}
-                            <div className="game-gallery">
-                                {UrlsList.length !== 0 && (
+                        <div className="game-gallery">
+                            {urlsList.length !== 0 && (
                                 <div className="game-gallery-header">
                                     <h3>Front Image :</h3>
                                     <div className="game-gallery-front-container">
                                         <button className="gallery-list-slide-button" onClick={prevSlide}>L</button>
-                                        <img className="game-gallery-front" src={UrlsList[slideNumber]} alt="" />
+                                        <img className="game-gallery-front" src={urlsList[slideNumber]} alt="" />
                                         <button className="gallery-list-slide-button" onClick={nextSlide}>R</button>
                                     </div>
                                     <button className="gallery-list-li-button" onClick={() => delUrl(slideNumber)}>Supprimer</button>
                                 </div>
-                                )}
-                                <form id="gallery-list" className="gallery-list" onSubmit={handleUrlGallerySubmit}>
-                                    <label htmlFor="gallery-list">Images : </label>
-                                    <ul className="gallery-list-ul">
-                                        {UrlsList.length > 2 && (
+                            )}
+                            <form id="gallery-list" className="gallery-list" onSubmit={handleUrlGallerySubmit}>
+                                <label htmlFor="gallery-list">Images : </label>
+                                <ul className="gallery-list-ul">
+                                    {urlsList.length > 2 && (
                                         <li className="gallery-list-li">
                                             <img src={
                                             slideNumber === 0
-                                                ? UrlsList[UrlsList.length - 1]
-                                                : UrlsList[slideNumber - 1]
+                                                ? urlsList[urlsList.length - 1]
+                                                : urlsList[slideNumber - 1]
                                             } alt="" />
                                         </li>
-                                        )}
-                                        {(UrlsList.length > 0 && <li className="gallery-list-li">
-                                            <img src={UrlsList[slideNumber]} alt="" />
+                                    )}
+                                    {urlsList.length > 0 && (
+                                        <li className="gallery-list-li">
+                                            <img src={urlsList[slideNumber]} alt="" />
                                         </li>
-                                        )}
-                                        {UrlsList.length > 1 && (<li className="gallery-list-li">
+                                    )}
+                                    {urlsList.length > 1 && (
+                                        <li className="gallery-list-li">
                                             <img src={
-                                            slideNumber === UrlsList.length - 1
-                                                ? UrlsList[0]
-                                                : UrlsList[slideNumber + 1]
+                                            slideNumber === urlsList.length - 1
+                                                ? urlsList[0]
+                                                : urlsList[slideNumber + 1]
                                             } alt="" />
-                                        </li>)}
-                                    </ul>
-                                    <input
-                                        type="url"
-                                        id="gallery-url"
-                                        placeholder="URL pour la galerie"
-                                        value={url}
-                                        onChange={handleUrlGalleryChange}
-                                    />
-                                    {urlGalleryError.map((e, i) => <p key={`error-${i}`}>{e}</p>)}
-                                    <button form="gallery-list" type="submit" className="game-gallery-form">Envoyer</button>
-                                </form>
-                            </div>
-                        {/* </div> */}
+                                        </li>
+                                    )}
+                                </ul>
+                                <input
+                                    type="url"
+                                    id="gallery-url"
+                                    placeholder="URL pour la galerie"
+                                    value={url}
+                                    onChange={handleUrlGalleryChange}
+                                />
+                                {urlGalleryError.map((e, i) => <p key={`error-${i}`}>{e}</p>)}
+                                <button form="gallery-list" type="submit" className="game-gallery-form">Envoyer</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 {gameCreateError.map((e, i) => <p className="game-form-error" key={`error-${i}`}>{e}</p>)}
-                <button form="game-form" type="submit" className="game-form-button">Création</button>
+                <div className="game-form-footer">
+                    <button form="game-form" type="submit" className="game-form-button">Création</button>
+                    <button onClick={() => navigate('/games')} className="game-form-button">Retour</button>
+                </div>
             </div>
         </PageWrapper>
 
