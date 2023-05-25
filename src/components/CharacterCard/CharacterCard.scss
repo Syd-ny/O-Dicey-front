@@ -11,6 +11,8 @@
   border-radius: 1rem;
 
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 
   color: white;
   text-shadow: black 1px 1px 5px;
@@ -82,12 +84,21 @@
     }
 
     .character-actions {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 0.5rem;
       button {
-        font-size: 1.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
         color: var(--light-blue);
-        background-color: transparent;
+        background-color: var(--main-blue);
+        border-radius: 50%;
         border: none;
         transition: scale 100ms ease-in;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       button:hover {
@@ -111,15 +122,13 @@
     }
   }
 
-  .character-stats,
-  .character-actions {
+  .character-stats {
     opacity: 0;
     transition: opacity 400ms ease-in-out;
   }
 
   &:hover {
-    .character-stats,
-    .character-actions {
+    .character-stats {
       opacity: 1;
     }
   }
