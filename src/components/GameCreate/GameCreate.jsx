@@ -405,7 +405,7 @@ const GameCreate = () => {
                                     <li>{user.pseudo} <span className="mj">MJ</span></li>
                                     {playersList.map((p) => 
                                         <li className="player-list-li" key={p.id}>
-                                            {p.login} 
+                                            {p.login}
                                             <button onClick={() => delPlayer(p.id)}>d</button>
                                         </li>
                                     )}

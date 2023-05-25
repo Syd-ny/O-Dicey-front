@@ -283,7 +283,6 @@ const GameEdit = () => {
             setGameUpdateForm({...gameUpdateForm, name: response.data.name, mode: response.data.mode.id, status: response.data.status})
         })
 
-        // ! TODO when back is update
         // axios => get data (users data) 
         await axios.get(
             `api/games/${gameId}/users`,
@@ -303,29 +302,9 @@ const GameEdit = () => {
             }
         })
 
-        // axios => get data (game data) 
-        await axios.get(
-            `api/games/${gameId}/galleries`,
-            {
-                method: 'get',
-                baseURL: `${apiUrl}/`,
-                headers: {
-                Authorization: `Bearer ${userToken}`,
-                Accept: 'application/json',
-                },
-            }
-        ).then((response) => {
-            // for (let index = 0; index < response.data.length; index++) {
-                setUrlsList(...urlsList, response.data);
-                for (let index = 0; index < response.data.length; index++) {
-                    newUrlsList.push(response.data[index].picture);
-                    oldUrlsList.push(response.data[index].picture);
-                }
-            // }
-        })
 
         // axios => get data (mode data) 
-        axios.get(
+        await axios.get(
             "api/modes/",
             {
                 method: 'get',
@@ -337,7 +316,6 @@ const GameEdit = () => {
             }
         ).then((response) => {
             setModes([response.data]);
-            // setGameCreateForm({...gameCreateForm, modes: response.data[0].id});
         })
 
         // axios => get data (all users)
@@ -354,6 +332,26 @@ const GameEdit = () => {
         ).then((response) => {
             // add user data in "user"
             setUsersList(response.data);
+        })
+
+
+        // axios => get data (game data) 
+        await axios.get(
+            `api/games/${gameId}/galleries`,
+            {
+                method: 'get',
+                baseURL: `${apiUrl}/`,
+                headers: {
+                Authorization: `Bearer ${userToken}`,
+                Accept: 'application/json',
+                },
+            }
+        ).then((response) => {
+                setUrlsList(...urlsList, response.data);
+                for (let index = 0; index < response.data.length; index++) {
+                    newUrlsList.push(response.data[index].picture);
+                    oldUrlsList.push(response.data[index].picture);
+                }
         })
     }, [userToken]);
     
@@ -508,6 +506,22 @@ const GameEdit = () => {
     }
 
 
+    // =======================
+    // ===== GAME DELETE =====
+    // =======================
+
+    const gameDelete = () => {
+        axios.delete(
+            `${apiUrl}/api/games/${gameId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                    Accept: 'application/json',
+                }, 
+            }
+        )
+    }
+
     return (
         <PageWrapper>
             <div className="game-create">
@@ -625,8 +639,12 @@ const GameEdit = () => {
                 {gameCreateError.map((e, i) => <p className="game-form-error" key={`error-${i}`}>{e}</p>)}
                 <div className="game-form-footer">
                     <button form="game-form" type="submit" className="game-form-button">Modifier</button>
-                    <button onClick={() => navigate('/games')} className="game-form-button">Retour</button>
+                    <button onClick={() => {
+                        gameDelete();
+                        navigate('/games');
+                    }} className="game-form-button">Supprimer</button>
                 </div>
+                <button onClick={() => navigate('/games')} className="game-form-button">Retour</button>
             </div>
         </PageWrapper>
 

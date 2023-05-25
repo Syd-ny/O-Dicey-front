@@ -82,10 +82,10 @@ const GameCardDetailed = ({
 
                 <div className="game-status">
                     <button className="game-button" onClick={() => navigate(`/games/${game.id}`)}>Rejoindre</button>
-                    <Dropdown
+                    {/* <Dropdown
                         title={gameStatusActive}
                         itemToList={gameStatus}
-                    />
+                    /> */}
                     {game.dm.id === user.user_id && <button className="game-edit-button" onClick={() => navigate(`/games/${game.id}/edit`)}>Modifier</button>}
                 </div>
             </div>

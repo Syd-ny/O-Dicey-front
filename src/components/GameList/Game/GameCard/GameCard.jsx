@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import "./GameCard.scss";
+import { useRef, useCallback, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
 
 const GameCard = ({
     game,
@@ -33,18 +36,67 @@ const GameCard = ({
     }
    
 
+    const apiUrl = import.meta.env.VITE_API_URL
+    const userToken = useSelector((state) => state.user.token);
+    const [urlsList, setUrlsList] = useState([]);
+
+    const fetchUsers = useCallback( async () => {
+        // axios => get data (game data) 
+        await axios.get(
+            `api/games/${game.id}/galleries`,
+            {
+                method: 'get',
+                baseURL: `${apiUrl}/`,
+                headers: {
+                Authorization: `Bearer ${userToken}`,
+                Accept: 'application/json',
+                },
+            }
+        ).then((response) => {
+            for (let index = 0; index < response.data.length; index++) {
+                if (response.data[index].mainPicture === 1) {
+                    setUrlsList(...urlsList, response.data[index]);
+                }
+            }
+        })
+    }, [userToken, apiUrl, game, urlsList]);
+    
+    // do it when new render
+    const firstRender = useRef(true);
+    useEffect(() => {
+        if (firstRender.current) {
+            fetchUsers();
+            firstRender.current = false;
+        } 
+    }, [fetchUsers]);
+
+
+
+
+
+
     return (
         <div className="gamecard">
-            <img className="gamecard-img" src="https://i.imgur.com/i1m3wz0.png" alt="" />
-            <div className="gamecard-information">
-                <header className="gamecard-header">
-                    <h3>{game.name}</h3>
-                    <p>Maître du jeu : {game.dm.login}</p>
-                </header>
-                <div className="gamecard-footer">
-                    <p>Créé le : {dateCreatedAt}</p>
-                    <p>Dernière session : {dateUpdatedAt} </p>
-                    <p>Status : <Status/></p>
+            <div className='gamecard-img-container'>
+                <img
+                    className="gamecard-img"
+                    src={
+                        urlsList.length !== 0
+                            ? urlsList.picture
+                            : "https://i.imgur.com/i1m3wz0.png"
+                        }
+                    alt=""
+                />
+                <div className="gamecard-information">
+                    <header className="gamecard-header">
+                        <h3>{game.name}</h3>
+                        <p>Maître du jeu : {game.dm.login}</p>
+                    </header>
+                    <div className="gamecard-footer">
+                        <p>Créé le : {dateCreatedAt}</p>
+                        <p>Dernière session : {dateUpdatedAt} </p>
+                        <p>Status : <Status/></p>
+                    </div>
                 </div>
             </div>
         </div>
