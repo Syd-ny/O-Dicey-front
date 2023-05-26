@@ -64,6 +64,10 @@
     border-radius: 1rem;
     border: none;
     padding: 0.4rem 0.6rem;
+
+    @media (min-width: 768px) {
+        margin-left: 1rem;
+    }
 }
 
 .game-list-header .search-button {
@@ -77,4 +81,56 @@
 
 .search-button-red {
     background-color: red;
+}
+
+.search-button-container {
+    position: relative;
+}
+
+
+.play-icon
+{
+    transition: all 0.075s ease-in-out;
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid;
+    border-color:var(--main-blue);
+    border-radius: .4rem;
+
+    &-container {
+        position: relative;
+
+        &:hover .play-icon {
+            width: 1.7rem;
+            height: 1.7rem;
+        }
+    }
+}
+
+.pause-icon
+{
+    transition: all 0.075s ease-in-out;
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid;
+    border-color:var(--main-blue);
+    border-radius: .4rem;
+
+    &-container {
+        position: relative;
+        margin: .5rem 0 .5rem 2rem;
+
+        &:hover .pause-icon {
+            width: 1.7rem;
+            height: 1.7rem;
+        }
+    }
 }

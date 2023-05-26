@@ -5,7 +5,7 @@ import axios from 'axios';
 import "./GameEdit.scss";
 import Dropdown from "../GameCreate/Dropdown/Dropdown";
 import PageWrapper from "../PageWrapper/PageWrapper";
-import { Cpu } from "feather-icons-react/build/IconComponents";
+import { X } from "feather-icons-react/build/IconComponents";
 
 const GameEdit = () => {
 
@@ -512,15 +512,19 @@ const GameEdit = () => {
     // =======================
 
     const gameDelete = () => {
-        axios.delete(
-            `${apiUrl}/api/games/${gameId}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                    Accept: 'application/json',
-                }, 
-            }
-        )
+        if (confirm("Êtes-vous sûr de vouloir supprimer cette partie ?")) {
+            axios.delete(
+                `${apiUrl}/api/games/${gameId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                        Accept: 'application/json',
+                    }, 
+                }
+            ).then(() => {
+                navigate('/games')
+            })
+        }
     }
 
     return (
@@ -640,12 +644,15 @@ const GameEdit = () => {
                 {gameCreateError.map((e, i) => <p className="game-form-error" key={`error-${i}`}>{e}</p>)}
                 <div className="game-form-footer">
                     <button form="game-form" type="submit" className="game-form-button">Modifier</button>
-                    <button onClick={() => {
-                        gameDelete();
-                        navigate('/games');
-                    }} className="game-form-button">Supprimer</button>
+                    <button onClick={() => gameDelete()} className="game-form-button">Supprimer</button>
                 </div>
-                <button onClick={() => navigate('/games')} className="game-form-button">Retour</button>
+                <div className='close-icon-container'>
+                    <X 
+                        onClick={() => navigate('/games')}
+                        className='close-icon'
+                    >
+                    </X>
+                </div>
             </div>
         </PageWrapper>
 

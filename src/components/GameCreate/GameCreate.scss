@@ -284,3 +284,16 @@
     justify-content: space-between;
     gap: 2rem
 }
+
+.game-status-default-ongoing {
+    user-select: none;
+    align-self: center;
+    width: fit-content;
+    color: green;
+    background-color: var(--main-blue);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+}

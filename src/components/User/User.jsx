@@ -47,18 +47,20 @@ const User = () => {
 
 
     const deleteA = () => { 
-        axios.delete(
-            `api/users/${userId}`,
-            {
-                method: 'delete',
-                baseURL: `${apiUrl}/`,
-                headers: {
-                    Authorization: `Bearer ${userToken}`,
-                }, 
-            }
-        ).then(
-            navigate("/")
-        )
+        if (confirm("Êtes-vous sûr de vouloir supprimer votre profil ?")) {
+            axios.delete(
+                `api/users/${userId}`,
+                {
+                    method: 'delete',
+                    baseURL: `${apiUrl}/`,
+                    headers: {
+                        Authorization: `Bearer ${userToken}`,
+                    }, 
+                }
+            ).then(
+                navigate("/")
+            )
+        }
     }
 
     return (

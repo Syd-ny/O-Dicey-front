@@ -5,6 +5,7 @@ import { useAnimate, stagger, motion } from "framer-motion";
 import "./Game.scss";
 import GameCard from "./GameCard/GameCard";
 import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
+import { X } from "feather-icons-react/build/IconComponents";
 
     // Animation from GameCard to GameCardDetailed
     function useAnimation(isOpen, boolean) {
@@ -57,8 +58,14 @@ import GameCardDetailed from "./GameCardDetailed/GameCardDetailed";
                     <GameCardDetailed
                         game={game}
                     />
-                    <button className='close' onClick={() => setIsOpen(!isOpen)}></button>
-                </div>{" "}
+                    <div className='close-icon-container'>
+                        <X 
+                            onClick={() => setIsOpen(!isOpen)}
+                            className='close-icon'
+                        >
+                        </X>
+                    </div>
+                </div>
             </div>
         );
     }

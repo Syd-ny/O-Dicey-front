@@ -7,6 +7,7 @@ import PageWrapper from "../PageWrapper/PageWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import { actionGetGameList } from '../../actions/user';
+import { Cpu } from "feather-icons-react/build/IconComponents";
 
 
 // ===============================
