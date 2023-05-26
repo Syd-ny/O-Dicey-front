@@ -1,7 +1,10 @@
-main {
+main.home {
     background-color: var(--light-blue);
     color: white;
-    margin: 4rem;
+    margin: 0.5rem;
+    @media (min-width: 768px) {
+        margin: 4rem;
+    }
     text-align : justify;
 }
 
