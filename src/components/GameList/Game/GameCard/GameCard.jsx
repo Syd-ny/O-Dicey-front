@@ -77,28 +77,28 @@ const GameCard = ({
 
     return (
         <div className="gamecard">
-            <div className='gamecard-img-container'>
-                <img
-                    className="gamecard-img"
-                    src={
-                        urlsList.length !== 0
-                            ? urlsList.picture
-                            : "https://i.imgur.com/i1m3wz0.png"
-                        }
-                    alt=""
-                />
-                <div className="gamecard-information">
-                    <header className="gamecard-header">
-                        <h3>{game.name}</h3>
-                        <p>Maître du jeu : {game.dm.login}</p>
-                    </header>
-                    <div className="gamecard-footer">
-                        <p>Créé le : {dateCreatedAt}</p>
-                        <p>Dernière session : {dateUpdatedAt} </p>
-                        <p>Status : <Status/></p>
-                    </div>
+            {/* <div className='gamecard-img-container'> */}
+            <img
+                className="gamecard-img"
+                src={
+                    urlsList.length !== 0
+                        ? urlsList.picture
+                        : "https://i.imgur.com/i1m3wz0.png"
+                    }
+                alt=""
+            />
+            <div className="gamecard-info">
+                <header className="gamecard-info-header">
+                    <h3 className="gamecard-info-header-h3">{game.name}</h3>
+                    <p>Maître du jeu : {game.dm.login}</p>
+                </header>
+                <div className="gamecard-info-footer">
+                    <p>Créé le : {dateCreatedAt}</p>
+                    <p>Dernière session : {dateUpdatedAt} </p>
+                    <p>Status : <Status/></p>
                 </div>
             </div>
+            {/* </div> */}
         </div>
     );
 };

@@ -1,5 +1,6 @@
 .frame {
   margin: 1rem auto;
+  width: 25rem;
 
   h2 {
     font-size: 1.2em;
@@ -17,5 +18,11 @@
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     border-top: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
   }
 }

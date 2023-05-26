@@ -62,18 +62,25 @@ const User = () => {
             )
         }
     }
+    console.log(user)
 
     return (
       <PageWrapper>
         <Frame title="Profil">
-            <h3 className='user-title'>Email</h3>
-            <p className='user-info'>{user.email}</p>
-            <h3 className='user-title'>Pseudo</h3>
-            <p className='user-info'>{user.login}</p>
-            <button onClick={() => navigate("/profile/edit")} className='user-button' type="submit">Modifier</button>
-            <button onClick={() => navigate("/profile/pwd")} className='user-button' type="submit">Changer de mot de passe</button>
+            <div className="user-profile-avatar-container">
+                <img className="user-profile-avatar" src={user.picture} alt="avatar" />
+            </div>
+
+            <h3 className='user-profile-title'>Email</h3>
+            <p className='user-profile-info'>{user.email}</p>
+
+            <h3 className='user-profile-title'>Pseudo</h3>
+            <p className='user-profile-info'>{user.login}</p>
+
+            <button onClick={() => navigate("/profile/edit")} className='user-profile-button' type="submit">Modifier</button>
+            <button onClick={() => navigate("/profile/pwd")} className='user-profile-button' type="submit">Changer de mot de passe</button>
             <button 
-                className='user-button' 
+                className='user-profile-button' 
                 type="submit"
                 onClick={deleteA}>
                     Supprimer

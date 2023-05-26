@@ -20,7 +20,7 @@
 
 
 //button close
-.close-icon
+.game-close-icon
 {
     transition: all 0.075s ease-in-out;
     position: absolute;
@@ -38,7 +38,8 @@
         top: 2rem;
         right: 2rem;
 
-        &:hover .close-icon {
+        &:hover .game-close-icon {
+            cursor: pointer;
             width: 1.7rem;
             height: 1.7rem;
         }

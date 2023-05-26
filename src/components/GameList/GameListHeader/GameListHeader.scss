@@ -1,7 +1,7 @@
 .game-list-header {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 
     margin: 2rem 0.5rem;
     padding-bottom: 1rem;
@@ -11,69 +11,97 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin: 2rem 4rem 1rem 4rem;
+        gap: 1rem;
     }
     
-}
-
-// new party & h2
-.game-list-header div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    @media (min-width: 768px) {
-        flex-direction: row;
-        justify-content: space-between;
+    &-part {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        
+        gap: 1rem;
+    
+        @media (min-width: 768px) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            
+        }
     }
-}
 
-.game-list-header h2 {
-    font-family: 'Aboreto', display;
-    font-weight: bold;
-    font-size: 2rem;
-    color: var(--main-blue);
-    color: black;
-
-    @media (min-width: 768px) {
-        margin-right: 4rem;;
+    &-h2 {
+        font-family: 'Aboreto', display;
+        font-weight: bold;
+        font-size: 2rem;
+        color: var(--main-blue);
+        color: black;
+        text-align: center;
+    
+        @media (min-width: 768px) {
+            margin-right: 4rem;;
+        }
     }
-}
 
-//button
-.classic {
+    &-new {
         width: fit-content;
         background-color: hsl(210, 86%, 37%);
         border: none;
         padding: 0.8em;
         border-radius: 0.5em;
         color: white;
-}
 
-.classic:hover {
-    background-color: hsl(210, 86%, 26%);
-    cursor: pointer;
-}
-
-.game-list-header input {
-    align-self: center;
-    width: 11rem;
-    border-radius: 1rem;
-    border: none;
-    padding: 0.4rem 0.6rem;
-
-    @media (min-width: 768px) {
-        margin-left: 1rem;
+        &:hover {
+            background-color: hsl(210, 86%, 26%);
+            cursor: pointer;
+        }
     }
-}
 
-.game-list-header .search-button {
-    display: flex;
-    flex-direction: row;
+    &-search {
+        align-self: center;
+        width: 11rem;
+        border-radius: 1rem;
+        border: none;
+        padding: 0.4rem 0.6rem;
+    
+        @media (min-width: 768px) {
+            margin-left: 1rem;
+        }
+    
+        &-container {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+        }
+    }
+
+    &-icon{
+        transition: all 0.075s ease-in-out;
+        position: absolute;
+        width: 1.4rem;
+        height: 1.4rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border: 1px solid;
+        border-color:var(--main-blue);
+        border-radius: .4rem;
+
+        &-container {
+            position: relative;
+            margin-bottom: .5rem;
+
+            @media (min-width: 768px) {
+                margin-bottom: 0;
+            }
+    
+            &:hover .game-list-header-icon {
+                cursor: pointer;
+                width: 1.7rem;
+                height: 1.7rem;
+            }
+        }
+    }
 }
 
 .search-button-green {
@@ -82,58 +110,4 @@
 
 .search-button-red {
     background-color: red;
-}
-
-.search-button-container {
-    position: relative;
-}
-
-
-.play-icon
-{
-    transition: all 0.075s ease-in-out;
-    position: absolute;
-    width: 1.4rem;
-    height: 1.4rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border: 1px solid;
-    border-color:var(--main-blue);
-    border-radius: .4rem;
-
-    &-container {
-        position: relative;
-
-        &:hover .play-icon {
-            cursor: pointer;
-            width: 1.7rem;
-            height: 1.7rem;
-        }
-    }
-}
-
-.pause-icon
-{
-    transition: all 0.075s ease-in-out;
-    position: absolute;
-    width: 1.4rem;
-    height: 1.4rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border: 1px solid;
-    border-color:var(--main-blue);
-    border-radius: .4rem;
-
-    &-container {
-        position: relative;
-        margin: .5rem 0 .5rem 2rem;
-
-        &:hover .pause-icon {
-            cursor: pointer;
-            width: 1.7rem;
-            height: 1.7rem;
-        }
-    }
 }

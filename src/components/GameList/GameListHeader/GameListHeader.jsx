@@ -34,39 +34,39 @@ const GameListHeader = (
 
     return (
         <div className="game-list-header">
-            <div>
-                <h2>Mes Parties</h2>
-                <button onClick={() => navigate("/games/new")} className="classic">Nouvelle Partie</button>
+            <div className="game-list-header-part">
+                <h2 className="game-list-header-h2">Mes Parties</h2>
+                <button onClick={() => navigate("/games/new")} className="game-list-header-new">Nouvelle Partie</button>
             </div>
-            <div className="search-button-container">
-                <div className="search-button">
-                    <div className='play-icon-container'>
+            <div className="game-list-header-part test">
+                <div className="game-list-header-search-container">
+                    <div className="game-list-header-icon-container">
                         <Play 
                             onClick={() => {
                                 statusValue(0); 
                                 toggleG("green");
                             }}
-                            className='play-icon'
+                            className="game-list-header-icon"
                             stroke={classOngoing}
                             fill={classOngoing}
                         >
                         </Play>
                     </div>
-                    <div className='pause-icon-container'>
+                    <div className="game-list-header-icon-container">
                         <Pause 
                              onClick={() => {
                                 statusValue(1);
                                 toggleR("red");
                             }}
-                            className='pause-icon'
+                            className="game-list-header-icon"
                             stroke={classFinished}
                             fill={classFinished}
                         >
                         </Pause>
                     </div>
                 </div>
-                <input onChange={searchValue} type="search" name="party-search" id="party-search" placeholder="Rechercher une partie"></input>
-                </div>
+                <input onChange={searchValue} type="search" name="party-search" className="game-list-header-search" placeholder="Rechercher une partie"></input>
+            </div>
         </div>       
     )
 }

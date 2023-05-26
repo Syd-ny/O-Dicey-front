@@ -58,10 +58,10 @@ import { X } from "feather-icons-react/build/IconComponents";
                     <GameCardDetailed
                         game={game}
                     />
-                    <div className='close-icon-container'>
-                        <X 
+                    <div className='game-close-icon-container'>
+                        <X
                             onClick={() => setIsOpen(!isOpen)}
-                            className='close-icon'
+                            className='game-close-icon'
                         >
                         </X>
                     </div>

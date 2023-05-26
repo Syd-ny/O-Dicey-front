@@ -4,12 +4,8 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
-}
 
-.none {
-    text-align: center;
-}
-
-.character-card-small {
-    max-height: 50%;
+    &-empty {
+        text-align: center;
+    }
 }
