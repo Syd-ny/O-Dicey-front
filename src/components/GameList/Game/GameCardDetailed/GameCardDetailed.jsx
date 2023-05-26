@@ -64,18 +64,6 @@ const GameCardDetailed = ({
                             character={c}
                         />
                     )}
-                    {game.characters.map((c, i) => 
-                        <CharacterCardSmall key={`character-${i}`} 
-                            name={c.name}
-                            character={c}
-                        />
-                    )}
-                    {/* {game.characters.map((c, i) => 
-                        <CharacterCardSmall key={`character-${i}`} 
-                            name={c.name}
-                            character={c}
-                        />
-                    )} */}
                 </div>
             );
         } else {
@@ -91,7 +79,7 @@ const GameCardDetailed = ({
                 <GameCard
                     game={game}
                 />
-                <p className="gamecard-detailed-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum suscipit, quo sit iste blanditiis unde explicabo voluptatibus tenetur quaerat cupiditate nulla, veritatis rerum non animi laborum reprehenderit praesentium atque sed?</p>
+                <p className="gamecard-detailed-description"></p>
 
                 <div className="gamecard-detailed-status">
                     <button 
