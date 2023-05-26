@@ -93,8 +93,8 @@ const CharacterCard = ({ edit, character, gameName }) => {
       <footer className="character-card-footer">
         <section className="game-title"><h2>{!edit ? gameName : <Link to={`/games/${character.game.id}`}>{gameName}</Link>}</h2></section>
         <section className="character-actions">
-          <button onClick={() => navigate(`/characters/${character.id}/edit`)}><Edit /></button>
-          <button onClick={() => handleDelete()}><Trash /></button>
+          <button type="button" onClick={() => navigate(`/characters/${character.id}/edit`)}><Edit /></button>
+          <button type="button" onClick={() => handleDelete()}><Trash /></button>
         </section>
       </footer>
     </article>
