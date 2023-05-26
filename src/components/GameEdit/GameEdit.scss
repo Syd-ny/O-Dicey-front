@@ -284,3 +284,33 @@
     justify-content: space-between;
     gap: 2rem
 }
+
+//button close
+.close-icon
+{
+    transition: all 0.075s ease-in-out;
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 2px solid;
+    border-color:var(--main-blue);
+    border-radius: .4rem;
+
+    &-container {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+
+        &:hover .close-icon {
+            width: 1.7rem;
+            height: 1.7rem;
+        }
+    }
+}
+
+.game-create{
+    position: relative;
+}

@@ -395,7 +395,7 @@ const GameCreate = () => {
                             </div>
                             <div className="game-form-part">
                                 <label htmlFor="game-status">Statut de la Partie :</label>
-                                <p className="game-status-default">En cours</p>
+                                <p className="game-status-default-ongoing">En cours</p>
                             </div>
                         </form>
                         <div className="game-form-part">
