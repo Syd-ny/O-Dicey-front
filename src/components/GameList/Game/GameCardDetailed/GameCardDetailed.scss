@@ -6,6 +6,7 @@
     gap: 1rem;
     height: calc(100% - 4rem);
     padding: 2rem;
+    overflow-y: scroll;
 
     &-info-container {
         display: flex;
@@ -15,6 +16,7 @@
         gap: 1rem;
         padding: 2rem;
         width: 300px;
+        height: 1000px;
     }
 
     &-description {
@@ -30,13 +32,16 @@
     &-gallery {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        align-items: center;
         gap: 1rem;
         overflow-y: scroll;
         height: calc(100% - 4rem);
         margin: 2rem;
 
         & .character-card-small {
-            max-height: 50%;
+            height: 20rem;
+            width: 12rem;
         }
     }
 
