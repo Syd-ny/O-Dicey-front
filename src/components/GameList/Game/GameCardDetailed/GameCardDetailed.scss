@@ -31,13 +31,16 @@
     &-gallery {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        align-items: center;
         gap: 1rem;
         overflow-y: scroll;
         height: calc(100% - 4rem);
         margin: 2rem;
 
         & .character-card-small {
-            max-height: 50%;
+            height: 20rem;
+            width: 12rem;
         }
     }
 

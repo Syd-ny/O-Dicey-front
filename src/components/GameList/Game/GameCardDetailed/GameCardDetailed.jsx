@@ -64,6 +64,18 @@ const GameCardDetailed = ({
                             character={c}
                         />
                     )}
+                    {game.characters.map((c, i) => 
+                        <CharacterCardSmall key={`character-${i}`} 
+                            name={c.name}
+                            character={c}
+                        />
+                    )}
+                    {/* {game.characters.map((c, i) => 
+                        <CharacterCardSmall key={`character-${i}`} 
+                            name={c.name}
+                            character={c}
+                        />
+                    )} */}
                 </div>
             );
         } else {
@@ -91,7 +103,7 @@ const GameCardDetailed = ({
                     {game.dm.id === user.user_id && <button className="gamecard-detailed-button" onClick={() => navigate(`/games/${game.id}/edit`)}>Modifier</button>}
                 </div>
             </div>
-            <Gallery />
+            {game.characters.length !== 0 && <Gallery />}
         </div>
     );
 };
