@@ -10,11 +10,11 @@ import { User, Users, FileText, ShoppingBag, Box, Map } from 'feather-icons-reac
 import CharacterSheet from '../CharacterSheet/CharacterSheet';
 import Gallery from '../Gallery/Gallery';
 import Team from '../Team/Team';
+import logo from '../../../assets/ten-sided-dice.svg';
 
 const GameTabs = () => {
   const [currentTab, setCurrentTab] = useState("sheet"); // display character sheet by default
   const isDm = useSelector(isDMSelector);
-  const currentCharacter = useSelector((state) => state.gamestate.currentCharacter);
 
   const changeTab = (event) => {
     event.preventDefault();
@@ -50,7 +50,7 @@ const GameTabs = () => {
             </a>
             <a href="#" className="player" data-screen="dice" onClick={changeTab}>
               <span className="tab-text">Lancé de dés</span>
-              <span className="tab-icon"><Box /></span>
+              <span className="tab-icon"><img src={logo} width="60%" height="60%" /></span>
             </a>
           </div>
 
