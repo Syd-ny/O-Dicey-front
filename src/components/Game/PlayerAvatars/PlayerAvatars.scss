@@ -23,8 +23,8 @@
         border-radius: 50%;
         box-sizing: border-box;
         background-color: var(--main-blue); // TODO: changer par un placeholder
-        background-size: cover;
         background-position: center;
+        background-repeat: no-repeat;
         position: relative;
 
         &-name {

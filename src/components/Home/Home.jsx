@@ -8,7 +8,7 @@ const Home = () => {
   const isLogged = useSelector((state) => state.user.logged);
   return (
     <PageWrapper>
-      <main>
+      <main className="home">
         <Card
           title="Avec O’Dicey, l’aventure est à portée de clavier !"
           cardClass='test'

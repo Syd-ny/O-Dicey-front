@@ -4,10 +4,12 @@ import { actionSaveCharacter, actionUpdateCharacterStats } from "../../../action
 import CharacterStatsEdit from "../../CharacterStatsEdit/CharacterStatsEdit";
 
 import './CharacterSheet.scss';
+import { isDMSelector } from "../../../selectors/gameSelectors";
 
 const CharacterSheet = () => {
   const dispatch = useDispatch();
   const { currentCharacter } = useSelector((state) => state.gamestate);
+  const isDm = useSelector(isDMSelector);
   const [canSave, setCanSave] = useState(false);
   const { stats } = currentCharacter;
 
@@ -24,11 +26,22 @@ const CharacterSheet = () => {
 
   return (
     <section className="game-sheet">
-      <header>
-        <h2>{currentCharacter.name}</h2>
-        <button disabled={!canSave} onClick={handleSave}>Sauvegarder</button>
-      </header>
-      <CharacterStatsEdit setStats={updateStats} stats={stats} />
+
+      {!(currentCharacter.id === 0) ? (
+        <>
+          <header>
+            <h2>{currentCharacter.name}</h2>
+            <button disabled={!canSave} onClick={handleSave}>Sauvegarder</button>
+          </header>
+          <CharacterStatsEdit setStats={updateStats} stats={stats} />
+        </>
+      )
+        : (
+          <header>
+            <h2 style={{textAlign: 'center'}}>Sélectionnez un personnage à afficher</h2>
+          </header>
+        )
+      }
     </section>
   );
 };

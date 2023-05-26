@@ -34,6 +34,11 @@ const CharacterStatsEdit = ({ stats, setStats }) => {
         <label htmlFor="experience">Expérience :</label>
         <input type="number" id="experience" value={stats.info.experience} onChange={updateInfo} />
 
+        <label htmlFor="experience">Points de vie actuels :</label>
+        <input type="number" id="experience" value={stats.hp.current} onChange={(e) => {
+          updateStats('hp', 'current', e.target.value);
+        }} />
+
         <label htmlFor="class">Classe :</label>
         <input type="text" id="class" value={stats.info.class} onChange={updateInfo} />
 
