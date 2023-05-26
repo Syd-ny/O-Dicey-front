@@ -13,7 +13,12 @@
     padding: 2rem;
 
     font-family: 'Aboreto', display;
-    font-size: 2rem;
+    font-size: 1.4rem;
+    text-align: center;
+    @media (min-width: 768px) {
+        font-size: 2rem;
+        text-align: justify;
+    }
     // width: 100%;
     // max-width: 100%;
 }
