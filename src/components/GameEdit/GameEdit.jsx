@@ -5,7 +5,7 @@ import axios from 'axios';
 import "./GameEdit.scss";
 import Dropdown from "../GameCreate/Dropdown/Dropdown";
 import PageWrapper from "../PageWrapper/PageWrapper";
-import { X } from "feather-icons-react/build/IconComponents";
+import { Trash2, ChevronsLeft, ChevronsRight, X } from "feather-icons-react/build/IconComponents";
 
 const GameEdit = () => {
 
@@ -529,12 +529,16 @@ const GameEdit = () => {
 
     return (
         <PageWrapper>
-            <div className="game-create">
-                <h2>Modifier ma partie</h2>
-                <div className="game-form-container">
-                    <div className="game-form-left">
-                        <form id="game-form" className="game-form" onSubmit={handleGameCreate}>
-                            <div className="game-form-part">
+            <div className="game-edit">
+                <h2 className="game-edit-title">Modifier ma partie</h2>
+                <div className="game-edit-form-container">
+                    <div className="game-edit-form-left">
+                        <form 
+                            id="game-edit-form"
+                            className="game-edit-form"
+                            onSubmit={handleGameCreate}
+                        >
+                            <div className="game-edit-form-info">
                                 <label htmlFor="game-name">Nom de la Partie :</label>
                                 <input
                                     type="text"
@@ -544,8 +548,7 @@ const GameEdit = () => {
                                     onChange={handleSignUpChangeField}
                                 />
                             </div>
-                    
-                            <div className="game-form-part">
+                            <div className="game-edit-form-info">
                                 <label htmlFor="game-mode">Système de Jeu :</label>
                                 <Dropdown
                                     title={mode}
@@ -554,7 +557,7 @@ const GameEdit = () => {
                                     defaultValue={defaultValueMode}
                                 />
                             </div>
-                            <div className="game-form-part">
+                            <div className="game-edit-form-info">
                                 <label htmlFor="game-status">Statut de la Partie :</label>
                                 <Dropdown
                                     title={status}
@@ -564,15 +567,20 @@ const GameEdit = () => {
                                 />
                             </div>
                         </form>
-                        <div className="game-form-part">
-                            <form className="player-list" onSubmit={handlePlayerInviteSubmit}>
-                                <label htmlFor="player-list">Liste des Joueurs : </label>
-                                <ul className="player-list-ul">
-                                    <li>{user.pseudo} <span className="mj">MJ</span></li>
+                        <div className="game-edit-form-info">
+                            <form className="game-edit-form-info-player-list" onSubmit={handlePlayerInviteSubmit}>
+                                <label htmlFor="player-list">Liste des Joueurs :</label>
+                                <ul className="game-edit-form-info-player-list-ul">
+                                    <li className="game-edit-form-info-player-list-li-mj">
+                                        {user.pseudo}
+                                        <span className="game-edit-form-info-player-list-mj">MJ</span>
+                                    </li>
                                     {newPlayersList.map((p) => 
-                                        <li className="player-list-li" key={p.id}>
+                                        <li className="game-edit-form-info-player-list-li" key={p.id}>
                                             {p.login}
-                                            <button onClick={() => delPlayer(p.id)}>d</button>
+                                            <div className="game-edit-icon-container">
+                                                <Trash2 className="game-edit-icon" onClick={() => delPlayer(p.id)}></Trash2>
+                                            </div>
                                         </li>
                                     )}
                                 </ul>
@@ -584,78 +592,81 @@ const GameEdit = () => {
                                     onChange={handlePlayerInviteChange}
                                 />
                                 {playerInviteError.map((e, i) => <p key={`error-${i}`}>{e}</p>)}
-                                <button type="submit" className="game-player-form">Inviter</button>
+                                <button type="submit" className="game-edit-button game-player-form">Inviter</button>
                             </form>
                         </div>
                     </div>
-                    <div className="game-form-right">
-                        <div className="game-gallery">
+                    <div className="game-edit-form-right">
+                        <div className="game-edit-form-gallery">
                             {newUrlsList.length !== 0 && (
-                                <div className="game-gallery-header">
+                                <div className="game-edit-form-gallery-header">
                                     <h3>Front Image :</h3>
-                                    <div className="game-gallery-front-container">
-                                        <button className="gallery-list-slide-button" onClick={prevSlide}>L</button>
-                                        <img className="game-gallery-front" src={newUrlsList[slideNumber]} alt="" />
-                                        <button className="gallery-list-slide-button" onClick={nextSlide}>R</button>
+                                    <img className="game-edit-form-gallery-front" src={newUrlsList[slideNumber]} alt="front-img" />
+                                    <div className="game-edit-form-gallery-front-slide">
+                                        <div className="game-edit-icon-container">
+                                            <ChevronsLeft className="game-edit-icon" onClick={prevSlide}></ChevronsLeft>
+                                        </div>
+                                        <button className="game-edit-button" onClick={() => delUrl(slideNumber)}>Supprimer</button>
+                                        <div className="game-edit-icon-container">
+                                            <ChevronsRight className="game-edit-icon" onClick={nextSlide}></ChevronsRight>
+                                        </div>
                                     </div>
-                                    <button className="gallery-list-li-button" onClick={() => delUrl(slideNumber)}>Supprimer</button>
                                 </div>
                             )}
-                            <form id="gallery-list" className="gallery-list" onSubmit={handleUrlGallerySubmit}>
+                            <form id="gallery-list" className="game-edit-form-gallery-list" onSubmit={handleUrlGallerySubmit}>
                                 <label htmlFor="gallery-list">Images : </label>
-                                <ul className="gallery-list-ul">
+                                <ul className="game-edit-form-gallery-list-ul">
                                     {newUrlsList.length > 2 && (
-                                        <li className="gallery-list-li">
+                                        <li className="game-edit-form-gallery-list-li">
                                             <img src={
                                             slideNumber === 0
                                                 ? newUrlsList[newUrlsList.length - 1]
                                                 : newUrlsList[slideNumber - 1]
-                                            } alt="" />
+                                            } alt="gallery-img" />
                                         </li>
                                     )}
                                     {newUrlsList.length > 0 && (
-                                        <li className="gallery-list-li">
-                                            <img src={newUrlsList[slideNumber]} alt="" />                                        
+                                        <li className="game-edit-form-gallery-list-li">
+                                            <img src={newUrlsList[slideNumber]} alt="gallery-img" />
                                         </li>
                                     )}
                                     {newUrlsList.length > 1 && (
-                                        <li className="gallery-list-li">
+                                        <li className="game-edit-form-gallery-list-li">
                                             <img src={
                                             slideNumber === newUrlsList.length - 1
                                                 ? newUrlsList[0]
                                                 : newUrlsList[slideNumber + 1]
-                                            } alt="" />
+                                            } alt="gallery-img" />
                                         </li>
                                     )}
                                 </ul>
-                                <input
-                                    type="url"
-                                    id="gallery-url"
-                                    placeholder="URL pour la galerie"
-                                    value={url}
-                                    onChange={handleUrlGalleryChange}
-                                />
-                                {urlGalleryError.map((e, i) => <p key={`error-${i}`}>{e}</p>)}
-                                <button form="gallery-list" type="submit" className="game-gallery-form">Envoyer</button>
+                                <div className="game-edit-form-gallery-list-footer">
+                                    <input
+                                        type="url"
+                                        id="game-gallery-url"
+                                        placeholder="URL pour la galerie"
+                                        value={url}
+                                        onChange={handleUrlGalleryChange}
+                                    />
+                                    {urlGalleryError.map((e, i) => <p key={`error-${i}`}>{e}</p>)}
+                                    <button form="gallery-list" type="submit" className="game-edit-button">Envoyer</button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                {gameCreateError.map((e, i) => <p className="game-form-error" key={`error-${i}`}>{e}</p>)}
-                <div className="game-form-footer">
-                    <button form="game-form" type="submit" className="game-form-button">Modifier</button>
-                    <button onClick={() => gameDelete()} className="game-form-button">Supprimer</button>
-                </div>
-                <div className='close-icon-container'>
+                {gameCreateError.map((e, i) => <p className="game-edit-form-error" key={`error-${i}`}>{e}</p>)}
+                <button form="game-edit-form" type="submit" className="game-edit-button game-edit-button-form">Modifier</button>
+                <button onClick={() => navigate('/games')} className="game-edit-button game-edit-button-back">Retour</button>
+                <div className='game-edit-close-icon-container'>
                     <X 
                         onClick={() => navigate('/games')}
-                        className='close-icon'
+                        className='game-edit-close-icon'
                     >
                     </X>
                 </div>
             </div>
         </PageWrapper>
-
     )
 }
 
