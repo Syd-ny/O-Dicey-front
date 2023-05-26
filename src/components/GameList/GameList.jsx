@@ -7,7 +7,6 @@ import PageWrapper from "../PageWrapper/PageWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import { actionGetGameList } from '../../actions/user';
-import { Cpu } from "feather-icons-react/build/IconComponents";
 
 
 // ===============================
@@ -149,7 +148,7 @@ const GameList = () => {
       <PageWrapper>
         <GameListHeader 
           searchValue={handleChange}
-          // statusValue
+          statusValue={setStatusFilter}
         />
         <div className="game-list">
           {searchGameResults.map((g, i) => <GameCardDetailed key={`game-${i}`}
@@ -157,7 +156,7 @@ const GameList = () => {
             mobile={isMobile}
           />)}
         </div>
-        {gameList.length === 0 && <p className="none">Aucune partie</p>}
+        {gameList.length === 0 && <p className="game-list-empty">Aucune partie</p>}
       </PageWrapper>
     )
   }

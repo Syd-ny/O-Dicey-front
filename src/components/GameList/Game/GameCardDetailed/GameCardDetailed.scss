@@ -1,4 +1,4 @@
-.gameDetailed {
+.gamecard-detailed {
     align-self: center;
     display: flex;
     flex-direction: row;
@@ -6,77 +6,53 @@
     gap: 1rem;
     height: calc(100% - 4rem);
     padding: 2rem;
-}
 
-.game-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: 2rem;
-    width: 300px;
-}
-
-.game-description {
-    text-align : justify;
-}
-
-.game-status {
-    display: flex;
-    flex-direction: row;
-    gap: 4rem;
-    
-}
-
-.gallery {
-    // background-color: green;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    overflow-y: scroll;
-    height: calc(100% - 4rem);
-    margin: 2rem;
-}
-
-.gallery img {
-    border: 1px solid black;
-    border-radius: 2rem;
-    width: 200px;
-}
-
-// Dropdown
-
-.game-status .custom-dropdown .items-holder {
-    top: calc(-300% + 4px);
-}
-
-.game-status .custom-dropdown, .game-status .custom-dropdown .items-holder {
-    width: 150px;
-}
-
-.game-status .custom-dropdown, .game-status .custom-dropdown .custom-dropdown-selection {
-    width: 120px;
-}
-
-.game-status .custom-dropdown, .game-status .custom-dropdown .items-holder .dropdown-item {
-    width: 120px;
-}
-
-
-.game-status .game-button, .game-status .game-edit-button{
-    width: fit-content;
-
-    color: white;
-    background-color: var(--main-blue);
-    border: none;
-    border-radius: 1rem;
-    padding: 0.5rem 1rem;
-    font-weight: bold;
-
-    &:hover {
-      background-color: hsl(210, 86%, 45%);
-      cursor: pointer;
+    &-info-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 2rem;
+        width: 300px;
     }
 
+    &-description {
+        text-align : justify;
+    }
+
+    &-status {
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+    }
+
+    &-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        overflow-y: scroll;
+        height: calc(100% - 4rem);
+        margin: 2rem;
+
+        & .character-card-small {
+            max-height: 50%;
+        }
+    }
+
+    &-button {
+        width: fit-content;
+    
+        color: white;
+        background-color: var(--main-blue);
+        border: none;
+        border-radius: 1rem;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+    
+        &:hover {
+          background-color: hsl(210, 86%, 45%);
+          cursor: pointer;
+        }
+    }
 }

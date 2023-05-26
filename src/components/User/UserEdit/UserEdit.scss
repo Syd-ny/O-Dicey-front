@@ -1,12 +1,43 @@
-.userform-form .pwd-old {
-    margin-bottom: 3rem;
+.user-edit {
+    &-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 2rem;
+        margin-bottom: 3rem;
+    }
+
+    &-label {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+        width: 100%;
+    }
+
+    &-input {
+        margin-bottom: 0.8rem;
+        width: 100%;
+        border-radius: 1rem;
+        border: none;
+        padding: 0.4rem 0.6rem;
+    }
+
+    &-button {
+        width: fit-content;
+  
+        color: white;
+        background-color: var(--main-blue);
+        border: none;
+        border-radius: 1rem;
+        padding: 0.5em 1em;
+        font-weight: bold;
+  
+        &:hover {
+          background-color: hsl(210, 86%, 45%);
+          cursor: pointer;
+        }
+    }
 }
 
-
-.frame {
-    width: 25rem;
-}
-
-.button-go-back {
+.user-edit-button-back {
     margin-top: 1rem;
 }

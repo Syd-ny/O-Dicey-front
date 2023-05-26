@@ -131,38 +131,42 @@ const UserEdit = ({ formType }) => {
         return (
             <PageWrapper>
                 <Frame title="Profil">
-                    <form className="userform-form" 
+                    <form className="user-edit-form" 
                     // onSubmit={saveUserChange} 
                     >
-                        <label htmlFor="avatar">Avatar :</label>
+                        <label 
+                            className="user-edit-label" htmlFor="avatar">Avatar :</label>
                         <input 
                             type="text" 
                             id="picture" 
+                            className="user-edit-input"
                             placeholder="URL image de profil" 
                             defaultValue={user.picture} 
                             onChange={handleChangeField} 
                         />
 
-                        <label htmlFor="email">E-mail :</label>
+                        <label className="user-edit-label" htmlFor="email">E-mail :</label>
                         <input 
                             type="email" 
                             id="email"
+                            className="user-edit-input"
                             placeholder="Adresse e-mail" 
                             defaultValue={user.email} 
                             onChange={handleChangeField}
                         />
 
-                        <label htmlFor="pseudo">Pseudo :</label>
+                        <label className="user-edit-label" htmlFor="pseudo">Pseudo :</label>
                         <input 
                             type="text" 
                             id="login" 
+                            className="user-edit-input"
                             placeholder="Pseudo" 
                             defaultValue={user.login} 
                             onChange={handleChangeField} 
                         />
 
-                        <button onClick={saveUserChange} type="submit">Envoyer</button>
-                        <button className='button-go-back' onClick={() => navigate("/profile")}>Retour</button>
+                        <button className="user-edit-button" onClick={saveUserChange} type="submit">Envoyer</button>
+                        <button className="user-edit-button user-edit-button-back" onClick={() => navigate("/profile")}>Retour</button>
                     </form>
                 </Frame>
             </PageWrapper>
@@ -181,19 +185,21 @@ const UserEdit = ({ formType }) => {
                         {/* <label htmlFor="password">Ancien mot de passe :</label>
                         <input className='pwd-old' type="password" id="password" placeholder="Mot de passe" /> */}
     
-                        <label htmlFor="password">Nouveau mot de passe :</label>
+                        <label className="user-edit-label" htmlFor="password">Nouveau mot de passe :</label>
                         <input 
                             type="password" 
                             id="password" 
+                            className="user-edit-input"
                             placeholder="Mot de passe" 
                             value={updatedUserData.password}
                             onChange={handleChangeField} 
                         />
     
-                        <label htmlFor="password">Confirmez le nouveau mot de passe :</label>
+                        <label className="user-edit-label" htmlFor="password">Confirmez le nouveau mot de passe :</label>
                         <input 
                             type="password" 
                             id="passwordcheck" 
+                            className="user-edit-input"
                             placeholder="Confirmez le mot de passe" 
                             value={updatedUserData.passwordCheck}
                             onChange={handleChangeField}
@@ -202,8 +208,8 @@ const UserEdit = ({ formType }) => {
                         <div className="userform-form-error">
                             {signUpError.map((e, i) => <p key={`error-${i}`}>{e}</p>)}
                         </div>
-                        <button onClick={saveUserChange} type="submit">Envoyer</button>
-                        <button className='button-go-back' onClick={() => navigate("/profile")}>Retour</button>
+                        <button className="user-edit-button" onClick={saveUserChange} type="submit">Envoyer</button>
+                        <button className="user-edit-button user-edit-button-back" onClick={() => navigate("/profile")}>Retour</button>
                     </form>
                 </Frame>
             </PageWrapper>
