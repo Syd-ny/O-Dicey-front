@@ -15,7 +15,7 @@ const Game = () => {
   const { gameId } = useParams();
   const firstRender = useRef(true);
   const refreshCurrentCharacter = useRef(false);
-  const { game, currentCharacter } = useSelector((state) => state.gamestate);
+  const { game, currentCharacter, canSave } = useSelector((state) => state.gamestate);
 
   useEffect(() => {
     if (firstRender.current) {
@@ -43,7 +43,8 @@ const Game = () => {
   // when game data is refreshed we need to update the displayed character
   useEffect(() => {
     // we check if the game data was indeed really updated from the API
-    if (refreshCurrentCharacter.current) {
+    // if canSave is true the character is being edited by the user: do not update
+    if (refreshCurrentCharacter.current && canSave === false) {
       // and we check which character was displayed if there was one
       // and we display it
       if (currentCharacter.id !== 0) {

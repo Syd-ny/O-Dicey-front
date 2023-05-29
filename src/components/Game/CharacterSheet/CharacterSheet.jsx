@@ -1,17 +1,21 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actionSaveCharacter, actionUpdateCharacterStats } from "../../../actions/gamestate";
+import { actionSaveCharacter, actionSetCanSave, actionUnsetCanSave, actionUpdateCharacterStats } from "../../../actions/gamestate";
 import CharacterStatsEdit from "../../CharacterStatsEdit/CharacterStatsEdit";
 
 import './CharacterSheet.scss';
-import { isDMSelector } from "../../../selectors/gameSelectors";
 
 const CharacterSheet = () => {
   const dispatch = useDispatch();
-  const { currentCharacter } = useSelector((state) => state.gamestate);
-  const isDm = useSelector(isDMSelector);
-  const [canSave, setCanSave] = useState(false);
+  const { currentCharacter, canSave } = useSelector((state) => state.gamestate);
   const { stats } = currentCharacter;
+
+  const setCanSave = (status) => {
+    if (status) {
+      dispatch(actionSetCanSave());
+    } else {
+      dispatch(actionUnsetCanSave());
+    }
+  };
 
   // ! When updating arrays values, be careful that the value is the entire updated array
   const updateStats = (stats) => {

@@ -1,13 +1,20 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actionSaveCharacter, actionUpdateNotes } from "../../../actions/gamestate";
+import { actionSaveCharacter, actionSetCanSave, actionUnsetCanSave, actionUpdateNotes } from "../../../actions/gamestate";
 
 import './Notes.scss';
 
 const Notes = () => {
   const dispatch = useDispatch();
-  const [canSave, setCanSave] = useState(false);
+  const { canSave } = useSelector((state) => state.gamestate);
   const { notes } = useSelector((state) => state.gamestate.currentCharacter);
+
+  const setCanSave = (status) => {
+    if (status) {
+      dispatch(actionSetCanSave());
+    } else {
+      dispatch(actionUnsetCanSave());
+    }
+  };
 
   const handleChangeNotes = (event) => {
     setCanSave(true);

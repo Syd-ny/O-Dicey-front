@@ -1,4 +1,4 @@
-import { ADD_DICE_ROLL, CLEAR_CURRENT_CHARACTER, CLEAR_DICE_ROLLS, CLEAR_GAME_DATA, UPDATE_CHARACTER_STATS, UPDATE_CURRENT_CHARACTER, UPDATE_GAME_DATA, UPDATE_INVENTORY, UPDATE_NOTES } from "../actions/gamestate";
+import { ADD_DICE_ROLL, CLEAR_CURRENT_CHARACTER, CLEAR_DICE_ROLLS, CLEAR_GAME_DATA, SET_CAN_SAVE, UNSET_CAN_SAVE, UPDATE_CHARACTER_STATS, UPDATE_CURRENT_CHARACTER, UPDATE_GAME_DATA, UPDATE_INVENTORY, UPDATE_NOTES } from "../actions/gamestate";
 import initialStats from '../types/character-stats';
 
 const initialState = {
@@ -23,7 +23,8 @@ const initialState = {
       id: 0,
     },
     galleries: [],
-  }
+  },
+  canSave: false,
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -63,6 +64,14 @@ const reducer = (state = initialState, action = {}) => {
 
     case UPDATE_CHARACTER_STATS: {
       return { ...state, currentCharacter: { ...state.currentCharacter, stats: action.payload } };
+    }
+
+    case SET_CAN_SAVE: {
+      return { ...state, canSave: true };
+    }
+
+    case UNSET_CAN_SAVE: {
+      return { ...state, canSave: false };
     }
 
     default: return state;
