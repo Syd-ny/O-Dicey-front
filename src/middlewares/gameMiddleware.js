@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ADD_GALLERY_PICTURE, DELETE_GALLERY_PICTURE, GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, UPDATE_MAIN_PICTURE, actionGetGameData, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
+import { actionAddError } from "../actions/user";
 
 const gameMiddleware = (store) => (next) => async (action) => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -17,7 +18,7 @@ const gameMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actionUpdateGameData(res.data));
       }
       catch (err) {
-        console.error(err);
+        store.dispatch(actionAddError("Erreur lors de la récupération de la partie."));
       }
       break;
     }
@@ -34,7 +35,7 @@ const gameMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actionUpdateCurrentCharacter(res.data));
       }
       catch (err) {
-        console.error(err);
+        store.dispatch(actionAddError("Erreur lors de la récupération du personnage."));
       }
       break;
     }
@@ -61,7 +62,7 @@ const gameMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actionUpdateCurrentCharacter(res.data));
       }
       catch (err) {
-        console.log(err);
+        store.dispatch(actionAddError("Erreur lors de l'enregistrement du personnage."));
       }
       break;
     }
@@ -94,7 +95,7 @@ const gameMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actionGetGameData(gameId));
       }
       catch (err) {
-        console.log(err);
+        store.dispatch(actionAddError("Erreur lors du changement d'image principale."));
       }
 
       break;
@@ -118,7 +119,7 @@ const gameMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actionGetGameData(gameId));
       }
       catch (err) {
-        console.log(err);
+        store.dispatch(actionAddError("Erreur lors de l'ajout d'image à la gallerie."));
       }
       break;
     }
@@ -137,7 +138,7 @@ const gameMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actionGetGameData(gameId));
       }
       catch (err) {
-        console.log(err);
+        store.dispatch(actionAddError("Erreur lors de la suppression de l'image."));
       }
 
       break;

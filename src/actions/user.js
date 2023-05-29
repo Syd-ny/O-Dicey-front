@@ -6,6 +6,8 @@ export const GET_CHARACTER_LIST = 'GET_CHARACTER_LIST';
 export const UPDATE_CHARACTER_LIST = 'UPDATE_CHARACTER_LIST';
 export const GET_GAME_LIST = 'GET_GAME_LIST';
 export const UPDATE_GAME_LIST = 'UPDATE_GAME_LIST';
+export const ADD_ERROR = 'ADD_ERROR';
+export const POP_ERROR = 'POP_ERROR'; // remove the oldest error from the error list
 
 export const actionUpdateFormField = (name, value) => ({
   type: UPDATE_FORM_FIELD,
@@ -41,4 +43,13 @@ export const actionGetGameList = () => ({
 export const actionUpdateGameList = (list) => ({
   type: UPDATE_GAME_LIST,
   payload: list,
+});
+
+export const actionAddError = (error) => ({
+  type: ADD_ERROR,
+  payload: error,
+});
+
+export const actionPopError = () => ({
+  type: POP_ERROR,
 });
