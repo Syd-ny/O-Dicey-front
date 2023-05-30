@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_GALLERY_PICTURE, DELETE_GALLERY_PICTURE, GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, UPDATE_MAIN_PICTURE, actionGetGameData, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
+import { ADD_GALLERY_PICTURE, DELETE_GALLERY_PICTURE, GET_CURRENT_CHARACTER, GET_GAME_DATA, SAVE_CHARACTER, UPDATE_MAIN_PICTURE, actionGetCurrentCharacter, actionGetGameData, actionUpdateCurrentCharacter, actionUpdateGameData } from "../actions/gamestate";
 import { actionAddError } from "../actions/user";
 
 const gameMiddleware = (store) => (next) => async (action) => {
@@ -16,6 +16,7 @@ const gameMiddleware = (store) => (next) => async (action) => {
           }
         });
         store.dispatch(actionUpdateGameData(res.data));
+        store.dispatch(actionGetCurrentCharacter(gameId));
       }
       catch (err) {
         store.dispatch(actionAddError("Erreur lors de la récupération de la partie."));
@@ -27,6 +28,13 @@ const gameMiddleware = (store) => (next) => async (action) => {
       try {
         const gameId = action.payload;
         const { token, user_id: userId } = store.getState().user;
+        const { dm } =  store.getState().gamestate.game;
+
+        // if the user the DM of the game, don't fetch the character
+        if (dm.id === userId) {
+          break;
+        }
+        
         const res = await axios.get(`${apiUrl}/api/users/${userId}/games/${gameId}/character`, {
           headers: {
             Authorization: `Bearer ${token}`,

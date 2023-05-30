@@ -6,7 +6,7 @@ import { actionSaveCharacter, actionSetCanSave, actionUnsetCanSave, actionUpdate
 
 const Inventory = () => {
   const dispatch = useDispatch();
-  const { canSave } = useSelector((state) => state.gamestate);
+  const { canSave, currentCharacter } = useSelector((state) => state.gamestate);
   const { inventory } = useSelector((state) => state.gamestate.currentCharacter);
 
   const setCanSave = (status) => {
@@ -32,9 +32,17 @@ const Inventory = () => {
 
   return (
     <section className="game-inventory">
-      <h2>Inventaire</h2>
-      <button disabled={!canSave} onClick={handleSaveNotes}>Sauvegarder</button>
-      <textarea value={textareaValue} onChange={handleChangeNotes} />
+      {!(currentCharacter.id === 0) ? (
+        <>
+          <h2>Inventaire</h2>
+          <button disabled={!canSave} onClick={handleSaveNotes}>Sauvegarder</button>
+          <textarea value={textareaValue} onChange={handleChangeNotes} />
+        </>
+      ) : (
+        <header>
+          <h2 style={{ textAlign: 'center' }}>Sélectionnez un personnage à afficher</h2>
+        </header>
+      )}
     </section>
   );
 };
