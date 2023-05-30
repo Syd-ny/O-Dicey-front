@@ -14,6 +14,8 @@ import CharacterEdit from "../CharacterEdit/CharacterEdit";
 import Game from "../Game/Game";
 import CharacterCreate from "../CharacterCreate/CharacterCreate";
 import ErrorToaster from "../ErrorToaster/ErrorToaster";
+import PageWrapper from "../PageWrapper/PageWrapper";
+import Frame from "../Frame/Frame";
 
 function App() {
   const isLogged = useSelector((state) => state.user.logged);
@@ -26,6 +28,27 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<UserForm formType="signup" />} />
             <Route path="/login" element={<UserForm formType="login" />} />
+            <Route path="/legal" element={(
+              <PageWrapper>
+                <Frame title="Mentions légales">
+                  <h3 style={{ fontWeight: 'bold' }}>TITRE PREMIER</h3>
+                  <p><span style={{ fontWeight: 'bold', fontSize: '0.8rem' }}> Art. 1 </span>Mentions légales en cours de rédaction</p>
+                </Frame>
+              </PageWrapper>
+            )} />
+
+            <Route path="/contact" element={(
+              <PageWrapper>
+                <Frame title="Nous contacter">
+                  <h3 style={{ alignSelf: 'flex-start', fontWeight: 'bold' }}>Par courrier :</h3>
+                  <p>46 rue de la Boustifaille 16200 JARNAC</p>
+                  <h3 style={{ alignSelf: 'flex-start', fontWeight: 'bold' }}>Par téléphone : </h3>
+                  <p>08 36 65 65 65 (3,71 F par appel)</p>
+                  <h3 style={{ alignSelf: 'flex-start', fontWeight: 'bold' }}>Par courriel : </h3>
+                  <p>admin@odicey.com</p>
+                </Frame>
+              </PageWrapper>
+            )} />
 
             {/* Restricted routes, user must be logged in */}
             {isLogged && (
