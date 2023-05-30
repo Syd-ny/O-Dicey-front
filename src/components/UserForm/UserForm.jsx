@@ -62,10 +62,6 @@ const UserForm = ({ formType }) => {
       errorList.push("Le pseudo doit être rempli");
       error = true;
     }
-    if (signUpForm.avatar === "") {
-      errorList.push("L'avatar doit être rempli");
-      error = true;
-    }
     if (signUpForm.password !== signUpForm.checkpassword){
       errorList.push("Les mots de passe ne sont pas identiques");
       error = true;
