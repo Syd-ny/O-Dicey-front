@@ -8,6 +8,7 @@ export const GET_GAME_LIST = 'GET_GAME_LIST';
 export const UPDATE_GAME_LIST = 'UPDATE_GAME_LIST';
 export const ADD_ERROR = 'ADD_ERROR';
 export const POP_ERROR = 'POP_ERROR'; // remove the oldest error from the error list
+export const CHECK_LOGIN = 'CHECK_LOGIN'; // action to check if the user is already connected
 
 export const actionUpdateFormField = (name, value) => ({
   type: UPDATE_FORM_FIELD,
@@ -52,4 +53,8 @@ export const actionAddError = (error) => ({
 
 export const actionPopError = () => ({
   type: POP_ERROR,
+});
+
+export const actionCheckLogin = () => ({
+  type: CHECK_LOGIN,
 });
