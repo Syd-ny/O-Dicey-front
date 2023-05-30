@@ -31,6 +31,7 @@ export const initialState = {
     ],
   },
   errors: [],
+  admin: false,
 };
 
 const reducer = (state = initialState, action = {}) => {

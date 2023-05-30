@@ -6,6 +6,7 @@ import axios from "axios";
 import './User.scss';
 import Frame from '../Frame/Frame';
 import PageWrapper from '../PageWrapper/PageWrapper';
+import placeholder from '../../assets/placeholder.png';
 
 const User = () => {
 
@@ -68,7 +69,7 @@ const User = () => {
       <PageWrapper>
         <Frame title="Profil">
             <div className="user-profile-avatar-container">
-                <img className="user-profile-avatar" src={user.picture} alt="avatar" />
+                <img className="user-profile-avatar" src={user.picture === '' ? placeholder : user.picture} alt="avatar" />
             </div>
 
             <h3 className='user-profile-title'>Email</h3>
