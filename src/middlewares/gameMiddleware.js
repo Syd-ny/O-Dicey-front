@@ -10,13 +10,16 @@ const gameMiddleware = (store) => (next) => async (action) => {
       try {
         const gameId = action.payload;
         const { token } = store.getState().user;
+        const { canSave } = store.getState().gamestate;
         const res = await axios.get(`${apiUrl}/api/games/${gameId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           }
         });
         store.dispatch(actionUpdateGameData(res.data));
-        store.dispatch(actionGetCurrentCharacter(gameId));
+        
+        // check if the currentCharacter is being modified
+        if (!canSave) store.dispatch(actionGetCurrentCharacter(gameId));
       }
       catch (err) {
         store.dispatch(actionAddError("Erreur lors de la récupération de la partie."));
