@@ -5,7 +5,7 @@ import GameCardDetailed from "./Game/GameCardDetailed/GameCardDetailed";
 import PageWrapper from "../PageWrapper/PageWrapper";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { actionGetGameList } from '../../actions/user';
 
 
@@ -65,7 +65,7 @@ const GameList = () => {
   const gameListData = useSelector((state) => state.user.games);
 
   // concat gamesDM & gamesPlayer
-  const gameList = [...gameListData.DM, ...gameListData.player];
+  const gameList = useMemo(() => [...gameListData.DM, ...gameListData.player], [gameListData]);
   const gameListName = []
   for (let index = 0; index < gameList.length; index++) {
     gameListName.push(gameList[index].name);
@@ -114,7 +114,7 @@ const GameList = () => {
       return dateB - dateA;
     });
     setSearchGameResults(results);
-  }, [searchGame, selectedStatus]);
+  }, [searchGame, selectedStatus, gameList]);
 
   // Status Filter
   const setStatusFilter = (status) => {
