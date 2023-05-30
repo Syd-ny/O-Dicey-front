@@ -77,7 +77,6 @@ const GameCard = ({
 
     return (
         <div className="gamecard">
-            {/* <div className='gamecard-img-container'> */}
             <img
                 className="gamecard-img"
                 src={
@@ -98,7 +97,6 @@ const GameCard = ({
                     <p>Status : <Status/></p>
                 </div>
             </div>
-            {/* </div> */}
         </div>
     );
 };

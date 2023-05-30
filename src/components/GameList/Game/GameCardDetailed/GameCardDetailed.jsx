@@ -79,7 +79,7 @@ const GameCardDetailed = ({
                 <GameCard
                     game={game}
                 />
-                <p className="gamecard-detailed-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum suscipit, quo sit iste blanditiis unde explicabo voluptatibus tenetur quaerat cupiditate nulla, veritatis rerum non animi laborum reprehenderit praesentium atque sed?</p>
+                <p className="gamecard-detailed-description"></p>
 
                 <div className="gamecard-detailed-status">
                     <button 
@@ -91,7 +91,7 @@ const GameCardDetailed = ({
                     {game.dm.id === user.user_id && <button className="gamecard-detailed-button" onClick={() => navigate(`/games/${game.id}/edit`)}>Modifier</button>}
                 </div>
             </div>
-            <Gallery />
+            {game.characters.length !== 0 && <Gallery />}
         </div>
     );
 };
