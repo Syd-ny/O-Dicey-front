@@ -18,8 +18,9 @@ const authMiddleware = (store) => (next) => async (action) => {
           id: res.data.data.id,
           login: res.data.data.login,
           token: res.data.token,
+          admin: res.data.data.roles.includes("ROLE_ADMIN"),
         }));
-        store.dispatch(actionUserLogin(res.data.data.login, res.data.token, res.data.data.id));
+        store.dispatch(actionUserLogin(res.data.data.login, res.data.token, res.data.data.id, res.data.data.roles.includes("ROLE_ADMIN")));
       }
       catch (err) {
         store.dispatch(actionAddError("Erreur lors de la connexion. Veuillez réessayer."));
@@ -31,7 +32,7 @@ const authMiddleware = (store) => (next) => async (action) => {
       // check if some userInfo is stored in localStorage
       if (localStorage.getItem('user_info') !== null) {
         const userInfo = JSON.parse(localStorage.getItem('user_info'));
-        store.dispatch(actionUserLogin(userInfo.login, userInfo.token, userInfo.id));
+        store.dispatch(actionUserLogin(userInfo.login, userInfo.token, userInfo.id, userInfo.admin));
       }
       break;
     }
