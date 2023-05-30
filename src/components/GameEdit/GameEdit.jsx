@@ -212,7 +212,7 @@ const GameEdit = () => {
                     }
                 }
             }).then(() => {
-                // navigate('/games')
+                navigate('/games')
             });
         }
         catch (err) {
