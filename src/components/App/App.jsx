@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.scss"
 import GameList from "../GameList/GameList";
 import GameEdit from "../GameEdit/GameEdit";
@@ -16,9 +16,21 @@ import CharacterCreate from "../CharacterCreate/CharacterCreate";
 import ErrorToaster from "../ErrorToaster/ErrorToaster";
 import PageWrapper from "../PageWrapper/PageWrapper";
 import Frame from "../Frame/Frame";
+import { useEffect, useRef } from "react";
+import { actionCheckLogin } from "../../actions/user";
 
 function App() {
   const isLogged = useSelector((state) => state.user.logged);
+  const dispatch = useDispatch();
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    // check if the user is connected
+    if (firstRender.current) {
+      dispatch(actionCheckLogin());
+      firstRender.current = false;
+    }
+  }, [dispatch])
 
   return (
     <div className="app">
