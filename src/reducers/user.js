@@ -1,4 +1,4 @@
-import { UPDATE_CHARACTER_LIST, UPDATE_FORM_FIELD, UPDATE_GAME_LIST, USER_LOGIN, USER_LOGOUT } from "../actions/user";
+import { ADD_ERROR, POP_ERROR, UPDATE_CHARACTER_LIST, UPDATE_FORM_FIELD, UPDATE_GAME_LIST, USER_LOGIN, USER_LOGOUT } from "../actions/user";
 
 export const initialState = {
   logged: false,
@@ -30,6 +30,7 @@ export const initialState = {
       },
     ],
   },
+  errors: [],
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -43,7 +44,8 @@ const reducer = (state = initialState, action = {}) => {
     }
 
     case USER_LOGOUT: {
-      return { ...initialState };
+      // we keep the errors on logout in case there's something interesting
+      return { ...initialState, errors: state.errors };
     }
 
     case UPDATE_CHARACTER_LIST: {
@@ -52,6 +54,16 @@ const reducer = (state = initialState, action = {}) => {
 
     case UPDATE_GAME_LIST: {
       return { ...state, games: action.payload };
+    }
+
+    case ADD_ERROR: {
+      return { ...state, errors: [...state.errors, action.payload] };
+    }
+
+    case POP_ERROR: {
+      // we remove the first element of the array
+      const newErrorList = state.errors.slice(1);
+      return { ...state, errors: newErrorList };
     }
 
     default: return state;

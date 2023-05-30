@@ -13,6 +13,8 @@ export const UPDATE_MAIN_PICTURE = 'UPDATE_MAIN_PICTURE';
 export const ADD_GALLERY_PICTURE = 'ADD_GALLERY_PICTURE';
 export const DELETE_GALLERY_PICTURE = 'DELETE_GALLERY_PICTURE';
 export const UPDATE_CHARACTER_STATS = 'UPDATE_CHARACTER_STATS';
+export const SET_CAN_SAVE = 'SET_CAN_SAVE';
+export const UNSET_CAN_SAVE = 'UNSET_CAN_SAVE';
 
 export const actionAddDiceRoll = (roll) => ({
   type: ADD_DICE_ROLL,
@@ -86,4 +88,12 @@ export const actionDeleteGalleryPicture = (id) => ({
 export const actionUpdateCharacterStats = (stats) => ({
   type: UPDATE_CHARACTER_STATS,
   payload: stats,
+});
+
+export const actionSetCanSave = () => ({
+  type: SET_CAN_SAVE,
+});
+
+export const actionUnsetCanSave = () => ({
+  type: UNSET_CAN_SAVE,
 });

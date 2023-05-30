@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PageWrapper from "../PageWrapper/PageWrapper";
 import CharacterStatsEdit from "../CharacterStatsEdit/CharacterStatsEdit";
+import { actionAddError } from "../../actions/user";
 
 import './CharacterCreate.scss';
 
@@ -11,6 +12,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 const CharacterCreate = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user_id: userId, token } = useSelector((state) => state.user);
   const [invites, setInvites] = useState([]);
   const [selectedGame, setSelectedGame] = useState(0);
@@ -22,14 +24,19 @@ const CharacterCreate = () => {
   const [characterInventory, setCharacterInventory] = useState("");
 
   const fetchInvites = useCallback(async () => {
-    const res = await axios.get(`${apiUrl}/api/users/${userId}/invites`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    });
+    try {
+      const res = await axios.get(`${apiUrl}/api/users/${userId}/invites`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
 
-    setInvites(res.data);
-  }, [userId, token]);
+      setInvites(res.data);
+    }
+    catch {
+      dispatch(actionAddError("Erreur lors de la récupération des invitations."));
+    }
+  }, [userId, token, dispatch]);
 
   useEffect(() => {
     fetchInvites();
@@ -41,15 +48,20 @@ const CharacterCreate = () => {
   };
 
   const fetchGame = useCallback(async () => {
-    const res = await axios.get(`${apiUrl}/api/games/${selectedGame}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    });
+    try {
+      const res = await axios.get(`${apiUrl}/api/games/${selectedGame}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
 
-    setGameData(res.data);
-    setCharacterStats(res.data.mode.jsonstats);
-  }, [selectedGame, token]);
+      setGameData(res.data);
+      setCharacterStats(res.data.mode.jsonstats);
+    }
+    catch {
+      dispatch(actionAddError("Erreur lors de la sélection de partie."));
+    }
+  }, [selectedGame, token, dispatch]);
 
   useEffect(() => {
     if (selectedGame !== 0) {
@@ -80,8 +92,8 @@ const CharacterCreate = () => {
 
       navigate("/characters");
     }
-    catch (err) {
-      console.log(err);
+    catch {
+      dispatch(actionAddError("Erreur lors de la création du personnage."));
     }
   };
 
@@ -91,7 +103,7 @@ const CharacterCreate = () => {
       <section className="character-create">
         <header>
           <h2 className="character-create-heading">Créer un personnage</h2>
-          
+
           <section className="character-create-game">
             <h2 className="character-create-game-heading">Partie</h2>
 

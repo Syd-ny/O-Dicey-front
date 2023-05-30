@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SUBMIT_LOGIN_FORM, actionUserLogin } from "../actions/user";
+import { SUBMIT_LOGIN_FORM, actionAddError, actionUserLogin } from "../actions/user";
 
 const authMiddleware = (store) => (next) => async (action) => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -16,8 +16,7 @@ const authMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actionUserLogin(res.data.data.login, res.data.token, res.data.data.id));
       }
       catch (err) {
-        // TODO: gérer les erreurs
-        console.error(err);
+        store.dispatch(actionAddError("Erreur lors de la connexion. Veuillez réessayer."));
       }
       break;
     }
