@@ -20,10 +20,6 @@ const Game = () => {
   useEffect(() => {
     if (firstRender.current) {
       dispatch(actionGetGameData(gameId));
-
-      // TODO: fix 404 when user is DM
-      dispatch(actionGetCurrentCharacter(gameId));
-
       firstRender.current = false;
     }
   }, [gameId, dispatch]);

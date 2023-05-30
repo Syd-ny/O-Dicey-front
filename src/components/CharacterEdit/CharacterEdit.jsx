@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionGetGameList } from '../../actions/user';
+import { actionAddError, actionGetGameList } from '../../actions/user';
 import defaultStats from '../../types/character-stats';
 
 import CharacterCard from '../CharacterCard/CharacterCard';
@@ -17,6 +17,7 @@ const CharacterEdit = () => {
   const { charId } = useParams();
   const firstRender = useRef(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userId = useSelector((state) => state.user.user_id);
   const userToken = useSelector((state) => state.user.token);
@@ -81,10 +82,10 @@ const CharacterEdit = () => {
           'Content-Type': 'application/json',
         }
       });
-      setCharacter(res.data);
+      navigate("/characters");
     }
     catch (err) {
-      console.error(err);
+      dispatch(actionAddError("Erreur lors de la modification du personnage"));
     }
   }
 
